@@ -1,1 +1,1 @@
-c'est pour le tutoriel des lamas :P
+c'est pour le tuto des lamas ;)
