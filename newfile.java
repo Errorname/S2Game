@@ -1,1 +1,0 @@
-c'est pour le tuto des lamas ;)
