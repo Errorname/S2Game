@@ -1,0 +1,74 @@
+package modele;
+
+/**
+* Classe Carte : définit la carte à éditer
+*
+* @author Hugo PIGEON
+* @version 1.0
+*/
+
+public class Carte
+{
+	private int larg;
+	private int haut;
+	private int tiles[][];
+	
+	/** Constructeur permettant de définir une carte en précisant sa largeur et sa hauteur
+	* @param largeur la largeur de la carte
+	* @param hauteur la hauteur de la carte
+	*/
+	public Carte(int largeur, int hauteur)
+	{
+		this.larg = largeur;
+		this.haut = hauteur;
+		this.tiles = new int[largeur][hauteur];
+		for(int i = 0 ; i < largeur ; i++)
+		{
+			for(int j = 0 ; j < hauteur ; j++)
+			{
+				this.tiles[i][j] = -2;
+			}
+		}
+	}
+	
+	/** Permet d'obtenir le tile aux coordonnées précisées ou -1 si les coordonnées ne sont pas valides
+	* @param x la coordonnée en x du tile à récupérer
+	* @param y la coordonnée en y du tile à récupérer
+	*/
+	public int getTile(int x, int y)
+	{
+		int ret = -1;
+		
+		if(x >= 0 && x < largeur && y >= 0 && y < hauteur)
+			ret = this.tiles[x][y];
+			
+		return ret;
+	}
+	
+	/** Permet de modifier le tile aux coordonnées précisées si les coordonnées sont valides
+	* @param x la coordonnée en x du tile à modifier
+	* @param y la coordonnée en y du tile à modifier
+	* @param tile le nouveau tile
+	*/
+	public void setTile(int x, int y, int tile)
+	{
+		if(x >= 0 && x < largeur && y >= 0 && y < hauteur)
+			this.tiles[x][y] = tile;
+	}
+	
+	/** Permet d'obtenir la largeur de la carte
+	* @return la largeur de la carte
+	*/
+	public int getLargeur()
+	{
+		return this.largeur;
+	}
+	
+	/** Permet d'obtenir la hauteur de la carte
+	* @return la hauteur de la carte
+	*/
+	public int getHauteur()
+	{
+		return this.hauteur;
+	}
+}
