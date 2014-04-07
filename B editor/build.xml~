@@ -9,28 +9,33 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" source="javac6.0"/>
     </target>
 
-    <target name="jar" depends="compile">
+    <target name="jar">
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
         </jar>
+        <chmod file="${jar.dir}/${ant.project.name}.jar" perm="ugo+x"/>
     </target>
     
-    <target name="javadoc" depends="jar">
+    <target name="javadoc">
     	<mkdir dir="${doc.dir}"/>
-    	<javadoc sourcepath="${src.dir}/vue" destdir="${doc.dir}" author="true" version="true" charset="utf8"/>
+    	<javadoc sourcepath="${src.dir}" destdir="${doc.dir}" author="true" version="true" charset="utf8"/>
     </target>
 
-    <target name="run" depends="javadoc">
+    <target name="run">
         <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
     </target>
+    
+    <target name="clean">
+    	<delete dir="${classes.dir}"/>
+    </target>
 
 
-    <target name="main" depends="run"/>
+    <target name="main" depends="compile, jar, javadoc, run"/>
 
 </project>
