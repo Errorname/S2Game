@@ -1,5 +1,6 @@
-package vue;
+package view;
 
+import model;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -19,17 +20,22 @@ public class Window extends JFrame
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
 	private JMenuItem quitFileMenu;
+	private Map map;
 
 	/** Constructeur permettant de créer la fenêtre
 	*/
 	public Window()
 	{   
+		this.map = new Map(5, 5);
+	
     	this.initWindow();
     	this.initMenu();
     	  
     	this.setVisible(true);
 	}
 	
+	/** Initialise la fenêtre
+	*/
 	private void initWindow()
 	{
    		this.setTitle("B editor");
@@ -38,6 +44,8 @@ public class Window extends JFrame
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	/** Initialise le menu
+	*/
 	private void initMenu()
 	{
 		this.menuBar = new JMenuBar();
@@ -57,5 +65,12 @@ public class Window extends JFrame
     		});
     	
     	this.setJMenuBar(menuBar); 
+	}
+	
+	/** Affiche la carte
+	*/
+	public void display()
+	{
+	
 	}
 }

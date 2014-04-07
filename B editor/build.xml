@@ -9,7 +9,7 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" source="1.4"/>
     </target>
 
     <target name="jar">
@@ -19,6 +19,7 @@
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
         </jar>
+        <chmod file="${jar.dir}/${ant.project.name}.jar" perm="ugo+x"/>
     </target>
     
     <target name="javadoc">
@@ -28,6 +29,10 @@
 
     <target name="run">
         <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+    </target>
+    
+    <target name="clean">
+    	<delete dir="${classes.dir}"/>
     </target>
 
 
