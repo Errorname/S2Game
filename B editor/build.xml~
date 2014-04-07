@@ -23,7 +23,7 @@
     
     <target name="javadoc" depends="jar">
     	<mkdir dir="${doc.dir}"/>
-    	<javadoc sourcepath="${src.dir}/vue" destdir="${doc.dir}" author="true" version="true" charset="utf8"/>
+    	<javadoc sourcepath="${src.dir}" destdir="${doc.dir}" author="true" version="true" charset="utf8"/>
     </target>
 
     <target name="run" depends="javadoc">

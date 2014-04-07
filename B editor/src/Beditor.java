@@ -1,9 +1,9 @@
-import vue.*;
+import view.*;
 
 public class Beditor
 {
 	public static void main(String args[])
 	{
-		Fenetre fenetre = new Fenetre();
+		Window window = new Window();
 	}
 }
