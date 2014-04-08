@@ -13,7 +13,7 @@ public class Level
 	private Item power;  
 
 
-	public Character(Coordinate start)
+	public Level(Coordinate start)
 	{
 		this.coordinate = new coordinate(start.getX(),start.getY());   
 	}

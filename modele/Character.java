@@ -8,14 +8,14 @@
 
 public class Character 
 {
-	private coordinate coordinate;
+	private Coordinate coordinate;
 	private Item key;
 	private Item power;  
 
 
 	public Character(Coordinate start)
 	{
-		this.coordinate = new coordinate(start.getX(),start.getY());   
+		this.coordinate = new Coordinate(start.getX(),start.getY());   
 	}
 	
 	public void recoverKey(Item theKey)

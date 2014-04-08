@@ -13,22 +13,12 @@ public class Tile
 	private boolean solid;  
 
 
-	public Tile(int theId)
+	public Tile(int theId, boolean solid, boolean breakable)
 	{
-		switch (theId) 
-		{
-			case 1: 
-				this.id = theId; 
-				this.sprite = new Sprite("tile/1.png"); 
-				this.breakable = false;
-				this.solid = true; 
-			break; 
-			default : 
-				this.id = 0; 
-				this.breakable = true;
-				this.solid = false; 	
-		}
-		/* ... */ 
+		this.id = theId; 
+		//this.sprite = new Sprite("tile/1.png"); 
+		this.breakable = breakable;
+		this.solid = solid; 
 	}
 	
 	public boolean isBreakable()
@@ -46,9 +36,9 @@ public class Tile
 		return this.id; 
 	}
 
-		public void afficher(Coordinate coord) 
+		/*public void afficher(Coordinate coord) 
 	{
 		sprite.afficher();
 	}
-
+*/
 }
