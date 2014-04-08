@@ -44,11 +44,17 @@ public class Sprite
 		this.img.setBorder(b);
 	}
 	
+	/** Permet d'obtenir la largeur du sprite
+	* @return la largeur du sprite
+	*/
 	public int getWidth()
 	{
 		return this.width;
 	}
 	
+	/** Permet d'obtenir la hauteur du sprite
+	* @return la largeur du sprite
+	*/
 	public int getHeight()
 	{
 		return this.height;

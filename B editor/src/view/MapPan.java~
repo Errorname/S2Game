@@ -17,8 +17,10 @@ public class MapPan extends JPanel
 	private Map map;
 	
 	/** Constructeur permettant d'afficher une nouvelle carte
-	* @param width la largeur de la carte
-	* @param height la hauteur de la carte
+	* @param mapWidth la largeur de la carte
+	* @param mapHeight la hauteur de la carte
+	* @param tileWidth la largeur des tiles
+	* @param tileHeight la hauteur des tiles
 	*/
 	public MapPan(int mapWidth, int mapHeight, int tileWidth, int tileHeight)
 	{
@@ -52,4 +54,13 @@ public class MapPan extends JPanel
 			}
 		}
 	}
+	
+	/** Affichage de la fenêtre
+	* @param g le conteneur dans lequel sera affichée l'image
+	*/
+  	public void paintComponent(Graphics g)
+  	{
+  		super.paintComponent(g);
+  		this.repaint(new Rectangle((int) this.getLocation().getX(), (int) this.getLocation().getY(), (int) this.getSize().getWidth(), (int) this.getSize().getHeight()));
+  	}
 }

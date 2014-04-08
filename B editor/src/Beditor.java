@@ -5,8 +5,7 @@ public class Beditor
 {
 	public static void main(String args[])
 	{
-		Window window = new Window();
-		Control control = new Control(window);
-		//window.display();
+		MainWindow window = new MainWindow();
+		InputsManager inputs = new InputsManager(window);
 	}
 }

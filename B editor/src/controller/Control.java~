@@ -13,12 +13,12 @@ import java.awt.event.ActionListener;
 
 public class Control
 {
-	private Window win;
+	private MainWindow win;
 	
 	/** Constructeur pour lequel il faut préciser la fenêtre
-	* @param fenetre la fenêtre du programme
+	* @param window la fenêtre du programme
 	*/
-	public Control(Window window)
+	public Control(MainWindow window)
 	{
 		this.win = window;
 		
