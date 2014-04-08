@@ -1,0 +1,163 @@
+/*Constant Game Speed with Maximum FPS
+Implementation
+
+Our first solution, FPS dependent on Constant Game Speed, has a problem when running on slow hardware. Both the game speed and the framerate will drop in that case. A possible solution for this could be to keep updating the game at that rate, but reduce the rendering framerate. This can be done using following game loop:
+*/
+/*
+    const int TICKS_PER_SECOND = 50;
+    const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+    const int MAX_FRAMESKIP = 10;
+
+    DWORD next_game_tick = GetTickCount();
+    int loops;
+
+    bool game_is_running = true;
+    while( game_is_running ) {
+
+        loops = 0;
+        while( GetTickCount() > next_game_tick && loops < MAX_FRAMESKIP) {
+            update_game();
+
+            next_game_tick += SKIP_TICKS;
+            loops++;
+        }
+
+        display_game();
+    }
+*/
+/*
+The game will be updated at a steady 50 times per second, and rendering is done as fast as possible. Remark that when rendering is done more than 50 times per second, some subsequent frames will be the same, so actual visual frames will be dispayed at a maximum of 50 frames per second. When running on slow hardware, the framerate can drop until the game update loop will reach MAX_FRAMESKIP. In practice this means that when our render FPS drops below 5 (= FRAMES_PER_SECOND / MAX_FRAMESKIP), the actual game will slow down.
+
+Slow hardware :
+On slow hardware the frames per second will drop, but the game itself will hopefully run at the normal speed. If the hardware still can’t handle this, the game itself will run slower and the framerate will not be smooth at all.
+
+Fast hardware :
+The game will have no problems on fast hardware, but like the first solution, you are wasting so many precious clock cycles that can be used for a higher framerate. Finding the balance between a fast update rate and being able to run on slow hardware is crucial.
+
+Conclusion :
+Using a constant game speed with a maximum FPS is a solution that is easy to implement and keeps the game code simple. But there are still some problems: Defining a high FPS can still pose problems on slow hardware (but not as severe as the first solution), and defining a low FPS will waste visual appeal on fast hardware.
+
+
+				source : http://www.koonsolo.com/news/dewitters-gameloop/
+*/
+/********************************Implementation en java*********************************/
+
+
+
+
+/**********premiere possibilite***************/
+/*chronometre en java a l'aide la la fonction currentTimeMillis*/
+// Fonctions pour le chronometre
+static long chrono = 0 ;
+
+// Lancement du chrono
+static void Go_Chrono() {
+	chrono = java.lang.System.currentTimeMillis() ;
+}
+
+// Arret du chrono
+static void Stop_Chrono() {
+	long chrono2 = java.lang.System.currentTimeMillis() ;
+	long temps = chrono2 - chrono ;
+	System.out.println("Temps ecoule = " + temps + " ms") ;
+}
+			//source : http://www.enseignement.polytechnique.fr/informatique/profs/Patrick.Gros/java/chrono.html
+
+			//annalyse currentTimeMillis()	==>	http://javamind-fr.blogspot.fr/2013/04/la-notion-de-temps-en-java-avec.html
+
+/**********deuxieme possibilite***************
+System.nanoTime() peu être utilise pour faire des mesures de temps
+plus precis que curentTimeMillis()
+*/
+/*****************constantes en java****************/
+/*Neither one. Use final class for Constants declare them as public static final and static import all constants wherever necessary.*/
+
+public final class Constants {
+
+    private Constants() {
+            // restrict instantiation
+    }
+
+    public static final double PI = 3.14159;
+    public static final double PLANCK_CONSTANT = 6.62606896e-34;
+}
+
+//Usage :
+
+import static Constants.PLANCK_CONSTANT;
+import static Constants.PI;//import static Constants.*;
+
+public class Calculations {
+
+        public double getReducedPlanckConstant() {
+                return PLANCK_CONSTANT / (2 * PI);
+        }
+}
+/*				source : http://stackoverflow.com/questions/12517978/java-constant-examples-declare-a-java-file-having-only-constant
+
+*/
+
+
+
+/**********implementation en java***************/
+final int TICKS_PER_SECOND = 50;
+final int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+final int MAX_FRAMESKIP = 10;
+
+static long next_game_tick = System.nanoTime();
+long Dt; //le delta-t utilise par la gravite 
+int loops;
+
+boolean game_is_running = true;
+
+while(game_is_running){
+	loops = 0;
+	Dt = System.nanoTime()
+	while(System.nanoTime() > next_game_tick && loops < MAX_FRAMESKIP){
+		Dt = System.nanoTime() - Dt;
+		update_game(Dt);
+		
+		next_game_tick += SKIP_TICKS;
+		loops++;
+	}
+	display_game();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

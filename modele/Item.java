@@ -11,7 +11,7 @@ public class Item
 	private int id; 
 	private Sprite sprite; 
 
-	public Tile(int theId)
+	public Item(int theId)
 	{
 		switch (theId) 
 		{

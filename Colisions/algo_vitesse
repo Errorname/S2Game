@@ -1,0 +1,152 @@
+
+/*************************************************Recherches**************************************
+vitesse augmente avec le temps
+la vitesse augmente de 'acceleration' tout les Dt (delta-t) tout le temps que la touche est appuyee
+
+joueur a des coordonnees
+	x coordonnee en x
+	y coordonnee en y
+
+position evolue avec les deplacement
+
+
+
+fonction toucheAppuyee (Dt){
+	si (Vx < Vxcap){
+		Vx += A * Dt;
+	}
+}
+avec Vx la vitesse en x
+A l'accélaration a appliquer
+et Dt l'ecart de temps
+
+(pour touche non appuyee, calcul deceleration 
+==>	si (Vx > 0){
+		Vx -= A*Dt
+	}
+)	
+
+calcul de la position
+
+x = x + Vx * Dt;
+y = y + Vy * Dt;
+(avec x et y les position en x et en y)
+
+tenir compte de g
+saut ==> Vy Ay * Dt + g*Dt
+*************************************************Fin_Recherches************************************/
+
+/*recherche duree des inputs
+- lorsque l'on presse la touche saut => depart d'un chronometre
+	Si la duree des saut atteint la duree limite
+		=> le joueur ne va pas plus haut et commence a descendre
+	Sinon le joueur continu de monter
+http://www.enseignement.polytechnique.fr/informatique/profs/Patrick.Gros/java/chrono.html
+	ex:
+		Joueur entre "touche saut"
+		top_debut compteur
+		appel a calculsPysiques
+		
+
+
+**************blocage des fps a 60
+http://www.koonsolo.com/news/dewitters-gameloop/
+
+
+*/
+
+
+//*************************************Calculateur_des_deplacements*********************
+/*
+		modifier le type de Dt
+		
+*/
+/**Fonction calculant les coordonnees d'un joueur
+*@param coordjoueur les coordonnees initiales du joueur
+*@param	speed la vitesse du joueur
+*@param acceleration l'acceleration du joueur
+*@param Dt l'ecart de temps
+*@return la nouvelle coordonnee du joueur
+*/
+public Coordonnee calculsPhysiques (Coordinate coordjoueur,Vector speed,Vector acceleration,temps Dt){
+	
+	Vector newSpeed = speed.clone();
+	Coordonnee newCoordJoueur = coordJoueur.clone();
+	
+	//si le joueur va a gauche
+	if(gauche && !droite){
+		newSpeed.setX(newSpeed.getX() - acceleration.getX() * Dt);
+		if(newSpeed.getX() < -VxMax){
+			newSpeed.setX(-VxMax); 
+		}
+	}else{
+		//si le joueur va a droite
+		if(droite && !gauche){
+			newSpeed.setX(newSpeed.getX() + acceleration.getX() * Dt);
+			if(newSpeed.getX() > VxMax){
+				newSpeed.setX(VxMax);
+			}
+		}else{
+			//si le joueur ne se deplace plus
+			newSpeed.setX(newSpeed.getX() - (acceleration.getX() * Dt * ((int)Math.signum(newSpeed.getX()))));
+		}
+	}
+	
+	//si le joueur saute
+	if(saut){
+		newSpeed.setY(newSpeed.getY() - acceleration.getY() * Dt - g * Dt);
+	}
+
+	newCoordJoueur.setX(coordjoueur.getX() + newspeed.getX() * Dt);
+	newCoordJoueur.setY(coordjoueur.getY() + newSpeed.getY() * Dt);	
+	
+	return newCoordjoueur;
+}
+//*************************************Fin_Calculateur_des_deplacements*********************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
