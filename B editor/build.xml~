@@ -9,7 +9,7 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" source="javac6.0"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" source="1.4"/>
     </target>
 
     <target name="jar">
@@ -36,6 +36,8 @@
     </target>
 
 
+    <target name="test" depends="compile, jar, run"/>
+    
     <target name="main" depends="compile, jar, javadoc, run"/>
 
 </project>

@@ -16,7 +16,7 @@ public class Coordinate
 	* @param coordX la coordonnée en X
 	* @param coordY la coordonnée en Y
 	*/
-	public Coordiante(int coordX, int coordY)
+	public Coordinate(int coordX, int coordY)
 	{
 		this.x = coordX;
 		this.y = coordY;
