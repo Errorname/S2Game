@@ -7,7 +7,7 @@
     <property name="main-class" value="Beditor"/>
 
 
-    <target name="compile">
+    <target name="compile" depends="clean">
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}" source="1.4"/>
     </target>
@@ -36,6 +36,8 @@
     </target>
 
 
+    <target name="test" depends="compile, jar, run"/>
+    
     <target name="main" depends="compile, jar, javadoc, run"/>
 
 </project>

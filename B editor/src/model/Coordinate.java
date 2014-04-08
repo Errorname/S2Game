@@ -1,7 +1,7 @@
 package model;
 
 /**
-* Classe Coordonnee : définit des coordonnées
+* Classe Coordinate : définit des coordonnées
 *
 * @author Hugo PIGEON
 * @version 1.0
