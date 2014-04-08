@@ -5,11 +5,18 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 /**
-* Classe Fenetre : permet de gérer la fenêtre affichant l'éditeur de niveaux
+* Classe Window : permet de gérer la fenêtre affichant l'éditeur de niveaux
 *
 * @author Hugo PIGEON
 * @version 1.0
@@ -20,17 +27,16 @@ public class Window extends JFrame
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
 	private JMenuItem quitFileMenu;
-	private Map map;
 
 	/** Constructeur permettant de créer la fenêtre
 	*/
 	public Window()
-	{   
-		this.map = new Map(5, 5);
+	{
+		this.add(new MapPan(10, 10, 32, 32));	
 	
     	this.initWindow();
     	this.initMenu();
-    	  
+    	
     	this.setVisible(true);
 	}
 	
@@ -55,22 +61,12 @@ public class Window extends JFrame
     	
     	this.quitFileMenu = new JMenuItem("Quitter");
     	this.fileMenu.add(this.quitFileMenu);
-    	// permet de quitter lors du clic sur le bouton quitter
-    	this.quitFileMenu.addActionListener(new ActionListener()
-    		{
-    			public void actionPerformed(ActionEvent arg0)
-    			{
-    				System.exit(0);
-    			}
-    		});
     	
     	this.setJMenuBar(menuBar); 
 	}
 	
-	/** Affiche la carte
-	*/
-	public void display()
+	public JMenuItem getQuitFileMenu()
 	{
-	
+		return this.quitFileMenu;
 	}
 }
