@@ -17,6 +17,10 @@ public class NewMapPan extends JPanel
 	private JButton tilesetButton;
 	private JButton confirmButton;
 	private JLabel labelTilesetPath;
+	private JSpinner spinnerMapWidth;
+	private JSpinner spinnerMapHeight;
+	private JSpinner spinnerTileWidth;
+	private JSpinner spinnerTileHeight;
 
 	/** Constructeur permettant d'afficher les boutons
 	*/
@@ -28,20 +32,20 @@ public class NewMapPan extends JPanel
 		this.tilesetButton = new JButton("Parcourir...");
 		
 		JLabel labelMapWidth = new JLabel("Largeur de la carte (en tiles) :");
-		SpinnerModel mapWidthModel = new SpinnerNumberModel(64, 1, 512, 1);
-		JSpinner spinnerMapWidth = new JSpinner(mapWidthModel);
+		SpinnerModel mapWidthModel = new SpinnerNumberModel(32, 16, 512, 1);
+		spinnerMapWidth = new JSpinner(mapWidthModel);
 		
 		JLabel labelMapHeight = new JLabel("Hauteur de la carte (en tiles) :");
-		SpinnerModel mapHeightModel = new SpinnerNumberModel(64, 1, 512, 1);
-		JSpinner spinnerMapHeight = new JSpinner(mapHeightModel);
+		SpinnerModel mapHeightModel = new SpinnerNumberModel(32, 20, 512, 1);
+		spinnerMapHeight = new JSpinner(mapHeightModel);
 		
 		JLabel labelTileWidth = new JLabel("Largeur des tiles (en pixels) :");
-		SpinnerModel tilesWidthModel = new SpinnerNumberModel(32, 1, 256, 1);
-		JSpinner spinnerTileWidth = new JSpinner(tilesWidthModel);
+		SpinnerModel tilesWidthModel = new SpinnerNumberModel(32, 16, 256, 1);
+		spinnerTileWidth = new JSpinner(tilesWidthModel);
 		
 		JLabel labelTileHeight = new JLabel("Hauteur des tiles (en pixels) :");
-		SpinnerModel tilesHeightModel = new SpinnerNumberModel(32, 1, 256, 1);
-		JSpinner spinnerTileHeight = new JSpinner(tilesHeightModel);
+		SpinnerModel tilesHeightModel = new SpinnerNumberModel(32, 16, 256, 1);
+		spinnerTileHeight = new JSpinner(tilesHeightModel);
 		
 		this.confirmButton = new JButton("Valider");
 		
@@ -122,5 +126,46 @@ public class NewMapPan extends JPanel
 	{
 		this.tilesetPath = path;
   		this.labelTilesetPath.setText(this.tilesetPath);
+  		this.revalidate();
+	}
+	
+	/** Permet d'obtenir le chemin du tileset
+	* @return le chemin du tileset
+	*/
+	public String getTilesetPath()
+	{
+		return this.tilesetPath;
+	}
+	
+	/** Permet d'obtenir la largeur saisie pour la carte
+	* @return la largeur saisie pour la carte
+	*/
+	public int getMapWidth()
+	{
+		return ((Integer) this.spinnerMapWidth.getValue()).intValue();
+	}
+	
+	/** Permet d'obtenir la hauteur saisie pour la carte
+	* @return la hauteur saisie pour la carte
+	*/
+	public int getMapHeight()
+	{
+		return ((Integer) this.spinnerMapHeight.getValue()).intValue();
+	}
+	
+	/** Permet d'obtenir la largeur saisie pour les tiles
+	* @return la largeur saisie pour les tiles
+	*/
+	public int getTileWidth()
+	{
+		return ((Integer) this.spinnerTileWidth.getValue()).intValue();
+	}
+	
+	/** Permet d'obtenir la hauteur saisie pour les tiles
+	* @return la hauteur saisie pour les tiles
+	*/
+	public int getTileHeight()
+	{
+		return ((Integer) this.spinnerTileHeight.getValue()).intValue();
 	}
 }

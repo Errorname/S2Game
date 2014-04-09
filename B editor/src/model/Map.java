@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Dimension;
+
 /**
 * Classe Map : définit la carte à éditer
 *
@@ -9,24 +11,21 @@ package model;
 
 public class Map
 {
-	private int w;
-	private int h;
+	private Dimension dim;
 	private int tiles[][];
 	
 	/** Constructeur permettant de définir une carte en précisant sa largeur et sa hauteur
-	* @param width la largeur de la carte
-	* @param height la hauteur de la carte
+	* @param dim les dimensions de la carte
 	*/
-	public Map(int width, int height)
+	public Map(Dimension dim)
 	{
-		this.w = width;
-		this.h = height;
-		this.tiles = new int[width][height];
-		for(int i = 0 ; i < width ; i++)
+		this.dim = dim;
+		this.tiles = new int[(int) dim.getWidth()][(int) dim.getHeight()];
+		for(int i = 0 ; i < dim.getWidth() ; i++)
 		{
-			for(int j = 0 ; j < height ; j++)
+			for(int j = 0 ; j < dim.getHeight() ; j++)
 			{
-				this.tiles[i][j] = -2;
+				this.tiles[i][j] = 0;
 			}
 		}
 	}
@@ -39,7 +38,7 @@ public class Map
 	{
 		int ret = -1;
 		
-		if(x >= 0 && x < this.w && y >= 0 && y < this.h)
+		if(x >= 0 && x < this.dim.getWidth() && y >= 0 && y < this.dim.getHeight())
 			ret = this.tiles[x][y];
 			
 		return ret;
@@ -52,7 +51,7 @@ public class Map
 	*/
 	public void setTile(int x, int y, int tile)
 	{
-		if(x >= 0 && x < this.w && y >= 0 && y < this.h)
+		if(x >= 0 && x < this.dim.getWidth() && y >= 0 && y < this.dim.getHeight())
 			this.tiles[x][y] = tile;
 	}
 	
@@ -61,7 +60,7 @@ public class Map
 	*/
 	public int getWidth()
 	{
-		return this.w;
+		return (int) this.dim.getWidth();
 	}
 	
 	/** Permet d'obtenir la hauteur de la carte
@@ -69,6 +68,6 @@ public class Map
 	*/
 	public int getHeight()
 	{
-		return this.h;
+		return (int) this.dim.getHeight();
 	}
 }

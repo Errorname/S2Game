@@ -1,9 +1,11 @@
 package view;
 
+import controller.*;
 import model.Coordinate;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.Border;
+import java.awt.image.BufferedImage;
 
 /**
 * Classe Sprite : permet d'afficher un sprite à partir d'une image
@@ -17,23 +19,34 @@ public class Sprite
 	private JLabel img;
 	private String file;
 	private Coordinate coord;
-	private int width;
-	private int height;
+	private Dimension dim;
 
 	/** Constructeur qui permet de préciser le chemin de l'image, les coordonnées et la taille du sprite
 	* @param file le fichier image chargé par le sprite
 	* @param coord les coordonnées du sprite
-	* @param width la largeur du sprite
-	* @param height la hauteur du sprite
+	* @param dim les dimensions du sprite
 	*/
-	public Sprite(String file, Coordinate coord, int width, int height)
+	public Sprite(String file, Coordinate coord, Dimension dim)
 	{
 		this.file = file;
 		this.coord = coord;
-		this.width = width;
-		this.height = height;
+		this.dim = dim;
 		
 		this.img = new JLabel(new ImageIcon(file));
+		
+		MouseEventsManager mouseEvents = new MouseEventsManager(this.img);
+		this.img.addMouseListener(mouseEvents);
+		this.img.addMouseMotionListener(mouseEvents);
+	}
+	
+	/** Constructeur qui permet de préciser l'image à charger ainsi que les coordonnées et la taille de la "sous-image"
+	* @param img l'image chargée par le sprite
+	* @param coord les coordonnées de la "sous-image"
+	* @param dim les dimensions de la "sous-image"
+	*/
+	public Sprite(BufferedImage img, Coordinate coord, Dimension dim)
+	{		
+		this.img = new JLabel(new ImageIcon(img.getSubImage(coord.getX(), coord.getY(), (int) dim.getWidth(), (int) dim.getHeight())));
 	}
 	
 	/** Permet de changer la bordure du sprite
@@ -42,6 +55,7 @@ public class Sprite
 	public void setBorder(Border b)
 	{
 		this.img.setBorder(b);
+		this.img.revalidate();
 	}
 	
 	/** Permet d'obtenir la largeur du sprite
@@ -49,22 +63,39 @@ public class Sprite
 	*/
 	public int getWidth()
 	{
-		return this.width;
+		return (int) this.dim.getWidth();
 	}
+	
 	/** Permet d'obtenir la hauteur du sprite
 	* @return la largeur du sprite
 	*/
 	public int getHeight()
 	{
-		return this.height;
+		return (int) this.dim.getHeight();
+	}
+	
+	/** Permet d'obtenir les coordonnées (en pixels) du tile
+	* @return la position en pixels du tile
+	*/
+	public Coordinate getPosition()
+	{
+		return this.coord;
+	}
+	
+	/** Permet d'obtenir l'image du sprite
+	* @return l'image du sprite
+	*/
+	public JLabel getImage()
+	{
+		return this.img;
 	}
 
 	/** Affichage de l'image
 	* @param g le conteneur dans lequel sera affichée l'image
 	*/
-  	public void paint(Graphics g)
+  	/*public void paint(Graphics g)
   	{
 		this.img.getIcon().paintIcon(null, g, this.coord.getX() + 1, this.coord.getY() + 1);
-		this.img.getBorder().paintBorder(null, g, this.coord.getX(), this.coord.getY(), this.width + 2, this.height + 2);
-	}
+		this.img.getBorder().paintBorder(null, g, this.coord.getX(), this.coord.getY(), this.dim.getX() + 2, this.dim.getY() + 2);
+	}*/
 }

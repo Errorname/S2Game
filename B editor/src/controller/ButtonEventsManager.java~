@@ -8,24 +8,35 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
-* Classe InputsManager : traite les entrées
+* Classe ButtonEventsManager : traite les événements générés par les boutons et le menu
 *
 * @author Hugo PIGEON
 * @version 1.0
 */
 
-public class InputsManager
+public class ButtonEventsManager
 {
 	private MainWindow win;
 	
 	/** Constructeur pour lequel il faut préciser la fenêtre
 	* @param window la fenêtre du programme
 	*/
-	public InputsManager(MainWindow window)
+	public ButtonEventsManager(MainWindow window)
 	{
 		this.win = window;
 		
-    	// permet de quitter lors du clic sur le bouton quitter
+		// permet de créer une nouvelle carte lors du clic sur le bouton "nouvelle carte" du menu
+		this.win.getNewFileMenu().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				win.switchNewMap();
+				
+				win.revalidate();
+			}
+		});
+		
+    	// permet de quitter lors du clic sur le bouton "quitter" du menu
     	this.win.getQuitFileMenu().addActionListener(new ActionListener()
     	{
     		public void actionPerformed(ActionEvent arg0)
@@ -40,15 +51,14 @@ public class InputsManager
     		public void actionPerformed(ActionEvent arg0)
     		{
     			JFileChooser chooser = new JFileChooser();
-    			String filesAllowed[] = new String[2];
+    			String filesAllowed[] = new String[3];
     			filesAllowed[0] = "jpg";
     			filesAllowed[1] = "png";
-    			FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG images", filesAllowed);
+    			filesAllowed[2] = "bmp";
+    			FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, BMP & PNG images", filesAllowed);
     			chooser.setFileFilter(filter);
     			chooser.showOpenDialog(win);
     			win.getNewMapPan().setTilesetPath(chooser.getSelectedFile().getName());
-    			
-    			win.revalidate();
     		}
     	});
     	
@@ -59,15 +69,14 @@ public class InputsManager
     		{
     			if(win.getNewMapPan().getTilesetPath() != "")
     			{
-    				win.switchNewMap(new MapPan(10, 10, 32, 32));
-    				win.revalidate();
+    				NewMapPan nmp = win.getNewMapPan();
+    				win.switchMap(new MapPan(nmp.getMapWidth(), nmp.getMapHeight(), nmp.getTileWidth(), nmp.getTileHeight(), nmp.getTilesetPath()));
     			}
     			else
     			{
     				JOptionPane errorMsg = new JOptionPane();
     				errorMsg.showMessageDialog(win, "Vous devez sélectionner un tileset", "Erreur", JOptionPane.ERROR_MESSAGE);
     			}
-    			
     		}
     	});
 	}
