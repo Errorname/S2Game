@@ -30,7 +30,7 @@ public class MainWindow extends JFrame
 	
     	this.initWindow();
     	this.initMenu();
-    	this.setResizable(false);
+    	//this.setResizable(false);
     	
     	this.setVisible(true);
 	}

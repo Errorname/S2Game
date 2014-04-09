@@ -20,33 +20,46 @@ public class Sprite
 	private String file;
 	private Coordinate coord;
 	private Dimension dim;
+	private JPanel panel;
 
 	/** Constructeur qui permet de préciser le chemin de l'image, les coordonnées et la taille du sprite
+	* @param pan le panel dans lequel le sprite est contenu
 	* @param file le fichier image chargé par le sprite
 	* @param coord les coordonnées du sprite
 	* @param dim les dimensions du sprite
+	* @param checkClicks mettre à true pour gérer les événements de clic de souris
+	* @param checkMoves mettre à true pour gérer les événements de mouvement de souris
 	*/
-	public Sprite(String file, Coordinate coord, Dimension dim)
+	public Sprite(JPanel pan, String file, Coordinate coord, Dimension dim, boolean checkClicks, boolean checkMoves)
 	{
+		this.panel = pan;
+	
 		this.file = file;
 		this.coord = coord;
 		this.dim = dim;
 		
 		this.img = new JLabel(new ImageIcon(file));
 		
-		MouseEventsManager mouseEvents = new MouseEventsManager(this.img);
+		MouseEventsManager mouseEvents = new MouseEventsManager(this, checkClicks, checkMoves);
 		this.img.addMouseListener(mouseEvents);
-		this.img.addMouseMotionListener(mouseEvents);
 	}
 	
 	/** Constructeur qui permet de préciser l'image à charger ainsi que les coordonnées et la taille de la "sous-image"
+	* @param pan le panel dans lequel le sprite est contenu
 	* @param img l'image chargée par le sprite
 	* @param coord les coordonnées de la "sous-image"
 	* @param dim les dimensions de la "sous-image"
+	* @param checkClicks mettre à true pour gérer les événements de clic de souris
+	* @param checkMoves mettre à true pour gérer les événements de mouvement de souris
 	*/
-	public Sprite(BufferedImage img, Coordinate coord, Dimension dim)
+	public Sprite(JPanel pan, BufferedImage img, Coordinate coord, Dimension dim, boolean checkClicks, boolean checkMoves)
 	{		
+		this.panel = pan;
+		
 		this.img = new JLabel(new ImageIcon(img.getSubimage(coord.getX(), coord.getY(), (int) dim.getWidth(), (int) dim.getHeight())));
+		
+		MouseEventsManager mouseEvents = new MouseEventsManager(this, checkClicks, checkMoves);
+		this.img.addMouseListener(mouseEvents);
 	}
 	
 	/** Permet de changer la bordure du sprite
@@ -89,13 +102,19 @@ public class Sprite
 	{
 		return this.img;
 	}
-
-	/** Affichage de l'image
-	* @param g le conteneur dans lequel sera affichée l'image
+	
+	/** Permet de changer l'image du sprite
+	* @param img la nouvelle image du sprite
 	*/
-  	/*public void paint(Graphics g)
-  	{
-		this.img.getIcon().paintIcon(null, g, this.coord.getX() + 1, this.coord.getY() + 1);
-		this.img.getBorder().paintBorder(null, g, this.coord.getX(), this.coord.getY(), this.dim.getX() + 2, this.dim.getY() + 2);
-	}*/
+	public void setImage(ImageIcon img)
+	{
+		this.img.setIcon(img);
+	}
+	
+	/** Permet d'obtenir le panel dans lequel le sprite est contenu
+	*/
+	public JPanel getPanel()
+	{
+		return this.panel;
+	}
 }

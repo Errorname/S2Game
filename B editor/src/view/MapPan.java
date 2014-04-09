@@ -16,7 +16,7 @@ public class MapPan extends JPanel
 {
 	private Sprite tiles[][];
 	private Map map;
-	private JLabel tilesetLabel;
+	private TilesetPan tilesetPan;
 	
 	/** Constructeur permettant d'afficher une nouvelle carte
 	* @param mapDim les dimensions de la carte
@@ -43,15 +43,17 @@ public class MapPan extends JPanel
 				int coordX = x * (int) tileDim.getWidth();
 				int coordY = y * (int) tileDim.getHeight();
 				
-    			this.tiles[x][y] = new Sprite("empty.jpg", new Coordinate(coordX, coordY), tileDim);
+    			this.tiles[x][y] = new Sprite(this, "empty.jpg", new Coordinate(coordX, coordY), tileDim, true, true);
     			this.tiles[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
     			tilesPan.add(this.tiles[x][y].getImage());
 			}
 		}
 		
+		this.tilesetPan = new TilesetPan(tilesetPath, tileDim);
+		
 		JScrollPane tilesScroll = new JScrollPane(tilesPan);
 		tilesScroll.setPreferredSize(new Dimension(512, 700));
-		JScrollPane tilesetScroll = new JScrollPane(new TilesetPan(tilesetPath, tileDim));
+		JScrollPane tilesetScroll = new JScrollPane(this.tilesetPan);
 		tilesetScroll.setPreferredSize(new Dimension(512, 700));
 		this.add(tilesScroll);
 		this.add(tilesetScroll);
@@ -85,5 +87,13 @@ public class MapPan extends JPanel
 			ret = this.tiles[0].length;
 		
 		return ret;
+	}
+	
+	/** Permet d'obtenir le tile sélectionné dans le tileset
+	* @return le tile sélectionné dans le tileset
+	*/
+	public Sprite getSelectedTile()
+	{
+		return this.tilesetPan.getSelectedSprite();
 	}
 }
