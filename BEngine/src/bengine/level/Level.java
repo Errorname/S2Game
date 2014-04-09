@@ -10,10 +10,11 @@ public class Level {
     public Level() {
         /*this.width = width;
         this.height = height;*/
-    }
+     }
 
     public void fromFile(String path) {
         /********* CHARGE LA MAP ICI ***********/
+    	
     }
 
     public void init() {
