@@ -18,6 +18,7 @@ public class MainWindow extends JFrame
 	private JMenu fileMenu;
 	private JMenuItem quitFileMenu;
 	private JMenuItem newFileMenu;
+	private JMenuItem saveFileMenu;
 	private MapPan mapPan;
 	private NewMapPan newMapPan;
 
@@ -57,6 +58,9 @@ public class MainWindow extends JFrame
     	this.newFileMenu = new JMenuItem("Nouvelle carte");
     	this.fileMenu.add(this.newFileMenu);
     	
+    	this.saveFileMenu = new JMenuItem("Enregistrer la carte");
+    	this.fileMenu.add(this.saveFileMenu);
+    	
     	this.quitFileMenu = new JMenuItem("Quitter");
     	this.fileMenu.add(this.quitFileMenu);
     	
@@ -79,12 +83,28 @@ public class MainWindow extends JFrame
 		return this.newFileMenu;
 	}
 	
+	/** Permet d'obtenir le bouton "nouvelle carte" du menu
+	* @return le bouton "nouvelle carte" du menu
+	*/
+	public JMenuItem getSaveFileMenu()
+	{
+		return this.saveFileMenu;
+	}
+	
 	/** Permet d'obtenir le bouton "parcourir" de la sélection de tileset
 	* @return le bouton "parcourir" de la sélection de tileset
 	*/
 	public JButton getTilesetButton()
 	{
 		return this.newMapPan.getTilesetButton();
+	}
+	
+	/** Permet d'obtenir le mapPan
+	* @return le mapPan de la fenêtre
+	*/
+	public MapPan getMapPan()
+	{
+		return this.mapPan;
 	}
 	
 	/** Permet d'obtenir le newMapPan

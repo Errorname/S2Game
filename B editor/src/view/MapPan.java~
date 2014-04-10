@@ -17,6 +17,7 @@ public class MapPan extends JPanel
 	private Sprite tiles[][];
 	private Map map;
 	private TilesetPan tilesetPan;
+	private Dimension tileDim;
 	
 	/** Constructeur permettant d'afficher une nouvelle carte
 	* @param mapDim les dimensions de la carte
@@ -25,6 +26,8 @@ public class MapPan extends JPanel
 	*/
 	public MapPan(Dimension mapDim, Dimension tileDim, String tilesetPath)
 	{
+		this.tileDim = tileDim;
+	
 		this.setBackground(Color.white);
 		this.setLayout(new GridLayout(0, 2));
 		
@@ -43,13 +46,13 @@ public class MapPan extends JPanel
 				int coordX = x * (int) tileDim.getWidth();
 				int coordY = y * (int) tileDim.getHeight();
 				
-    			this.tiles[x][y] = new Sprite(this, "empty.jpg", new Coordinate(coordX, coordY), tileDim, true, true);
+    			this.tiles[x][y] = new Sprite(this, new Coordinate(coordX, coordY), tileDim, true, true);
     			this.tiles[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
     			tilesPan.add(this.tiles[x][y].getImage());
 			}
 		}
 		
-		this.tilesetPan = new TilesetPan(tilesetPath, tileDim);
+		this.tilesetPan = new TilesetPan(tilesetPath, tileDim, this);
 		
 		JScrollPane tilesScroll = new JScrollPane(tilesPan);
 		tilesScroll.setPreferredSize(new Dimension(512, 700));
@@ -58,7 +61,15 @@ public class MapPan extends JPanel
 		this.add(tilesScroll);
 		this.add(tilesetScroll);
 		
-		this.tiles[0][0].setImage(new ImageIcon("empty2.jpg"));
+		this.reloadMap();
+	}
+	
+	/** Permet d'obtenir la carte
+	* @return la carte du MapPan
+	*/
+	public Map getMap()
+	{
+		return this.map;
 	}
 	
 	/** Permet d'obtenir le tile dont les coordonnées sont précisées (coordonnées en tiles)
@@ -97,5 +108,28 @@ public class MapPan extends JPanel
 	public Sprite getSelectedTile()
 	{
 		return this.tilesetPan.getSelectedSprite();
+	}
+	
+	/** Permet d'obtenir le TilesetPan
+	* @return le TilesetPan
+	*/
+	public TilesetPan getTilesetPan()
+	{
+		return this.tilesetPan;
+	}
+	
+	/** Permet de charger la carte à partir du modèle Map
+	*/
+	public void reloadMap()
+	{
+		for(int x = 0 ; x < this.getTilesNumberX() ; x++)
+		{
+			for(int y = 0 ; y < this.getTilesNumberY() ; y++)
+			{
+				if(this.map.getTile(x, y) != 0)
+					System.out.println(y + " " + x + " " + this.map.getTile(x, y));
+				this.tiles[y][x].setImage(new ImageIcon(this.tilesetPan.getSpriteImage(this.map.getTile(x, y))));
+			}
+		}
 	}
 }

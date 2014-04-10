@@ -21,11 +21,11 @@ public class Map
 	{
 		this.dim = dim;
 		this.tiles = new int[(int) dim.getWidth()][(int) dim.getHeight()];
-		for(int i = 0 ; i < dim.getWidth() ; i++)
+		for(int x = 0 ; x < dim.getWidth() ; x++)
 		{
-			for(int j = 0 ; j < dim.getHeight() ; j++)
+			for(int y = 0 ; y < dim.getHeight() ; y++)
 			{
-				this.tiles[i][j] = 0;
+				this.tiles[x][y] = 0;
 			}
 		}
 	}
@@ -39,7 +39,7 @@ public class Map
 		int ret = -1;
 		
 		if(x >= 0 && x < this.dim.getWidth() && y >= 0 && y < this.dim.getHeight())
-			ret = this.tiles[x][y];
+			ret = this.tiles[y][x];
 			
 		return ret;
 	}

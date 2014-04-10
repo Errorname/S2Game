@@ -24,13 +24,12 @@ public class Sprite
 
 	/** Constructeur qui permet de préciser le chemin de l'image, les coordonnées et la taille du sprite
 	* @param pan le panel dans lequel le sprite est contenu
-	* @param file le fichier image chargé par le sprite
 	* @param coord les coordonnées du sprite
 	* @param dim les dimensions du sprite
 	* @param checkClicks mettre à true pour gérer les événements de clic de souris
 	* @param checkMoves mettre à true pour gérer les événements de mouvement de souris
 	*/
-	public Sprite(JPanel pan, String file, Coordinate coord, Dimension dim, boolean checkClicks, boolean checkMoves)
+	public Sprite(JPanel pan, Coordinate coord, Dimension dim, boolean checkClicks, boolean checkMoves)
 	{
 		this.panel = pan;
 	
@@ -38,10 +37,18 @@ public class Sprite
 		this.coord = coord;
 		this.dim = dim;
 		
-		this.img = new JLabel(new ImageIcon(file));
+		this.img = new JLabel();
 		
-		MouseEventsManager mouseEvents = new MouseEventsManager(this, checkClicks, checkMoves);
-		this.img.addMouseListener(mouseEvents);
+		if(this.panel instanceof MapPan)
+		{
+			MouseEventsManager mouseEvents = new MouseEventsManager(this, ((MapPan) this.panel).getMap(), checkClicks, checkMoves);
+			this.img.addMouseListener(mouseEvents);
+		}
+		else if(this.panel instanceof TilesetPan)
+		{
+			MouseEventsManager mouseEvents = new MouseEventsManager(this, ((TilesetPan) this.panel).getMapPan().getMap(), checkClicks, checkMoves);
+			this.img.addMouseListener(mouseEvents);
+		}
 	}
 	
 	/** Constructeur qui permet de préciser l'image à charger ainsi que les coordonnées et la taille de la "sous-image"
@@ -55,11 +62,21 @@ public class Sprite
 	public Sprite(JPanel pan, BufferedImage img, Coordinate coord, Dimension dim, boolean checkClicks, boolean checkMoves)
 	{		
 		this.panel = pan;
+		this.coord = coord;
+		this.dim = dim;
 		
 		this.img = new JLabel(new ImageIcon(img.getSubimage(coord.getX(), coord.getY(), (int) dim.getWidth(), (int) dim.getHeight())));
 		
-		MouseEventsManager mouseEvents = new MouseEventsManager(this, checkClicks, checkMoves);
-		this.img.addMouseListener(mouseEvents);
+		if(this.panel instanceof MapPan)
+		{
+			MouseEventsManager mouseEvents = new MouseEventsManager(this, ((MapPan) this.panel).getMap(), checkClicks, checkMoves);
+			this.img.addMouseListener(mouseEvents);
+		}
+		else if(this.panel instanceof TilesetPan)
+		{
+			MouseEventsManager mouseEvents = new MouseEventsManager(this, ((TilesetPan) this.panel).getMapPan().getMap(), checkClicks, checkMoves);
+			this.img.addMouseListener(mouseEvents);
+		}
 	}
 	
 	/** Permet de changer la bordure du sprite
@@ -112,6 +129,7 @@ public class Sprite
 	}
 	
 	/** Permet d'obtenir le panel dans lequel le sprite est contenu
+	* @return le panel dans lequel le sprite est contenu
 	*/
 	public JPanel getPanel()
 	{

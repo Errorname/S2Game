@@ -1,6 +1,6 @@
 package controller;
 
-import model.Coordinate;
+import model.*;
 import view.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -16,17 +16,20 @@ import javax.swing.*;
 public class MouseEventsManager extends MouseAdapter
 {
 	private Sprite sprite;
+	private Map map;
 	private boolean checkClicks;
 	private boolean checkMoves;
 	
 	/** Constructeur pour lequel il faut préciser le sprite observé
 	* @param sprite le sprite observé
+	* @param map la carte à modifier
 	* @param checkClicks mettre à true pour gérer les événements de clic
 	* @param checkMoves mettre à true pour gérer les événements de mouvement
 	*/
-	public MouseEventsManager(Sprite sprite, boolean checkClicks, boolean checkMoves)
+	public MouseEventsManager(Sprite sprite, Map map, boolean checkClicks, boolean checkMoves)
 	{
 		this.sprite = sprite;
+		this.map = map;
 		this.checkClicks = checkClicks;
 		this.checkMoves = checkMoves;
 	}
@@ -39,11 +42,22 @@ public class MouseEventsManager extends MouseAdapter
 		if(this.checkClicks)
 		{
 			if(this.sprite.getPanel() instanceof TilesetPan)
+			{
 				((TilesetPan) this.sprite.getPanel()).setSelectedSprite(this.sprite);
+			}
 			else if(this.sprite.getPanel() instanceof MapPan)
 			{
-				this.sprite.setImage(((ImageIcon) ((MapPan) this.sprite.getPanel()).getSelectedTile().getImage().getIcon()));
+				TilesetPan tp = ((MapPan) this.sprite.getPanel()).getTilesetPan();
+			
+				final int x = tp.getSelectedSpriteIndex().getX();
+				final int y = tp.getSelectedSpriteIndex().getY();
+				final int tileX = this.sprite.getPosition().getX() / /*(((MapPan) this.sprite.getPanel()).getTilesNumberX()*/ this.sprite.getWidth();
+				final int tileY = this.sprite.getPosition().getY() / /*(((MapPan) this.sprite.getPanel()).getTilesNumberY()*/ this.sprite.getHeight();
+			
+				this.map.setTile(tileX, tileY, x + ((MapPan) this.sprite.getPanel()).getTilesetPan().getTilesetWidth() * y);
+				((MapPan) this.sprite.getPanel()).reloadMap();
 			}
+			
 			this.sprite.getPanel().revalidate();
 		}
 	}

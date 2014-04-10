@@ -6,10 +6,7 @@ public class Beditor
 	public static void main(String args[])
 	{
 		MainWindow window = new MainWindow();
-		ButtonEventsManager buttons = new ButtonEventsManager(window);
-		while(true)
-		{
-			window.revalidate();
-		}
+		wait(100);
+		ButtonEventsManager buttons = new ButtonEventsManager(window, window.getMapPan().getMap());
 	}
 }
