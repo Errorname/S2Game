@@ -28,7 +28,7 @@ public class TitleMenu extends GuiMenu {
 
     public void render(Screen screen) {
 
-        //screen.clear(0);
+        // screen.clear(0);
         screen.blit(Art.titleScreen, 0, 0);
 
         super.render(screen);
