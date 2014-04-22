@@ -32,32 +32,33 @@ public class TilesetPan extends JPanel
 	{
 		if(tilesetPath != "")
 		{
+			this.mapPan = mapPan;
+			File file = new File(tilesetPath);
 			try
 			{
-				this.mapPan = mapPan;
-				File file = new File(tilesetPath);
 				this.tileset = ImageIO.read(file);
-				this.sprites = new Sprite[(int) tileSize.getWidth()][(int) tileSize.getHeight()];
-				
-				this.tilesetWidth = (int) (this.tileset.getWidth() / tileSize.getWidth());
-				this.tilesetHeight = (int) (this.tileset.getHeight() / tileSize.getHeight());
-				
-				for(int y = 0 ; y < this.tilesetHeight ; y++)
-				{
-					for(int x = 0 ; x < this.tilesetWidth ; x++)
-					{
-						this.sprites[x][y] = new Sprite(this, this.tileset, new Coordinate((int) (x * tileSize.getWidth()), (int) (y * tileSize.getHeight())), tileSize, true, false);
-						this.add(this.sprites[x][y].getImage());
-					}
-				}
-				this.setSelectedSprite(sprites[0][0]);
-				
-				this.setLayout(new GridLayout(tilesetWidth + 1, tilesetHeight + 1, 0, 0));
 			}
 			catch(Exception e)
 			{
 				e.printStackTrace();
 			}
+			
+			this.tilesetWidth = (int) (this.tileset.getWidth() / tileSize.getWidth());
+			this.tilesetHeight = (int) (this.tileset.getHeight() / tileSize.getHeight());
+			
+			this.sprites = new Sprite[this.tilesetWidth][this.tilesetHeight];
+			
+			for(int y = 0 ; y < this.tilesetHeight ; y++)
+			{
+				for(int x = 0 ; x < this.tilesetWidth ; x++)
+				{
+					this.sprites[x][y] = new Sprite(this, this.tileset, new Coordinate((int) (x * tileSize.getWidth()), (int) (y * tileSize.getHeight())), tileSize, true, false);
+					this.add(this.sprites[x][y].getImage());
+				}
+			}
+			this.setSelectedSprite(sprites[0][0]);
+			
+			this.setLayout(new GridLayout(tilesetWidth + 1, tilesetHeight + 1, 0, 0));
 		}
 		else
 		{

@@ -4,13 +4,13 @@
     <property name="classes.dir" value="classes"/>
     <property name="jar.dir" value="jar"/>
 	<property name="doc.dir" value="doc"/>
-	<property name="main-package" value="bengine"/>
+	<property name="main-package" value="beditor"/>
     <property name="main-class" value="Beditor"/>
 
 
     <target name="compile" depends="clean">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" source="1.4"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
     </target>
 
     <target name="jar">

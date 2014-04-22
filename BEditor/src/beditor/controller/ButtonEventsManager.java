@@ -63,15 +63,16 @@ public class ButtonEventsManager
 					{
 						for(int x = 0 ; x < map.getWidth() ; x++)
 						{
-							mapFileWriter.write(map.getTile(x, y) + " ");
+							if(map.getTile(x, y) == 0)
+								mapFileWriter.write("  ");
+							else
+								mapFileWriter.write(map.getTile(x, y) + " ");
 						}
 						mapFileWriter.write("\n");
 					}
 					
-					// System.out.println("Carte enregistrée");
-					//////////////////////////
-					// AFFICHER UN MESSAGE CARTE ENREGISTREE
-					//////////////////////////
+					JOptionPane savedMsg = new JOptionPane();
+					savedMsg.showMessageDialog(win, "The map has been successfully saved", "Map saved", JOptionPane.INFORMATION_MESSAGE);      
 					mapFileWriter.close();
     			}
     			catch(NullPointerException e)
@@ -99,10 +100,10 @@ public class ButtonEventsManager
     			FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG images", filesAllowed);
     			chooser.setFileFilter(filter);
     			chooser.showOpenDialog(win);
-    			win.getNewMapPan().setTilesetPath(chooser.getSelectedFile().getName());
+    			win.getNewMapPan().setTilesetPath(chooser.getSelectedFile().getPath());
     			
     			//////////////////////
-    			// TRAITER LE CAS OU L'UTILISATEUR CLIQUE SUR ANNULER DANS LE CHOOSER + RECUPERER TOUT LE CHEMIN
+    			// TRAITER LE CAS OU L'UTILISATEUR CLIQUE SUR ANNULER DANS LE CHOOSER
     			//////////////////////
     		}
     	});
