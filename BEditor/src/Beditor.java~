@@ -1,0 +1,12 @@
+import view.*;
+import controller.*;
+
+public class Beditor
+{
+	public static void main(String args[])
+	{
+		MainWindow window = new MainWindow();
+		wait(100);
+		ButtonEventsManager buttons = new ButtonEventsManager(window, window.getMapPan().getMap());
+	}
+}

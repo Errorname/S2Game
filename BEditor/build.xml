@@ -1,0 +1,44 @@
+<project name="Beditor" basedir="." default="main">
+
+    <property name="src.dir" value="src"/>
+    <property name="classes.dir" value="classes"/>
+    <property name="jar.dir" value="jar"/>
+	<property name="doc.dir" value="doc"/>
+	<property name="main-package" value="beditor"/>
+    <property name="main-class" value="BEditor"/>
+
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-package}.${main-class}"/>
+            </manifest>
+        </jar>
+        <chmod file="${jar.dir}/${ant.project.name}.jar" perm="ugo+x"/>
+    </target>
+    
+    <target name="javadoc">
+    	<mkdir dir="${doc.dir}"/>
+    	<javadoc sourcepath="${src.dir}" destdir="${doc.dir}" author="true" version="true" charset="utf8"/>
+    </target>
+
+    <target name="run">
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+    </target>
+    
+    <target name="clean">
+    	<delete dir="${classes.dir}"/>
+    </target>
+
+
+    <target name="test" depends="compile, jar, run"/>
+    
+    <target name="main" depends="compile, jar, javadoc, run"/>
+
+</project>
