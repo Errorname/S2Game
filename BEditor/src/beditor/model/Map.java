@@ -25,7 +25,7 @@ public class Map
 		{
 			for(int y = 0 ; y < dim.getHeight() ; y++)
 			{
-				this.tiles[x][y] = 0;
+				this.tiles[x][y] = -1;
 			}
 		}
 	}

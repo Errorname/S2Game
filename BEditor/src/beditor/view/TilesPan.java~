@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
-* MapPan : a class to dispay the editor
+* MapPan : a class to dispay the edited map
 *
 * @author Hugo PIGEON
 * @version 1.0
@@ -126,10 +126,7 @@ public class MapPan extends JPanel
 		{
 			for(int y = 0 ; y < this.getTilesNumberY() ; y++)
 			{
-				if(this.map.getTile(x, y) != -1)
-					this.tiles[y][x].setImage(new ImageIcon(this.tilesetPan.getSpriteImage(this.map.getTile(x, y))));
-				else
-					this.tiles[y][x].setImage(null);
+				this.tiles[y][x].setImage(new ImageIcon(this.tilesetPan.getSpriteImage(this.map.getTile(x, y))));
 			}
 		}
 	}

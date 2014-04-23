@@ -71,9 +71,8 @@ public class ButtonEventsManager
 						mapFileWriter.write("\n");
 					}
 					
-					//////////////////////////
-					// AFFICHER UN MESSAGE CARTE ENREGISTREE
-					//////////////////////////
+					JOptionPane savedMsg = new JOptionPane();
+					savedMsg.showMessageDialog(win, "The map has been successfully saved", "Map saved", JOptionPane.INFORMATION_MESSAGE);      
 					mapFileWriter.close();
     			}
     			catch(NullPointerException e)
@@ -100,12 +99,9 @@ public class ButtonEventsManager
     			filesAllowed[1] = "png";
     			FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG images", filesAllowed);
     			chooser.setFileFilter(filter);
-    			chooser.showOpenDialog(win);
-    			win.getNewMapPan().setTilesetPath(chooser.getSelectedFile().getPath());
-    			
-    			//////////////////////
-    			// TRAITER LE CAS OU L'UTILISATEUR CLIQUE SUR ANNULER DANS LE CHOOSER
-    			//////////////////////
+    			int choice = chooser.showOpenDialog(win);
+    			if(choice == JFileChooser.APPROVE_OPTION)
+	    			win.getNewMapPan().setTilesetPath(chooser.getSelectedFile().getPath());
     		}
     	});
     	

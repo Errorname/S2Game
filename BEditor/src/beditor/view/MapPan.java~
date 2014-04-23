@@ -1,12 +1,12 @@
 package beditor.view;
 
-import model.*;
-import controller.*;
+import beditor.model.*;
+import beditor.controller.*;
 import javax.swing.*;
 import java.awt.*;
 
 /**
-* MapPan : a class to dispay the edited map
+* MapPan : a class to dispay the editor
 *
 * @author Hugo PIGEON
 * @version 1.0

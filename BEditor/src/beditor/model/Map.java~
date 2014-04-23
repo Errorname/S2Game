@@ -36,7 +36,7 @@ public class Map
 	*/
 	public int getTile(int x, int y)
 	{
-		return = this.tiles[y][x];
+		return this.tiles[y][x];
 	}
 	
 	/** Changes the tile at the given coordinates

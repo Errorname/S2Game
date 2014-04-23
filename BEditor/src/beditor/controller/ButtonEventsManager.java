@@ -63,7 +63,7 @@ public class ButtonEventsManager
 					{
 						for(int x = 0 ; x < map.getWidth() ; x++)
 						{
-							if(map.getTile(x, y) == 0)
+							if(map.getTile(x, y) == -1)
 								mapFileWriter.write("  ");
 							else
 								mapFileWriter.write(map.getTile(x, y) + " ");
@@ -99,12 +99,9 @@ public class ButtonEventsManager
     			filesAllowed[1] = "png";
     			FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG images", filesAllowed);
     			chooser.setFileFilter(filter);
-    			chooser.showOpenDialog(win);
-    			win.getNewMapPan().setTilesetPath(chooser.getSelectedFile().getPath());
-    			
-    			//////////////////////
-    			// TRAITER LE CAS OU L'UTILISATEUR CLIQUE SUR ANNULER DANS LE CHOOSER
-    			//////////////////////
+    			int choice = chooser.showOpenDialog(win);
+    			if(choice == JFileChooser.APPROVE_OPTION)
+	    			win.getNewMapPan().setTilesetPath(chooser.getSelectedFile().getPath());
     		}
     	});
     	
