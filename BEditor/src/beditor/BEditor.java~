@@ -2,12 +2,22 @@ package beditor;
 
 import beditor.view.*;
 import beditor.controller.*;
-
+import java.util.Locale;
+import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
+import javax.swing.UIManager;
 public class BEditor
 {
 	public static void main(String args[])
 	{
 		Locale.setDefault(Locale.ENGLISH);
+		try
+		{
+        	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+		catch(Exception e)
+		{
+		   System.out.println("ERROR : unsupported look and feel !");
+		}
 		MainWindow window = new MainWindow();
 		ButtonEventsManager buttons = new ButtonEventsManager(window);
 	}

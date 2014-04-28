@@ -1,6 +1,6 @@
 package beditor.view;
 
-import model.*;
+import beditor.model.*;
 import javax.swing.*;
 import java.awt.*;
 

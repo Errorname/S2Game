@@ -1,7 +1,6 @@
 package beditor.view;
 
 import beditor.controller.*;
-import beditor.model.Coordinate;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.Border;
@@ -18,7 +17,7 @@ public class Sprite
 {
 	private JLabel img;
 	private String file;
-	private Coordinate coord;
+	private Point coord;
 	private Dimension dim;
 	private JPanel panel;
 
@@ -29,7 +28,7 @@ public class Sprite
 	* @param checkClicks give true to allow mouse click events
 	* @param checkMoves give true to allow mouse moves events
 	*/
-	public Sprite(JPanel pan, Coordinate coord, Dimension dim, boolean checkClicks, boolean checkMoves)
+	public Sprite(JPanel pan, Point coord, Dimension dim, boolean checkClicks, boolean checkMoves)
 	{
 		this.panel = pan;
 	
@@ -46,7 +45,7 @@ public class Sprite
 		}
 		else if(this.panel instanceof TilesetPan)
 		{
-			MouseEventsManager mouseEvents = new MouseEventsManager(this, ((TilesetPan) this.panel).getMapPan().getMap(), checkClicks, checkMoves);
+			MouseEventsManager mouseEvents = new MouseEventsManager(this, ((TilesetPan) this.panel).getEditorPan().getMapPan().getMap(), checkClicks, checkMoves);
 			this.img.addMouseListener(mouseEvents);
 		}
 	}
@@ -59,13 +58,13 @@ public class Sprite
 	* @param checkClicks give true to allow mouse click events
 	* @param checkMoves give true to allow mouse moves events
 	*/
-	public Sprite(JPanel pan, BufferedImage img, Coordinate coord, Dimension dim, boolean checkClicks, boolean checkMoves)
+	public Sprite(JPanel pan, BufferedImage img, Point coord, Dimension dim, boolean checkClicks, boolean checkMoves)
 	{		
 		this.panel = pan;
 		this.coord = coord;
 		this.dim = dim;
 		
-		this.img = new JLabel(new ImageIcon(img.getSubimage(coord.getX(), coord.getY(), (int) dim.getWidth(), (int) dim.getHeight())));
+		this.img = new JLabel(new ImageIcon(img.getSubimage((int) coord.getX(), (int) coord.getY(), (int) dim.getWidth(), (int) dim.getHeight())));
 		
 		if(this.panel instanceof MapPan)
 		{
@@ -74,7 +73,7 @@ public class Sprite
 		}
 		else if(this.panel instanceof TilesetPan)
 		{
-			MouseEventsManager mouseEvents = new MouseEventsManager(this, ((TilesetPan) this.panel).getMapPan().getMap(), checkClicks, checkMoves);
+			MouseEventsManager mouseEvents = new MouseEventsManager(this, ((TilesetPan) this.panel).getEditorPan().getMapPan().getMap(), checkClicks, checkMoves);
 			this.img.addMouseListener(mouseEvents);
 		}
 	}
@@ -107,7 +106,7 @@ public class Sprite
 	/** Gives the sprite's position (in pixels)
 	* @return the sprite's position (in pixels)
 	*/
-	public Coordinate getPosition()
+	public Point getPosition()
 	{
 		return this.coord;
 	}

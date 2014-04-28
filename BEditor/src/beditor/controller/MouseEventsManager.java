@@ -47,15 +47,15 @@ public class MouseEventsManager extends MouseAdapter
 			}
 			else if(this.sprite.getPanel() instanceof MapPan)
 			{
-				TilesetPan tp = ((MapPan) this.sprite.getPanel()).getTilesetPan();
+				TilesetPan tp = ((MapPan) this.sprite.getPanel()).getEditorPan().getTilesetPan();
 			
-				final int x = tp.getSelectedSpriteIndex().getX();
-				final int y = tp.getSelectedSpriteIndex().getY();
-				final int tileX = this.sprite.getPosition().getX() / this.sprite.getWidth();
-				final int tileY = this.sprite.getPosition().getY() / this.sprite.getHeight();
+				final int x = (int) tp.getSelectedSpriteIndex().getX();
+				final int y = (int) tp.getSelectedSpriteIndex().getY();
+				final int tileX = (int) this.sprite.getPosition().getX() / this.sprite.getWidth();
+				final int tileY = (int) this.sprite.getPosition().getY() / this.sprite.getHeight();
 			
 				if(e.getButton() == MouseEvent.BUTTON1)
-					this.map.setTile(tileX, tileY, x + ((MapPan) this.sprite.getPanel()).getTilesetPan().getTilesetWidth() * y);
+					this.map.setTile(tileX, tileY, x + ((MapPan) this.sprite.getPanel()).getEditorPan().getTilesetPan().getTilesetWidth() * y);
 				else
 					this.map.setTile(tileX, tileY, -1);
 				((MapPan) this.sprite.getPanel()).reloadMap();

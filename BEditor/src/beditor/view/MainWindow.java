@@ -19,9 +19,16 @@ public class MainWindow extends JFrame
 	private JMenuItem quitFileMenu;
 	private JMenuItem newFileMenu;
 	private JMenuItem saveFileMenu;
-	private MapPan mapPan;
+	private EditorPan editorPan;
 	private NewMapPan newMapPan;
-
+	
+	private final String WINDOW_TITLE = "BEditor";
+	private final Dimension WINDOW_SIZE = new Dimension(1024, 768);
+	private final String FILE_MENU = "File";
+	private final String NEW_MAP_MENU = "New map";
+	private final String SAVE_MAP_MENU = "Save the map";
+	private final String QUIT_MENU = "Quit";
+	
 	/** Constructor to make a new window
 	*/
 	public MainWindow()
@@ -31,7 +38,6 @@ public class MainWindow extends JFrame
 	
     	this.initWindow();
     	this.initMenu();
-    	//this.setResizable(false);
     	
     	this.setVisible(true);
 	}
@@ -40,8 +46,8 @@ public class MainWindow extends JFrame
 	*/
 	private void initWindow()
 	{
-   		this.setTitle("B Editor");
-    	this.setSize(1024, 768);
+   		this.setTitle(WINDOW_TITLE);
+    	this.setSize(WINDOW_SIZE);
    		this.setLocationRelativeTo(null);
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -52,16 +58,16 @@ public class MainWindow extends JFrame
 	{
 		this.menuBar = new JMenuBar();
     	
-    	this.fileMenu = new JMenu("File");
+    	this.fileMenu = new JMenu(FILE_MENU);
     	this.menuBar.add(this.fileMenu);
     	
-    	this.newFileMenu = new JMenuItem("New map");
+    	this.newFileMenu = new JMenuItem(NEW_MAP_MENU);
     	this.fileMenu.add(this.newFileMenu);
     	
-    	this.saveFileMenu = new JMenuItem("Save the map");
+    	this.saveFileMenu = new JMenuItem(SAVE_MAP_MENU);
     	this.fileMenu.add(this.saveFileMenu);
     	
-    	this.quitFileMenu = new JMenuItem("Quit");
+    	this.quitFileMenu = new JMenuItem(QUIT_MENU);
     	this.fileMenu.add(this.quitFileMenu);
     	
     	this.setJMenuBar(menuBar); 
@@ -91,12 +97,12 @@ public class MainWindow extends JFrame
 		return this.saveFileMenu;
 	}
 	
-	/** Gives the window's MapPan
-	* @return the windows's MapPan
+	/** Gives the window's EditorPan
+	* @return the windows's EditorPan
 	*/
-	public MapPan getMapPan()
+	public EditorPan getEditorPan()
 	{
-		return this.mapPan;
+		return this.editorPan;
 	}
 	
 	/** Gives the window's NewMapPan
@@ -107,17 +113,17 @@ public class MainWindow extends JFrame
 		return this.newMapPan;
 	}
 	
-	/** Switches from the NewMapPan screen to the MapPan screen
-	* @param mapPan the new MapPan screen
+	/** Switches from the NewMapPan screen to the EditorPan screen
+	* @param editorPan the new EditorPan screen
 	*/
-	public void switchMap(MapPan mapPan)
+	public void switchMap(EditorPan editorPan)
 	{
-		this.mapPan = mapPan;
-		this.setContentPane(this.mapPan);
+		this.editorPan = editorPan;
+		this.setContentPane(this.editorPan);
 		this.revalidate();
 	}
 	
-	/** Switches from the MapPan screen to the NewMapPan screen
+	/** Switches from the EditorPan screen to the NewMapPan screen
 	*/
 	public void switchNewMap()
 	{

@@ -17,7 +17,7 @@ import java.io.File;
 public class TilesetPan extends JPanel
 {
 	private Sprite sprites[][];
-	private MapPan mapPan;
+	private EditorPan editorPan;
 	private int tilesetWidth;
 	private int tilesetHeight;
 	private Sprite selectedSprite;
@@ -26,13 +26,13 @@ public class TilesetPan extends JPanel
 	/** Constructor which makes a new tileset
 	* @param tilesetPath the tileset's path
 	* @param tileSize the dimensions of one tile in the tileset
-	* @param mapPan the panel which contains the tileset
+	* @param editorPan the panel which contains the tileset
 	*/
-	public TilesetPan(String tilesetPath, Dimension tileSize, MapPan mapPan)
+	public TilesetPan(String tilesetPath, Dimension tileSize, EditorPan editorPan)
 	{
 		if(tilesetPath != "")
 		{
-			this.mapPan = mapPan;
+			this.editorPan = editorPan;
 			File file = new File(tilesetPath);
 			try
 			{
@@ -52,17 +52,13 @@ public class TilesetPan extends JPanel
 			{
 				for(int x = 0 ; x < this.tilesetWidth ; x++)
 				{
-					this.sprites[x][y] = new Sprite(this, this.tileset, new Coordinate((int) (x * tileSize.getWidth()), (int) (y * tileSize.getHeight())), tileSize, true, false);
+					this.sprites[x][y] = new Sprite(this, this.tileset, new Point((int) (x * tileSize.getWidth()), (int) (y * tileSize.getHeight())), tileSize, true, false);
 					this.add(this.sprites[x][y].getImage());
 				}
 			}
 			this.setSelectedSprite(sprites[0][0]);
 			
 			this.setLayout(new GridLayout(tilesetWidth + 1, tilesetHeight + 1, 0, 0));
-		}
-		else
-		{
-			System.out.println("Erreur : aucun tileset n'a été sélectionné");
 		}
 	}
 	
@@ -85,10 +81,10 @@ public class TilesetPan extends JPanel
 	/** Gives the selected sprite's coordinates (in tiles)
 	* @return the selected sprite's coordinates (in tiles)
 	*/
-	public Coordinate getSelectedSpriteIndex()
+	public Point getSelectedSpriteIndex()
 	{
 		boolean trouve = false;
-		Coordinate coord = new Coordinate(-1, -1);
+		Point coord = new Point(-1, -1);
 	
 		for(int x = 0 ; x < this.tilesetWidth ; x++)
 		{
@@ -97,8 +93,7 @@ public class TilesetPan extends JPanel
 				if(this.sprites[x][y] == this.selectedSprite)
 				{
 					trouve = true;
-					coord.setX(x);
-					coord.setY(y);
+					coord.setLocation(x, y);
 				}
 			}
 		}
@@ -140,9 +135,9 @@ public class TilesetPan extends JPanel
 	/** Gives the panel which contains the tileset
 	* @return the panel which contains the tileset
 	*/
-	public MapPan getMapPan()
+	public EditorPan getEditorPan()
 	{
-		return this.mapPan;
+		return this.editorPan;
 	}
 	
 	/** Called to refresh the tileset

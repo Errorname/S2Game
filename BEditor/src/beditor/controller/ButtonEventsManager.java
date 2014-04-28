@@ -20,6 +20,15 @@ public class ButtonEventsManager
 {
 	private MainWindow win;
 	
+	private final String MAP_SAVED_MSG = "The map has been successfully saved";
+	private final String MAP_SAVED_TITLE = "Map saved";
+	private final String MAP_NOT_CREATED_MSG = "No map has been created, nothing saved";
+	private final String MAP_NOT_CREATED_TITLE = "Error";
+	private final String MAP_NOT_SAVED_MSG = "The map couldn't be saved";
+	private final String MAP_NOT_SAVED_TITLE = "Error";
+	private final String TILESET_NOT_SELECTED_MSG = "You must select a tileset";
+	private final String TILESET_NOT_SELECTED_TITLE = "Error";
+	
 	/** Constructor which needs the window
 	* @param window the program's window
 	*/
@@ -54,7 +63,7 @@ public class ButtonEventsManager
     		{
     			try
     			{
-    				Map map = win.getMapPan().getMap();
+    				Map map = win.getEditorPan().getMapPan().getMap();
     				
     				File mapFile = new File("newMap.map");
 					mapFile.createNewFile();
@@ -72,18 +81,18 @@ public class ButtonEventsManager
 					}
 					
 					JOptionPane savedMsg = new JOptionPane();
-					savedMsg.showMessageDialog(win, "The map has been successfully saved", "Map saved", JOptionPane.INFORMATION_MESSAGE);      
+					savedMsg.showMessageDialog(win, MAP_SAVED_MSG, MAP_SAVED_TITLE, JOptionPane.INFORMATION_MESSAGE);      
 					mapFileWriter.close();
     			}
     			catch(NullPointerException e)
     			{
     				JOptionPane errorMsg = new JOptionPane();
-    				errorMsg.showMessageDialog(win, "No map has been created, nothing saved", "Error", JOptionPane.ERROR_MESSAGE);
+    				errorMsg.showMessageDialog(win, MAP_NOT_CREATED_MSG, MAP_NOT_CREATED_TITLE, JOptionPane.ERROR_MESSAGE);
     			}
 				catch(Exception e)
 				{
     				JOptionPane errorMsg = new JOptionPane();
-    				errorMsg.showMessageDialog(win, "The map couldn't be saved", "Error", JOptionPane.ERROR_MESSAGE);
+    				errorMsg.showMessageDialog(win, MAP_NOT_SAVED_MSG, MAP_NOT_SAVED_TITLE, JOptionPane.ERROR_MESSAGE);
 				}
     		}
     	});
@@ -113,12 +122,12 @@ public class ButtonEventsManager
     			if(win.getNewMapPan().getTilesetPath() != "")
     			{
     				NewMapPan nmp = win.getNewMapPan();
-    				win.switchMap(new MapPan(new Dimension(nmp.getMapWidth(), nmp.getMapHeight()), new Dimension(nmp.getTileWidth(), nmp.getTileHeight()), nmp.getTilesetPath()));
+    				win.switchMap(new EditorPan(new Dimension(nmp.getMapWidth(), nmp.getMapHeight()), new Dimension(nmp.getTileWidth(), nmp.getTileHeight()), nmp.getTilesetPath()));
     			}
     			else
     			{
     				JOptionPane errorMsg = new JOptionPane();
-    				errorMsg.showMessageDialog(win, "You must select a tileset", "Error", JOptionPane.ERROR_MESSAGE);
+    				errorMsg.showMessageDialog(win, TILESET_NOT_SELECTED_MSG, TILESET_NOT_SELECTED_TITLE, JOptionPane.ERROR_MESSAGE);
     			}
     		}
     	});

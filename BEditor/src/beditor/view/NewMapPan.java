@@ -21,33 +21,41 @@ public class NewMapPan extends JPanel
 	private JSpinner spinnerMapHeight;
 	private JSpinner spinnerTileWidth;
 	private JSpinner spinnerTileHeight;
+	
+	private final String LABEL_PATH_TILESET = "Path to the tileset : ";
+	private final String LABEL_BROWSE_TILESET = "Browse...";
+	private final String LABEL_MAP_WIDTH = "Map's width (in tiles) :";
+	private final String LABEL_MAP_HEIGHT = "Map's height (in tiles) :";
+	private final String LABEL_TILE_WIDTH = "One tile's width (in pixels) :";
+	private final String LABEL_TILE_HEIGHT = "One tile's height (in pixels) :";
+	private final String LABEL_CREATE = "Create";
 
 	/** Constructeur that displays the buttons
 	*/
 	public NewMapPan()
 	{		
-		JLabel labelTileset = new JLabel("Path to the tileset : ");
+		JLabel labelTileset = new JLabel(LABEL_PATH_TILESET);
 		this.tilesetPath = "";
 		this.labelTilesetPath = new JLabel(this.tilesetPath);
-		this.tilesetButton = new JButton("Browse...");
+		this.tilesetButton = new JButton(LABEL_BROWSE_TILESET);
 		
-		JLabel labelMapWidth = new JLabel("Map's width (in tiles) :");
+		JLabel labelMapWidth = new JLabel(LABEL_MAP_WIDTH);
 		SpinnerModel mapWidthModel = new SpinnerNumberModel(32, 16, 512, 1);
 		spinnerMapWidth = new JSpinner(mapWidthModel);
 		
-		JLabel labelMapHeight = new JLabel("Map's height (in tiles) :");
+		JLabel labelMapHeight = new JLabel(LABEL_MAP_HEIGHT);
 		SpinnerModel mapHeightModel = new SpinnerNumberModel(32, 26, 512, 1);
 		spinnerMapHeight = new JSpinner(mapHeightModel);
 		
-		JLabel labelTileWidth = new JLabel("One tile's width (in pixels) :");
+		JLabel labelTileWidth = new JLabel(LABEL_TILE_WIDTH);
 		SpinnerModel tilesWidthModel = new SpinnerNumberModel(32, 16, 256, 1);
 		spinnerTileWidth = new JSpinner(tilesWidthModel);
 		
-		JLabel labelTileHeight = new JLabel("One tile's height (in pixels) :");
+		JLabel labelTileHeight = new JLabel(LABEL_TILE_HEIGHT);
 		SpinnerModel tilesHeightModel = new SpinnerNumberModel(32, 16, 256, 1);
 		spinnerTileHeight = new JSpinner(tilesHeightModel);
 		
-		this.confirmButton = new JButton("Create");
+		this.confirmButton = new JButton(LABEL_CREATE);
 		
 		JPanel p1 = new JPanel();
 		p1.setLayout(new GridLayout(1, 3));
