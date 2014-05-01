@@ -1,0 +1,67 @@
+Tilemapping Version 1.0
+#nbTilesLengthWorld
+19
+#nbTilesWidthWorld
+13
+#nbTilesX
+6
+#nbTilesY
+1
+#lengthTile
+20
+#widthTile
+20
+#scrollX
+10
+#scrollY
+10
+#nbItem
+5
+#collisionType
+normal
+#coordinateStart 
+2 2 
+#coordinateFinish
+18 2  
+#tileset
+tile 0 empty notBreakable
+tile 1 solid notBreakable
+tile 2 solid breakable
+tile 3 solid breakable
+tile 4 solid notBreakable
+tile 5 solid notBreakable
+#level_layer1
+                                     
+                                     
+                                     
+                                     
+0 0 0 0 0 0 0 0 0 2 2 2 2 2 0 0 2 2 2
+                                    2
+                                    2
+                                    2
+    3 4       2 2 2 2     2 2   2 2 2
+    5 5                            
+    5 5                                      
+    5 5                                      
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+#level_layer2
+                                     
+                                     
+                                     
+                  2 2 2 2 2     2 2 2
+                                    2
+                                    2 
+                                    2
+    3 4       2 2 2 2     2 2   2 2 2
+    5 5                              
+    5 5                              
+    5 5                              
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+#items 
+goldenkey 10 7
+door 17 2
+lollipop 2 5
+lollipop 12 9
+panneau 3 1
+#end
+

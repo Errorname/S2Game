@@ -16,12 +16,13 @@ import java.io.File;
 
 public class TilesetPan extends JPanel
 {
+	private Tileset tileset;
 	private Sprite sprites[][];
 	private EditorPan editorPan;
 	private int tilesetWidth;
 	private int tilesetHeight;
 	private Sprite selectedSprite;
-	private BufferedImage tileset;
+	private BufferedImage tilesetImg;
 
 	/** Constructor which makes a new tileset
 	* @param tilesetPath the tileset's path
@@ -36,15 +37,17 @@ public class TilesetPan extends JPanel
 			File file = new File(tilesetPath);
 			try
 			{
-				this.tileset = ImageIO.read(file);
+				this.tilesetImg = ImageIO.read(file);
 			}
 			catch(Exception e)
 			{
 				e.printStackTrace();
 			}
 			
-			this.tilesetWidth = (int) (this.tileset.getWidth() / tileSize.getWidth());
-			this.tilesetHeight = (int) (this.tileset.getHeight() / tileSize.getHeight());
+			this.tilesetWidth = (int) (this.tilesetImg.getWidth() / tileSize.getWidth());
+			this.tilesetHeight = (int) (this.tilesetImg.getHeight() / tileSize.getHeight());
+			
+			this.tileset = new Tileset(new Dimension(tilesetWidth, tilesetHeight));
 			
 			this.sprites = new Sprite[this.tilesetWidth][this.tilesetHeight];
 			
@@ -52,13 +55,14 @@ public class TilesetPan extends JPanel
 			{
 				for(int x = 0 ; x < this.tilesetWidth ; x++)
 				{
-					this.sprites[x][y] = new Sprite(this, this.tileset, new Point((int) (x * tileSize.getWidth()), (int) (y * tileSize.getHeight())), tileSize, true, false);
+					this.sprites[x][y] = new Sprite(this, this.tilesetImg, new Point((int) (x * tileSize.getWidth()), (int) (y * tileSize.getHeight())), tileSize, true, false);
 					this.add(this.sprites[x][y].getImage());
 				}
 			}
 			this.setSelectedSprite(sprites[0][0]);
 			
 			this.setLayout(new GridLayout(tilesetWidth + 1, tilesetHeight + 1, 0, 0));
+			this.revalidate();
 		}
 	}
 	
@@ -106,7 +110,7 @@ public class TilesetPan extends JPanel
 	*/
 	public BufferedImage getSpriteImage(int index)
 	{
-		BufferedImage ret = this.tileset.getSubimage(0, 0, this.sprites[0][0].getWidth(), this.sprites[0][0].getHeight());
+		BufferedImage ret = this.tilesetImg.getSubimage(0, 0, this.sprites[0][0].getWidth(), this.sprites[0][0].getHeight());
 		boolean found = false;
 		
 		for(int y = 0 ; y < this.tilesetHeight && !found ; y++)
@@ -116,7 +120,7 @@ public class TilesetPan extends JPanel
 				if(x + this.tilesetWidth * y == index)
 				{
 					found = true;
-					ret =  this.tileset.getSubimage(x * this.sprites[0][0].getWidth(), y * this.sprites[0][0].getHeight(), this.sprites[0][0].getWidth(), this.sprites[0][0].getHeight());
+					ret =  this.tilesetImg.getSubimage(x * this.sprites[0][0].getWidth(), y * this.sprites[0][0].getHeight(), this.sprites[0][0].getWidth(), this.sprites[0][0].getHeight());
 				}
 			}
 		}
@@ -138,6 +142,14 @@ public class TilesetPan extends JPanel
 	public EditorPan getEditorPan()
 	{
 		return this.editorPan;
+	}
+	
+	/** Gives the tileset (model)
+	* @return the tileset
+	*/
+	public Tileset getTileset()
+	{
+		return this.tileset;
 	}
 	
 	/** Called to refresh the tileset
