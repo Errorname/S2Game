@@ -21,6 +21,8 @@ public class NewMapPan extends JPanel
 	private JSpinner spinnerMapHeight;
 	private JSpinner spinnerTileWidth;
 	private JSpinner spinnerTileHeight;
+	private JRadioButton solidRadio;
+	private JRadioButton rubberRadio;
 	
 	private final String LABEL_PATH_TILESET = "Path to the tileset : ";
 	private final String LABEL_BROWSE_TILESET = "Browse...";
@@ -28,7 +30,11 @@ public class NewMapPan extends JPanel
 	private final String LABEL_MAP_HEIGHT = "Map's height (in tiles) :";
 	private final String LABEL_TILE_WIDTH = "One tile's width (in pixels) :";
 	private final String LABEL_TILE_HEIGHT = "One tile's height (in pixels) :";
+	private final String LABEL_COLLISION = "Collision type :";
+	private final String LABEL_SOLID = "Solid";
+	private final String LABEL_RUBBER = "Rubber";
 	private final String LABEL_CREATE = "Create";
+
 
 	/** Constructeur that displays the buttons
 	*/
@@ -54,6 +60,13 @@ public class NewMapPan extends JPanel
 		JLabel labelTileHeight = new JLabel(LABEL_TILE_HEIGHT);
 		SpinnerModel tilesHeightModel = new SpinnerNumberModel(32, 16, 256, 1);
 		spinnerTileHeight = new JSpinner(tilesHeightModel);
+		
+		JLabel labelCollision = new JLabel(LABEL_COLLISION);
+		ButtonGroup collisionGroup = new ButtonGroup();
+		solidRadio = new JRadioButton(LABEL_SOLID, true);
+		rubberRadio = new JRadioButton(LABEL_RUBBER);
+		collisionGroup.add(solidRadio);
+		collisionGroup.add(rubberRadio);
 		
 		this.confirmButton = new JButton(LABEL_CREATE);
 		
@@ -102,13 +115,30 @@ public class NewMapPan extends JPanel
 		p2.add(p28);
 		
 		JPanel p3 = new JPanel();
-		p3.add(confirmButton);
+		p3.setLayout(new GridLayout(1, 3));
 		
-		this.setLayout(new GridLayout(3, 1));
+		JPanel p31 = new JPanel();
+		p31.add(labelCollision);
+		
+		JPanel p32 = new JPanel();
+		p32.add(solidRadio);
+		
+		JPanel p33 = new JPanel();
+		p33.add(rubberRadio);
+		
+		p3.add(p31);
+		p3.add(p32);
+		p3.add(p33);
+		
+		JPanel p4 = new JPanel();
+		p4.add(confirmButton);
+		
+		this.setLayout(new GridLayout(4, 1));
 		
 		this.add(p1);
 		this.add(p2);
 		this.add(p3);
+		this.add(p4);
 	}
 	
 	/** Gives the "browse" button which allows to chose the tileset
@@ -175,5 +205,18 @@ public class NewMapPan extends JPanel
 	public int getTileHeight()
 	{
 		return ((Integer) this.spinnerTileHeight.getValue()).intValue();
+	}
+	
+	/** Gives the selected collision type
+	* @return 0 for the solid collision, 1 for the rubber collision
+	*/
+	public int getSelectedCollision()
+	{
+		int ret = 0;
+	
+		if(this.rubberRadio.isSelected())
+			ret = 1;
+		
+		return ret;
 	}
 }

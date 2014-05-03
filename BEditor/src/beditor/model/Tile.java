@@ -39,4 +39,20 @@ public class Tile
 	{
 		return this.breakable;
 	}
+	
+	/** Makes the tile solid or not
+	* @param solid true to make the tile solid
+	*/
+	public void setSolid(boolean solid)
+	{
+		this.solid = solid;
+	}
+	
+	/** Makes the tile breakable or not
+	* @param breakable true to make the tile breakable
+	*/
+	public void setBreakable(boolean breakable)
+	{
+		this.breakable = breakable;
+	}
 }

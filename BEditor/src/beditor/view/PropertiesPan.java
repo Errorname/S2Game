@@ -66,6 +66,8 @@ public class PropertiesPan extends JPanel
 		breakableGroup.add(notBreakableRadio);
 		breakableGroup.add(breakableRadio);
 		
+		JPanel messagePan = new JPanel();
+		messagePan.add(message);
 		JPanel solidPan = new JPanel();
 		solidPan.add(this.emptyRadio);
 		solidPan.add(this.solidRadio);
@@ -73,9 +75,75 @@ public class PropertiesPan extends JPanel
 		breakablePan.add(this.notBreakableRadio);
 		breakablePan.add(this.breakableRadio);
 		
-		this.add(message);
+		this.add(messagePan);
 		this.add(this.selectedSprite);
 		this.add(solidPan);
 		this.add(breakablePan);
+	}
+	
+	/** Gives the "empty" radio button
+	* @return the "empty" radio button
+	*/
+	public JRadioButton getEmptyRadio()
+	{
+		return this.emptyRadio;
+	}
+	
+	/** Gives the "solid" radio button
+	* @return the "solid" radio button
+	*/
+	public JRadioButton getSolidRadio()
+	{
+		return this.solidRadio;
+	}
+	
+	/** Gives the "not breakable" radio button
+	* @return the "not breakable" radio button
+	*/
+	public JRadioButton getNotBreakableRadio()
+	{
+		return this.notBreakableRadio;
+	}
+	
+	/** Gives the "breakable" radio button
+	* @return the "breakable" radio button
+	*/
+	public JRadioButton getBreakableRadio()
+	{
+		return this.breakableRadio;
+	}
+	
+	/** Refreshes the display of this PropertiesPan
+	*/
+	public void revalidate()
+	{
+		if(this.editorPan != null && this.editorPan.getTilesetPan() != null)
+		{
+			this.selectedSprite.setIcon(this.editorPan.getSelectedTile().getImage().getIcon());
+		
+			if(this.editorPan.getTilesetPan().getTileset().getTile(this.editorPan.getTilesetPan().getSelectedSpriteIndex()).getSolid())
+			{
+				this.solidRadio.setSelected(true);
+				this.emptyRadio.setSelected(false);
+			}
+			else
+			{
+				this.solidRadio.setSelected(false);
+				this.emptyRadio.setSelected(true);
+			}
+				
+			if(this.editorPan.getTilesetPan().getTileset().getTile(this.editorPan.getTilesetPan().getSelectedSpriteIndex()).getBreakable())
+			{
+				this.breakableRadio.setSelected(true);
+				this.notBreakableRadio.setSelected(false);
+			}
+			else
+			{
+				this.breakableRadio.setSelected(false);
+				this.notBreakableRadio.setSelected(true);
+			}
+		}
+	
+		super.revalidate();
 	}
 }

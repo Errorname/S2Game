@@ -136,6 +136,14 @@ public class TilesetPan extends JPanel
 		return this.tilesetWidth;
 	}
 	
+	/** Gives the tileset's height (in tiles)
+	* @return the tileset's height (in tiles)
+	*/
+	public int getTilesetHeight()
+	{
+		return this.tilesetHeight;
+	}
+	
 	/** Gives the panel which contains the tileset
 	* @return the panel which contains the tileset
 	*/

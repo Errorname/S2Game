@@ -21,6 +21,7 @@ public class MainWindow extends JFrame
 	private JMenuItem saveFileMenu;
 	private EditorPan editorPan;
 	private NewMapPan newMapPan;
+	private ButtonEventsManager buttons;
 	
 	private final String WINDOW_TITLE = "BEditor";
 	private final Dimension WINDOW_SIZE = new Dimension(1024, 768);
@@ -38,6 +39,8 @@ public class MainWindow extends JFrame
 	
     	this.initWindow();
     	this.initMenu();
+    	
+		this.buttons = new ButtonEventsManager(this);
     	
     	this.setVisible(true);
 	}
@@ -119,6 +122,7 @@ public class MainWindow extends JFrame
 	public void switchMap(EditorPan editorPan)
 	{
 		this.editorPan = editorPan;
+		this.buttons.addPropertiesPanListeners();
 		this.setContentPane(this.editorPan);
 		this.revalidate();
 	}
@@ -129,5 +133,13 @@ public class MainWindow extends JFrame
 	{
 		this.setContentPane(this.newMapPan);
 		this.revalidate();
-	}	
+	}
+	
+	/** Gives this window's ButtonEventsManager
+	* @return this window's ButtonEventsManager
+	*/
+	public ButtonEventsManager getButtonEventsManager()
+	{
+		return this.buttons;
+	}
 }

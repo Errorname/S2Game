@@ -10,6 +10,5 @@ public class BEditor
 	{
 		Locale.setDefault(Locale.ENGLISH);
 		MainWindow window = new MainWindow();
-		ButtonEventsManager buttons = new ButtonEventsManager(window);
 	}
 }

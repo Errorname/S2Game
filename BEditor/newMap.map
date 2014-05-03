@@ -1,0 +1,214 @@
+Tilemapping Version 1.0
+#nbTilesLengthWorld
+32
+#nbTilesWidthWorld
+32
+#nbTilesX
+12
+#nbTilesY
+13
+#lengthTile
+72
+#widthTile
+72
+#scrollX
+10
+#scrollY
+10
+#nbItem
+XXXXXXX  TO DO  XXXXXXX
+#collisionType
+rubber
+#coordinateStart
+XXXXXXX  TO DO  XXXXXXX
+#coordinateFinish
+XXXXXXX  TO DO  XXXXXXX
+#tileset
+tile 0 empty not breakable
+tile 1 empty not breakable
+tile 2 empty not breakable
+tile 3 empty not breakable
+tile 4 empty not breakable
+tile 5 empty not breakable
+tile 6 empty not breakable
+tile 7 empty not breakable
+tile 8 empty not breakable
+tile 9 empty not breakable
+tile 10 empty not breakable
+tile 11 empty not breakable
+tile 12 empty not breakable
+tile 13 empty not breakable
+tile 14 empty not breakable
+tile 15 empty not breakable
+tile 16 empty not breakable
+tile 17 empty not breakable
+tile 18 empty not breakable
+tile 19 empty not breakable
+tile 20 empty not breakable
+tile 21 empty not breakable
+tile 22 empty not breakable
+tile 23 empty not breakable
+tile 24 empty not breakable
+tile 25 empty not breakable
+tile 26 empty not breakable
+tile 27 empty not breakable
+tile 28 empty not breakable
+tile 29 empty not breakable
+tile 30 empty not breakable
+tile 31 empty not breakable
+tile 32 empty not breakable
+tile 33 empty not breakable
+tile 34 empty not breakable
+tile 35 empty not breakable
+tile 36 empty not breakable
+tile 37 empty not breakable
+tile 38 empty not breakable
+tile 39 empty not breakable
+tile 40 empty not breakable
+tile 41 empty not breakable
+tile 42 empty not breakable
+tile 43 empty not breakable
+tile 44 empty not breakable
+tile 45 empty not breakable
+tile 46 empty not breakable
+tile 47 empty not breakable
+tile 48 empty not breakable
+tile 49 empty not breakable
+tile 50 empty not breakable
+tile 51 empty not breakable
+tile 52 empty not breakable
+tile 53 empty not breakable
+tile 54 empty not breakable
+tile 55 empty not breakable
+tile 56 empty not breakable
+tile 57 empty not breakable
+tile 58 empty not breakable
+tile 59 empty not breakable
+tile 60 empty not breakable
+tile 61 empty not breakable
+tile 62 empty not breakable
+tile 63 empty not breakable
+tile 64 empty not breakable
+tile 65 empty not breakable
+tile 66 empty not breakable
+tile 67 empty not breakable
+tile 68 empty not breakable
+tile 69 empty not breakable
+tile 70 empty not breakable
+tile 71 empty not breakable
+tile 72 empty not breakable
+tile 73 empty not breakable
+tile 74 empty not breakable
+tile 75 empty not breakable
+tile 76 empty not breakable
+tile 77 empty not breakable
+tile 78 empty not breakable
+tile 79 empty not breakable
+tile 80 empty not breakable
+tile 81 empty not breakable
+tile 82 empty not breakable
+tile 83 empty not breakable
+tile 84 empty not breakable
+tile 85 empty not breakable
+tile 86 empty not breakable
+tile 87 empty not breakable
+tile 88 empty not breakable
+tile 89 empty not breakable
+tile 90 empty not breakable
+tile 91 empty not breakable
+tile 92 empty not breakable
+tile 93 empty not breakable
+tile 94 empty not breakable
+tile 95 empty not breakable
+tile 96 empty not breakable
+tile 97 empty not breakable
+tile 98 empty not breakable
+tile 99 empty not breakable
+tile 100 empty not breakable
+tile 101 empty not breakable
+tile 102 empty not breakable
+tile 103 empty not breakable
+tile 104 empty not breakable
+tile 105 empty not breakable
+tile 106 empty not breakable
+tile 107 empty not breakable
+tile 108 empty not breakable
+tile 109 empty not breakable
+tile 110 empty not breakable
+tile 111 empty not breakable
+tile 112 empty not breakable
+tile 113 empty not breakable
+tile 114 empty not breakable
+tile 115 empty not breakable
+tile 116 empty not breakable
+tile 117 empty not breakable
+tile 118 empty not breakable
+tile 119 empty not breakable
+tile 120 empty not breakable
+tile 121 empty not breakable
+tile 122 empty not breakable
+tile 123 empty not breakable
+tile 124 empty not breakable
+tile 125 empty not breakable
+tile 126 empty not breakable
+tile 127 empty not breakable
+tile 128 empty not breakable
+tile 129 empty not breakable
+tile 130 empty not breakable
+tile 131 empty not breakable
+tile 132 empty not breakable
+tile 133 empty not breakable
+tile 134 empty not breakable
+tile 135 empty not breakable
+tile 136 empty not breakable
+tile 137 empty not breakable
+tile 138 empty not breakable
+tile 139 empty not breakable
+tile 140 empty not breakable
+tile 141 empty not breakable
+tile 142 empty not breakable
+tile 143 empty not breakable
+tile 144 empty not breakable
+tile 145 empty not breakable
+tile 146 empty not breakable
+tile 147 empty not breakable
+tile 148 empty not breakable
+tile 149 empty not breakable
+tile 150 empty not breakable
+tile 151 empty not breakable
+tile 152 empty not breakable
+tile 153 empty not breakable
+tile 154 empty not breakable
+tile 155 empty not breakable
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                

@@ -22,9 +22,10 @@ public class MapPan extends JPanel
 	/** Constructor to make a new map
 	* @param mapDim the map's dimensions
 	* @param tileDim a tile's dimensions
+	* @param collisionType the map's collision type
 	* @param editorPan the EditorPan which contains this MapPan
 	*/
-	public MapPan(Dimension mapDim, Dimension tileDim, EditorPan editorPan)
+	public MapPan(Dimension mapDim, Dimension tileDim, int collisionType, EditorPan editorPan)
 	{
 		this.tileDim = tileDim;
 		this.editorPan = editorPan;
@@ -32,7 +33,7 @@ public class MapPan extends JPanel
 		this.setLayout(new GridLayout((int) mapDim.getHeight(), (int) mapDim.getWidth(), 0, 0));
 		this.setPreferredSize(new Dimension((int) (mapDim.getWidth() * tileDim.getWidth()), (int) (mapDim.getHeight() * tileDim.getHeight())));
 		
-		this.map = new Map(mapDim);
+		this.map = new Map(mapDim, collisionType);
 		
 		this.tiles = new Sprite[(int) mapDim.getWidth()][(int) mapDim.getHeight()];
 		
@@ -75,6 +76,14 @@ public class MapPan extends JPanel
 	public EditorPan getEditorPan()
 	{
 		return this.editorPan;
+	}
+	
+	/** Gives the dimensions of a tile
+	* @return the dimensions of a tile
+	*/
+	public Dimension getTilesDim()
+	{
+		return this.tileDim;
 	}
 	
 	/** Loads the map from the model

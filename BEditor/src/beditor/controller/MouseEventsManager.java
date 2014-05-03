@@ -44,6 +44,7 @@ public class MouseEventsManager extends MouseAdapter
 			if(this.sprite.getPanel() instanceof TilesetPan)
 			{
 				((TilesetPan) this.sprite.getPanel()).setSelectedSprite(this.sprite);
+				((TilesetPan) this.sprite.getPanel()).getEditorPan().getPropertiesPan().revalidate();
 			}
 			else if(this.sprite.getPanel() instanceof MapPan)
 			{

@@ -13,13 +13,16 @@ public class Map
 {
 	private Dimension dim;
 	private int tiles[][];
+	private int collisionType;
 	
 	/** Constructor which makes a new map with the given dimensions
 	* @param dim the map's dimensions
+	* @param collisionType the collision type
 	*/
-	public Map(Dimension dim)
+	public Map(Dimension dim, int collisionType)
 	{
 		this.dim = dim;
+		this.collisionType = collisionType;
 		this.tiles = new int[(int) dim.getWidth()][(int) dim.getHeight()];
 		for(int x = 0 ; x < dim.getWidth() ; x++)
 		{
@@ -63,5 +66,13 @@ public class Map
 	public int getHeight()
 	{
 		return (int) this.dim.getHeight();
+	}
+	
+	/** Gives the map's collision type
+	* @return the map's collision type
+	*/
+	public int getCollisionType()
+	{
+		return this.collisionType;
 	}
 }

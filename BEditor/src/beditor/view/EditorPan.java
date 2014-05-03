@@ -14,6 +14,7 @@ import java.awt.*;
 
 public class EditorPan extends JPanel
 {
+	private MainWindow mainWindow;
 	private MapPan mapPan;
 	private TilesetPan tilesetPan;
 	private PropertiesPan propertiesPan;
@@ -28,13 +29,16 @@ public class EditorPan extends JPanel
 	* @param mapDim the map's dimensions
 	* @param tileDim a tile's dimensions
 	* @param tilesetPath the path to the tileset file
+	* @param collisionType the map's collision type
+	* @param mainWindow the MainWindow containing the EditorPan
 	*/
-	public EditorPan(Dimension mapDim, Dimension tileDim, String tilesetPath)
+	public EditorPan(Dimension mapDim, Dimension tileDim, String tilesetPath, int collisionType, MainWindow mainWindow)
 	{
+		this.mainWindow = mainWindow;
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.white);
 		
-		this.mapPan = new MapPan(mapDim, tileDim, this);		
+		this.mapPan = new MapPan(mapDim, tileDim, collisionType, this);		
 		this.tilesetPan = new TilesetPan(tilesetPath, tileDim, this);
 		this.propertiesPan = new PropertiesPan(this);
 		
@@ -47,8 +51,10 @@ public class EditorPan extends JPanel
 		
 		JSplitPane propertiesSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tilesetScroll, propertiesScroll);
 		propertiesSplit.setDividerLocation(SPLIT_PROPERTIES_LOCATION);
+		propertiesSplit.setContinuousLayout(true);
 		JSplitPane editorSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mapScroll, propertiesSplit);
 		editorSplit.setDividerLocation(SPLIT_EDITOR_LOCATION);
+		editorSplit.setContinuousLayout(true);
 		this.add(editorSplit, BorderLayout.CENTER);
 	}
 	
@@ -82,5 +88,13 @@ public class EditorPan extends JPanel
 	public PropertiesPan getPropertiesPan()
 	{
 		return this.propertiesPan;
+	}
+	
+	/** Gives the MainWindow containing this EditorPan
+	* @return the MainWindow containing this EditorPan
+	*/
+	public MainWindow getMainWindow()
+	{
+		return this.mainWindow;
 	}
 }
