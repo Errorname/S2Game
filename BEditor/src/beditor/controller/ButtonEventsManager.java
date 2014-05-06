@@ -144,6 +144,15 @@ public class ButtonEventsManager
 				savedMsg.showMessageDialog(win, "The map has been successfully saved", "Map saved", JOptionPane.INFORMATION_MESSAGE);      
     		}
     	});
+
+		//Called when clicking on "properties"
+		this.win.getMapPropertiesMenu().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				MapPropertiesWindow properties = new MapPropertiesWindow();
+			}
+		});
     		
     	// Called when clicking on "browse" for the tileset
     	this.win.getNewMapPan().getTilesetButton().addActionListener(new ActionListener()

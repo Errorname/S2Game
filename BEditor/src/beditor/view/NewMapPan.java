@@ -50,7 +50,7 @@ public class NewMapPan extends JPanel
 		spinnerMapWidth = new JSpinner(mapWidthModel);
 		
 		JLabel labelMapHeight = new JLabel(LABEL_MAP_HEIGHT);
-		SpinnerModel mapHeightModel = new SpinnerNumberModel(32, 26, 512, 1);
+		SpinnerModel mapHeightModel = new SpinnerNumberModel(32, 16, 512, 1);
 		spinnerMapHeight = new JSpinner(mapHeightModel);
 		
 		JLabel labelTileWidth = new JLabel(LABEL_TILE_WIDTH);

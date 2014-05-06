@@ -19,16 +19,20 @@ public class MainWindow extends JFrame
 	private JMenuItem quitFileMenu;
 	private JMenuItem newFileMenu;
 	private JMenuItem saveFileMenu;
+	private JMenu mapMenu;
+	private JMenuItem mapPropertiesMenu;
 	private EditorPan editorPan;
 	private NewMapPan newMapPan;
 	private ButtonEventsManager buttons;
 	
 	private final String WINDOW_TITLE = "BEditor";
-	private final Dimension WINDOW_SIZE = new Dimension(1024, 768);
+	private final Dimension WINDOW_SIZE = new Dimension(/*1024, 768*/800, 500);
 	private final String FILE_MENU = "File";
 	private final String NEW_MAP_MENU = "New map";
 	private final String SAVE_MAP_MENU = "Save the map";
 	private final String QUIT_MENU = "Quit";
+	private final String MAP_MENU = "Map";
+	private final String MAP_PROPERTIES_MENU = "Properties";
 	
 	/** Constructor to make a new window
 	*/
@@ -73,6 +77,12 @@ public class MainWindow extends JFrame
     	this.quitFileMenu = new JMenuItem(QUIT_MENU);
     	this.fileMenu.add(this.quitFileMenu);
     	
+    	this.mapMenu = new JMenu(MAP_MENU);
+    	this.menuBar.add(this.mapMenu);
+    	
+    	this.mapPropertiesMenu = new JMenuItem(MAP_PROPERTIES_MENU);
+    	this.mapMenu.add(this.mapPropertiesMenu);
+    	
     	this.setJMenuBar(menuBar); 
 	}
 	
@@ -98,6 +108,14 @@ public class MainWindow extends JFrame
 	public JMenuItem getSaveFileMenu()
 	{
 		return this.saveFileMenu;
+	}
+
+	/** Gives the map menu's "properties" button
+	* @return the map menu's "properties" button
+	*/
+	public JMenuItem getMapPropertiesMenu()
+	{
+		return this.mapPropertiesMenu;
 	}
 	
 	/** Gives the window's EditorPan
