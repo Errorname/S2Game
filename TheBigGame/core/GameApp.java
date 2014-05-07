@@ -12,7 +12,7 @@ public class GameApp extends JFrame {
 		setTitle("TheBigGame");
 		GameControleur controleur = new GameControleur(width, height);
 		add(controleur);
-		revalidate(); // strange
+		//revalidate(); // strange
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 	}

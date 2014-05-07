@@ -11,16 +11,25 @@ import javax.imageio.ImageIO;
 
 import level.Level;
 
+import gui.*;
 
-public class GameView implements KeyListener {
+
+public class GameView {
 	
 	private Level level;
+	private Menu menu;
 	
-	public GameView() {
+	public GameView(int screenWidth, int screenHeight) {
+		level = null;
+		menu = null;
 	}
 	
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+	
+	public void setMenu(Menu menu) {
+		this.menu = menu;
 	}
 	
 	public static int pixelsToTiles(float pixels, int tileSize) {
@@ -41,9 +50,14 @@ public class GameView implements KeyListener {
         g.fillRect(0, 0, screenWidth, screenHeight);
         
 		// draw level
-		level.draw(g, screenWidth, screenHeight);
+		if (level != null) {
+			level.draw(g, screenWidth, screenHeight);
+		}
 		
 		// draw menu
+		if (menu != null) {
+			menu.draw(g, screenWidth, screenHeight);
+		}
 	}
 	
 	public static BufferedImage loadImage(String filename) {
@@ -53,20 +67,4 @@ public class GameView implements KeyListener {
 		} catch (IOException e) { System.out.println("THERE IS A FUCKING PROBLEME HERE"); }
 		return img;
 	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		level.keyPressed(e);
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		level.keyReleased(e);
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	} 
 }
