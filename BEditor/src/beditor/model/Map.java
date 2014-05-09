@@ -68,6 +68,48 @@ public class Map
 		return (int) this.dim.getHeight();
 	}
 	
+	/** Sets the map's width
+	* @param width the new map's width
+	*/
+	public void setWidth(int width)
+	{
+		int tmpTiles[][] = new int[width][(int) this.dim.getHeight()];
+		
+		for(int x = 0 ; x < width ; x++)
+		{
+			for(int y = 0 ; y < dim.getHeight() ; y++)
+			{
+				if(x < this.dim.getWidth())
+					tmpTiles[x][y] = tiles[x][y];
+				else
+					tmpTiles[x][y] = -1;
+			}
+		}
+		this.tiles = tmpTiles;
+		this.dim.setSize(width, this.dim.getHeight());
+	}
+	
+	/** Sets the map's height
+	* @param height the new map's height
+	*/
+	public void setHeight(int height)
+	{
+		int tmpTiles[][] = new int[(int) this.dim.getWidth()][height];
+		
+		for(int x = 0 ; x < dim.getWidth() ; x++)
+		{
+			for(int y = 0 ; y < height ; y++)
+			{
+				if(y < this.dim.getHeight())
+					tmpTiles[x][y] = tiles[x][y];
+				else
+					tmpTiles[x][y] = -1;
+			}
+		}
+		this.tiles = tmpTiles;
+		this.dim.setSize(this.dim.getWidth(), height);
+	}
+	
 	/** Gives the map's collision type
 	* @return the map's collision type
 	*/

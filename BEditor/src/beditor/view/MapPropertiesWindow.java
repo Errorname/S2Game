@@ -93,4 +93,28 @@ public class MapPropertiesWindow extends JFrame
 		this.getContentPane().add(p3);
 		this.getContentPane().add(p4);
 	}
+	
+	/** Gives the apply button
+	* @return the apply button
+	*/
+	public JButton getApplyButton()
+	{
+		return this.applyButton;
+	}
+	
+	/** Gives the typped width for the map
+	* @return the typped width for the map
+	*/
+	public int getMapWidth()
+	{
+		return ((Integer) this.spinnerMapWidth.getValue()).intValue();
+	}
+	
+	/** Gives the typped height for the map
+	* @return the typped height for the map
+	*/
+	public int getMapHeight()
+	{
+		return ((Integer) this.spinnerMapHeight.getValue()).intValue();
+	}
 }

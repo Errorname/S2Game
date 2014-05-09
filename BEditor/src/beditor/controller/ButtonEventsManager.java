@@ -145,14 +145,14 @@ public class ButtonEventsManager
     		}
     	});
 
-		//Called when clicking on "properties"
+		//Called when clicking on "properties" in the "map" menu
 		this.win.getMapPropertiesMenu().addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
 				if(win.getEditorPan() != null)
 				{
-					MapPropertiesWindow properties = new MapPropertiesWindow(win);
+					win.setMapPropertiesWindow(new MapPropertiesWindow(win));
 				}
 				else
 				{
@@ -233,6 +233,21 @@ public class ButtonEventsManager
     		public void actionPerformed(ActionEvent arg0)
     		{
 	    		win.getEditorPan().getTilesetPan().getTileset().getTile(win.getEditorPan().getTilesetPan().getSelectedSpriteIndex()).setBreakable(true);
+    		}
+    	});
+	}
+	
+	public void addMapPropertiesWindowListeners()
+	{
+		// Called when clicking on the "apply" button
+    	win.getMapPropertiesWindow().getApplyButton().addActionListener(new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent arg0)
+    		{
+    			win.getEditorPan().getMapPan().setMapDim(win.getMapPropertiesWindow().getMapWidth(), win.getMapPropertiesWindow().getMapHeight());
+    			
+	    		win.getMapPropertiesWindow().dispose();
+    			win.setMapPropertiesWindow(null);
     		}
     	});
 	}

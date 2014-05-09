@@ -53,6 +53,37 @@ public class MapPan extends JPanel
 		this.reloadMap();
 	}
 	
+	public void setMapDim(int width, int height)
+	{
+		Sprite tmpTiles[][] = new Sprite[width][height];
+		
+		this.removeAll();
+		
+		for(int y = 0 ; y < height ; y++)
+		{
+			for(int x = 0 ; x < width ; x++)
+			{
+				int coordX = x * (int) this.tileDim.getWidth();
+				int coordY = y * (int) this.tileDim.getHeight();
+				
+				if(x < this.map.getWidth() && y < this.map.getHeight())
+    				tmpTiles[x][y] = this.tiles[x][y];
+    			else
+    				tmpTiles[x][y] = new Sprite(this, new Point(coordX, coordY), this.tileDim, true, true);
+    			tmpTiles[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
+    			this.add(tmpTiles[x][y].getImage());
+			}
+		}
+		this.tiles = tmpTiles;
+		
+		this.map.setWidth(width);
+		this.map.setHeight(height);
+		this.setLayout(new GridLayout(height, width, 0, 0));
+		this.setPreferredSize(new Dimension((int) (width * this.tileDim.getWidth()), (int) (height * this.tileDim.getHeight())));
+		
+		this.revalidate();
+	}
+	
 	/** Gives the map
 	* @return the EditorPan's map
 	*/

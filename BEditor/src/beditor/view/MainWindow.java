@@ -24,6 +24,7 @@ public class MainWindow extends JFrame
 	private EditorPan editorPan;
 	private NewMapPan newMapPan;
 	private ButtonEventsManager buttons;
+	private MapPropertiesWindow mapPropertiesWindow;
 	
 	private final String WINDOW_TITLE = "BEditor";
 	private final Dimension WINDOW_SIZE = new Dimension(1024, 768);
@@ -159,5 +160,23 @@ public class MainWindow extends JFrame
 	public ButtonEventsManager getButtonEventsManager()
 	{
 		return this.buttons;
+	}
+	
+	/** Gives the window allowing to set the map's properties
+	* @return the window allowing to set the map's properties
+	*/
+	public MapPropertiesWindow getMapPropertiesWindow()
+	{
+		return this.mapPropertiesWindow;
+	}
+	
+	/** Sets the window allowing to set the map's properties
+	* @param mpWin the new window allowing to set the map's properties
+	*/
+	public void setMapPropertiesWindow(MapPropertiesWindow mpWin)
+	{
+		this.mapPropertiesWindow = mpWin;
+		if(mpWin != null)
+			this.buttons.addMapPropertiesWindowListeners();
 	}
 }

@@ -1,8 +1,8 @@
 Tilemapping Version 1.0
 #nbTilesLengthWorld
-16
+18
 #nbTilesWidthWorld
-200
+31
 #nbTilesX
 12
 #nbTilesY
@@ -18,7 +18,7 @@ Tilemapping Version 1.0
 #nbItem
 XXXXXXX  TO DO  XXXXXXX
 #collisionType
-solid
+rubber
 #coordinateStart
 XXXXXXX  TO DO  XXXXXXX
 #coordinateFinish
@@ -180,19 +180,21 @@ tile 152 solid not breakable
 tile 153 solid not breakable
 tile 154 solid not breakable
 tile 155 solid not breakable
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                    45                                                                                                                                                                                                                                                                                                                                                                                           
-  40             64   57                                                                                                                                                                                                                                                                                                                                                                                           
-128 103 103 103 103 103 103 103 103 103 103 103 104                                                                                                                                                                                                                                                                                                                                                                                       
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                
+0 0                         0 0                             0 
+0                             0                               
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
