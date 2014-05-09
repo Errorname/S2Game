@@ -26,7 +26,7 @@ public class MainWindow extends JFrame
 	private ButtonEventsManager buttons;
 	
 	private final String WINDOW_TITLE = "BEditor";
-	private final Dimension WINDOW_SIZE = new Dimension(1024, 768);
+	private final Dimension WINDOW_SIZE = new Dimension(/*1024, 768*/800, 500);
 	private final String FILE_MENU = "File";
 	private final String NEW_MAP_MENU = "New map";
 	private final String SAVE_MAP_MENU = "Save the map";

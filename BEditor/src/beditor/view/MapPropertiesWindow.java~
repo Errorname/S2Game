@@ -58,14 +58,14 @@ public class MapPropertiesWindow extends JFrame
 		
 		JPanel p1 = new JPanel();
 		JLabel labelMapWidth = new JLabel(LABEL_MAP_WIDTH);
-	    SpinnerModel mapWidthModel = new SpinnerNumberModel(this.win.getEditorPan().getMapPan().getMap().getWidth(), 16, 512, 1);
+	    SpinnerModel mapWidthModel = new SpinnerNumberModel(32, 16, 512, 1);
     	this.spinnerMapWidth = new JSpinner(mapWidthModel);
 		p1.add(labelMapWidth);
 		p1.add(this.spinnerMapWidth);
                 
 		JPanel p2 = new JPanel();
 	    JLabel labelMapHeight = new JLabel(LABEL_MAP_HEIGHT);
-	    SpinnerModel mapHeightModel = new SpinnerNumberModel(this.win.getEditorPan().getMapPan().getMap().getHeight(), 16, 512, 1);
+	    SpinnerModel mapHeightModel = new SpinnerNumberModel(32, 16, 512, 1);
     	this.spinnerMapHeight = new JSpinner(mapHeightModel);
 		p2.add(labelMapHeight);
 		p2.add(this.spinnerMapHeight);
