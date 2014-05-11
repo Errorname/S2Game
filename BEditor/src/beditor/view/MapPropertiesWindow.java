@@ -15,17 +15,15 @@ import java.awt.*;
 public class MapPropertiesWindow extends JFrame
 {	
 	private MainWindow win;
-	private JButton applyButton;
-	private JSpinner spinnerMapWidth, spinnerMapHeight, spinnerStartX, spinnerStartY;
+	private JButton applyButton, closeButton;
+	private JSpinner spinnerMapWidth, spinnerMapHeight, spinnerStartX, spinnerStartY, spinnerEndX, spinnerEndY;
 
 	private final String WINDOW_TITLE = "Map properties";
-	private final Dimension WINDOW_SIZE = new Dimension(400, 200);
+	private final Dimension WINDOW_SIZE = new Dimension(400, 150);
 	private final String APPLY_LABEL = "Apply";
+	private final String CLOSE_LABEL = "Close";
 	private final String LABEL_MAP_WIDTH = "Map's width (in tiles) :";
 	private final String LABEL_MAP_HEIGHT = "Map's height (in tiles) :";
-	private final String LABEL_STARTING_COORDINATES = "Starting coordinates :";
-	private final String LABEL_STARTING_X = "X :";
-	private final String LABEL_STARTING_Y = "Y :";
 
 	
 	/** Constructor to make a new window
@@ -54,44 +52,31 @@ public class MapPropertiesWindow extends JFrame
 	*/
 	private void addContent()
 	{
-		this.getContentPane().setLayout(new GridLayout(4, 1));
+		this.getContentPane().setLayout(new GridLayout(3, 1));
 		
 		JPanel p1 = new JPanel();
 		JLabel labelMapWidth = new JLabel(LABEL_MAP_WIDTH);
-	    SpinnerModel mapWidthModel = new SpinnerNumberModel(this.win.getEditorPan().getMapPan().getMap().getWidth(), 16, 512, 1);
+	    SpinnerModel mapWidthModel = new SpinnerNumberModel(this.win.getEditorPan().getLayer1().getMap().getWidth(), 16, 512, 1);
     	this.spinnerMapWidth = new JSpinner(mapWidthModel);
 		p1.add(labelMapWidth);
 		p1.add(this.spinnerMapWidth);
                 
 		JPanel p2 = new JPanel();
 	    JLabel labelMapHeight = new JLabel(LABEL_MAP_HEIGHT);
-	    SpinnerModel mapHeightModel = new SpinnerNumberModel(this.win.getEditorPan().getMapPan().getMap().getHeight(), 16, 512, 1);
+	    SpinnerModel mapHeightModel = new SpinnerNumberModel(this.win.getEditorPan().getLayer1().getMap().getHeight(), 16, 512, 1);
     	this.spinnerMapHeight = new JSpinner(mapHeightModel);
 		p2.add(labelMapHeight);
 		p2.add(this.spinnerMapHeight);
 		
 		JPanel p3 = new JPanel();
-		JLabel labelStartingCoordinates = new JLabel(LABEL_STARTING_COORDINATES);
-		JLabel labelStartX = new JLabel(LABEL_STARTING_X);
-	    SpinnerModel startXModel = new SpinnerNumberModel(0, 0, 512, 1);
-		this.spinnerStartX = new JSpinner(startXModel);
-		JLabel labelStartY = new JLabel(LABEL_STARTING_Y);
-	    SpinnerModel startYModel = new SpinnerNumberModel(0, 0, 512, 1);
-		this.spinnerStartY = new JSpinner(startYModel);
-		p3.add(labelStartingCoordinates);
-		p3.add(labelStartX);
-		p3.add(this.spinnerStartX);
-		p3.add(labelStartY);
-		p3.add(this.spinnerStartY);
-		
-		JPanel p4 = new JPanel();
 		this.applyButton = new JButton(APPLY_LABEL);
-		p4.add(this.applyButton);
+		this.closeButton = new JButton(CLOSE_LABEL);
+		p3.add(this.applyButton);
+		p3.add(this.closeButton);
 
 		this.getContentPane().add(p1);
 		this.getContentPane().add(p2);
 		this.getContentPane().add(p3);
-		this.getContentPane().add(p4);
 	}
 	
 	/** Gives the apply button
@@ -100,6 +85,14 @@ public class MapPropertiesWindow extends JFrame
 	public JButton getApplyButton()
 	{
 		return this.applyButton;
+	}
+	
+	/** Gives the close button
+	* @return the close button
+	*/
+	public JButton getCloseButton()
+	{
+		return this.closeButton;
 	}
 	
 	/** Gives the typped width for the map

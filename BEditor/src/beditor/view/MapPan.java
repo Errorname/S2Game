@@ -19,6 +19,9 @@ public class MapPan extends JPanel
 	private Dimension tileDim;
 	private EditorPan editorPan;
 	
+	private final Point DEFAULT_STARTING_POINT = new Point(0, 0);
+	private final Point DEFAULT_ENDING_POINT = new Point(0, 1);
+	
 	/** Constructor to make a new map
 	* @param mapDim the map's dimensions
 	* @param tileDim a tile's dimensions
@@ -33,7 +36,7 @@ public class MapPan extends JPanel
 		this.setLayout(new GridLayout((int) mapDim.getHeight(), (int) mapDim.getWidth(), 0, 0));
 		this.setPreferredSize(new Dimension((int) (mapDim.getWidth() * tileDim.getWidth()), (int) (mapDim.getHeight() * tileDim.getHeight())));
 		
-		this.map = new Map(mapDim, collisionType);
+		this.map = new Map(mapDim, collisionType, DEFAULT_STARTING_POINT, DEFAULT_ENDING_POINT);
 		
 		this.tiles = new Sprite[(int) mapDim.getWidth()][(int) mapDim.getHeight()];
 		

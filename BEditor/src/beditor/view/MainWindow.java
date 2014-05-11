@@ -16,11 +16,9 @@ public class MainWindow extends JFrame
 {	
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
-	private JMenuItem quitFileMenu;
-	private JMenuItem newFileMenu;
-	private JMenuItem saveFileMenu;
+	private JMenuItem quitFileMenu, newFileMenu, saveFileMenu;
 	private JMenu mapMenu;
-	private JMenuItem mapPropertiesMenu;
+	private JMenuItem mapPropertiesMenu, mapLayer1Menu, mapLayer2Menu;
 	private EditorPan editorPan;
 	private NewMapPan newMapPan;
 	private ButtonEventsManager buttons;
@@ -34,6 +32,8 @@ public class MainWindow extends JFrame
 	private final String QUIT_MENU = "Quit";
 	private final String MAP_MENU = "Map";
 	private final String MAP_PROPERTIES_MENU = "Properties";
+	private final String MAP_LAYER_1_MENU = "Edit layer 1";
+	private final String MAP_LAYER_2_MENU = "Edit layer 2";
 	
 	/** Constructor to make a new window
 	*/
@@ -78,12 +78,6 @@ public class MainWindow extends JFrame
     	this.quitFileMenu = new JMenuItem(QUIT_MENU);
     	this.fileMenu.add(this.quitFileMenu);
     	
-    	this.mapMenu = new JMenu(MAP_MENU);
-    	this.menuBar.add(this.mapMenu);
-    	
-    	this.mapPropertiesMenu = new JMenuItem(MAP_PROPERTIES_MENU);
-    	this.mapMenu.add(this.mapPropertiesMenu);
-    	
     	this.setJMenuBar(menuBar); 
 	}
 	
@@ -109,6 +103,22 @@ public class MainWindow extends JFrame
 	public JMenuItem getSaveFileMenu()
 	{
 		return this.saveFileMenu;
+	}
+
+	/** Gives the map menu's "layer 1" button
+	* @return the map menu's "layer 1" button
+	*/
+	public JMenuItem getMapLayer1Menu()
+	{
+		return this.mapLayer1Menu;
+	}
+
+	/** Gives the map menu's "layer 2" button
+	* @return the map menu's "layer 2" button
+	*/
+	public JMenuItem getMapLayer2Menu()
+	{
+		return this.mapLayer2Menu;
 	}
 
 	/** Gives the map menu's "properties" button
@@ -140,6 +150,23 @@ public class MainWindow extends JFrame
 	*/
 	public void switchMap(EditorPan editorPan)
 	{
+		if(this.mapMenu == null)
+		{
+			this.mapMenu = new JMenu(MAP_MENU);
+			this.menuBar.add(this.mapMenu);
+			
+			this.mapLayer1Menu = new JMenuItem(MAP_LAYER_1_MENU);
+			this.mapMenu.add(this.mapLayer1Menu);
+			
+			this.mapLayer2Menu = new JMenuItem(MAP_LAYER_2_MENU);
+			this.mapMenu.add(this.mapLayer2Menu);
+			
+			this.mapPropertiesMenu = new JMenuItem(MAP_PROPERTIES_MENU);
+			this.mapMenu.add(this.mapPropertiesMenu);
+			
+			this.buttons.addMapMenuListeners();
+    	}
+    	
 		this.editorPan = editorPan;
 		this.buttons.addPropertiesPanListeners();
 		this.setContentPane(this.editorPan);

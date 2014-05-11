@@ -45,8 +45,10 @@ public class Sprite
 		}
 		else if(this.panel instanceof TilesetPan)
 		{
-			MouseEventsManager mouseEvents = new MouseEventsManager(this, ((TilesetPan) this.panel).getEditorPan().getMapPan().getMap(), checkClicks, checkMoves);
-			this.img.addMouseListener(mouseEvents);
+			MouseEventsManager mouseEventsLayer1 = new MouseEventsManager(this, ((TilesetPan) this.panel).getEditorPan().getLayer1().getMap(), checkClicks, checkMoves);
+			MouseEventsManager mouseEventsLayer2 = new MouseEventsManager(this, ((TilesetPan) this.panel).getEditorPan().getLayer2().getMap(), checkClicks, checkMoves);
+			this.img.addMouseListener(mouseEventsLayer1);
+			this.img.addMouseListener(mouseEventsLayer2);
 		}
 	}
 	
@@ -73,8 +75,10 @@ public class Sprite
 		}
 		else if(this.panel instanceof TilesetPan)
 		{
-			MouseEventsManager mouseEvents = new MouseEventsManager(this, ((TilesetPan) this.panel).getEditorPan().getMapPan().getMap(), checkClicks, checkMoves);
-			this.img.addMouseListener(mouseEvents);
+			MouseEventsManager mouseEventsLayer1 = new MouseEventsManager(this, ((TilesetPan) this.panel).getEditorPan().getLayer1().getMap(), checkClicks, checkMoves);
+			MouseEventsManager mouseEventsLayer2 = new MouseEventsManager(this, ((TilesetPan) this.panel).getEditorPan().getLayer2().getMap(), checkClicks, checkMoves);
+			this.img.addMouseListener(mouseEventsLayer1);
+			this.img.addMouseListener(mouseEventsLayer2);
 		}
 	}
 	

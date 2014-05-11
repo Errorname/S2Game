@@ -1,6 +1,7 @@
 package beditor.model;
 
 import java.awt.Dimension;
+import java.awt.Point;
 
 /**
 * Map : a class to define the edited map
@@ -11,6 +12,8 @@ import java.awt.Dimension;
 
 public class Map
 {
+	private Point startingPoint;
+	private Point endingPoint;
 	private Dimension dim;
 	private int tiles[][];
 	private int collisionType;
@@ -18,9 +21,12 @@ public class Map
 	/** Constructor which makes a new map with the given dimensions
 	* @param dim the map's dimensions
 	* @param collisionType the collision type
+	* @param startingPoint the point where the player starts
 	*/
-	public Map(Dimension dim, int collisionType)
+	public Map(Dimension dim, int collisionType, Point startingPoint, Point endingPoint)
 	{
+		this.startingPoint = startingPoint;
+		this.endingPoint = endingPoint;
 		this.dim = dim;
 		this.collisionType = collisionType;
 		this.tiles = new int[(int) dim.getWidth()][(int) dim.getHeight()];
@@ -116,5 +122,37 @@ public class Map
 	public int getCollisionType()
 	{
 		return this.collisionType;
+	}
+	
+	/** Gives the point where the player starts
+	* @return the point where the player starts
+	*/
+	public Point getStartingPoint()
+	{
+		return this.startingPoint;
+	}
+	
+	/** Sets a new starting point
+	* @param startingPoint the new starting point
+	*/
+	public void setStartingPoint(Point startingPoint)
+	{
+		this.startingPoint = startingPoint;
+	}
+	
+	/** Gives the point where the player finishes the level
+	* @return the point where the player finishes the level
+	*/
+	public Point getEndingPoint()
+	{
+		return this.endingPoint;
+	}
+	
+	/** Sets a new ending point
+	* @param endingPoint the new ending point
+	*/
+	public void setEndingPoint(Point endingPoint)
+	{
+		this.endingPoint = endingPoint;
 	}
 }

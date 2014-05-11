@@ -1,8 +1,8 @@
 Tilemapping Version 1.0
 #nbTilesLengthWorld
-18
+16
 #nbTilesWidthWorld
-31
+16
 #nbTilesX
 12
 #nbTilesY
@@ -18,13 +18,13 @@ Tilemapping Version 1.0
 #nbItem
 XXXXXXX  TO DO  XXXXXXX
 #collisionType
-rubber
+solid
 #coordinateStart
-XXXXXXX  TO DO  XXXXXXX
+0 0
 #coordinateFinish
-XXXXXXX  TO DO  XXXXXXX
+0 1
 #tileset
-tile 0 solid not breakable
+tile 0 empty not breakable
 tile 1 solid not breakable
 tile 2 solid not breakable
 tile 3 solid not breakable
@@ -180,21 +180,37 @@ tile 152 solid not breakable
 tile 153 solid not breakable
 tile 154 solid not breakable
 tile 155 solid not breakable
-0 0                         0 0                             0 
-0                             0                               
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
+#level_layer1
+                                
+                                
+      0                         
+        0                       
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+#level_layer2
+0                               
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                

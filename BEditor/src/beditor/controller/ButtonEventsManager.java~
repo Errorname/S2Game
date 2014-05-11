@@ -99,9 +99,9 @@ public class ButtonEventsManager
 					else if(mapLayer1.getCollisionType() == 1)
 						mapFileWriter.write("rubber\n");
 					mapFileWriter.write("#coordinateStart\n");
-					mapFileWriter.write((int) win.getEditorPan().getLayer1().getMap().getStartingPoint().getX() + " " + (int) win.getEditorPan().getLayer1().getMap().getStartingPoint().getY() + "\n");
+					mapFileWriter.write((int) win.getEditorPan().getLayer1().getMap().getStartingPoint().getX() + " " + (int) win.getEditorPan().getMapPan().getMap().getStartingPoint().getY() + "\n");
 					mapFileWriter.write("#coordinateFinish\n");
-					mapFileWriter.write((int) win.getEditorPan().getLayer1().getMap().getEndingPoint().getX() + " " + (int) win.getEditorPan().getLayer1().getMap().getEndingPoint().getY() + "\n");
+					mapFileWriter.write((int) win.getEditorPan().getLayer1().getMap().getEndingPoint().getX() + " " + (int) win.getEditorPan().getMapPan().getMap().getEndingPoint().getY() + "\n");
 					mapFileWriter.write("#tileset\n");
 					for(int y = 0 ; y < win.getEditorPan().getTilesetPan().getTilesetHeight() ; y++)
 					{
