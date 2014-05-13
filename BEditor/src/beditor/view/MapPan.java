@@ -18,6 +18,7 @@ public class MapPan extends JPanel
 	private Map map;
 	private Dimension tileDim;
 	private EditorPan editorPan;
+	private MapPanType type;
 	
 	private final Point DEFAULT_STARTING_POINT = new Point(0, 0);
 	private final Point DEFAULT_ENDING_POINT = new Point(0, 1);
@@ -26,17 +27,24 @@ public class MapPan extends JPanel
 	* @param mapDim the map's dimensions
 	* @param tileDim a tile's dimensions
 	* @param collisionType the map's collision type
+	* @param type set 0 for a regular MapPan, 1 to edit the starting and finishing points, 2 to edit the items
 	* @param editorPan the EditorPan which contains this MapPan
 	*/
-	public MapPan(Dimension mapDim, Dimension tileDim, int collisionType, EditorPan editorPan)
+	public MapPan(Dimension mapDim, Dimension tileDim, int collisionType, MapPanType type, EditorPan editorPan)
 	{
+		this.type = type;
 		this.tileDim = tileDim;
 		this.editorPan = editorPan;
 		
 		this.setLayout(new GridLayout((int) mapDim.getHeight(), (int) mapDim.getWidth(), 0, 0));
 		this.setPreferredSize(new Dimension((int) (mapDim.getWidth() * tileDim.getWidth()), (int) (mapDim.getHeight() * tileDim.getHeight())));
 		
-		this.map = new Map(mapDim, collisionType, DEFAULT_STARTING_POINT, DEFAULT_ENDING_POINT);
+		this.map = new Map(mapDim, collisionType);
+		if(type == MapPanType.START_FINISH)
+		{
+			this.map.setTile(0, 0, 0);
+			this.map.setTile(0, 1, 1);
+		}
 		
 		this.tiles = new Sprite[(int) mapDim.getWidth()][(int) mapDim.getHeight()];
 		
@@ -52,10 +60,12 @@ public class MapPan extends JPanel
     			this.add(this.tiles[x][y].getImage());
 			}
 		}
-		
-		this.reloadMap();
 	}
 	
+	/** Allows to change the map's dimension
+	* @param width the new width
+	* @param height the new height
+	*/
 	public void setMapDim(int width, int height)
 	{
 		Sprite tmpTiles[][] = new Sprite[width][height];
@@ -118,6 +128,14 @@ public class MapPan extends JPanel
 	public Dimension getTilesDim()
 	{
 		return this.tileDim;
+	}
+	
+	/** Gives the type of the MapPan
+	* @return the type of the MapPan - see the constructor for more details
+	*/
+	public MapPanType getType()
+	{
+		return this.type;
 	}
 	
 	/** Loads the map from the model

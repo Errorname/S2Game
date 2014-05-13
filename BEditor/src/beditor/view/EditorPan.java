@@ -15,7 +15,7 @@ import java.awt.*;
 public class EditorPan extends JPanel
 {
 	private MainWindow mainWindow;
-	private MapPan layer1, layer2, currentlyEdited;
+	private MapPan layer1, layer2, startFinishLayer, currentlyEdited;
 	private TilesetPan tilesetPan;
 	private PropertiesPan propertiesPan;
 	private JScrollPane mapScroll, tilesetScroll, propertiesScroll;
@@ -40,8 +40,9 @@ public class EditorPan extends JPanel
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.white);
 		
-		this.layer1 = new MapPan(mapDim, tileDim, collisionType, this);
-		this.layer2 = new MapPan(mapDim, tileDim, collisionType, this);
+		this.layer1 = new MapPan(mapDim, tileDim, collisionType, MapPanType.REGULAR, this);
+		this.layer2 = new MapPan(mapDim, tileDim, collisionType, MapPanType.REGULAR, this);
+		this.startFinishLayer = new MapPan(mapDim, tileDim, collisionType, MapPanType.START_FINISH, this);
 		this.currentlyEdited = this.layer1;
 		
 		this.tilesetPan = new TilesetPan(tilesetPath, tileDim, this);
@@ -69,6 +70,7 @@ public class EditorPan extends JPanel
 	{
 		this.currentlyEdited = this.layer1;
 		this.mapScroll.setViewportView(this.currentlyEdited);
+		this.currentlyEdited.reloadMap();
 	}
 	
 	/** Allows to edit the layer 2
@@ -77,6 +79,16 @@ public class EditorPan extends JPanel
 	{
 		this.currentlyEdited = this.layer2;
 		this.mapScroll.setViewportView(this.currentlyEdited);
+		this.currentlyEdited.reloadMap();
+	}
+	
+	/** Allows to edit the layer related to the starting and finishing points
+	*/
+	public void editStartFinishLayer()
+	{
+		this.currentlyEdited = this.startFinishLayer;
+		this.mapScroll.setViewportView(this.currentlyEdited);
+		this.currentlyEdited.reloadMap();
 	}
 	
 	/** Gives the selected tile in the tileset
@@ -92,12 +104,6 @@ public class EditorPan extends JPanel
 	*/
 	public MapPan getCurrentlyEdited()
 	{
-		if(this.currentlyEdited == this.layer1)
-			System.out.println("1");
-		else if(this.currentlyEdited == this.layer2)
-			System.out.println("2");
-		else
-			System.out.println("WTF");
 		return this.currentlyEdited;
 	}
 	
@@ -115,6 +121,14 @@ public class EditorPan extends JPanel
 	public MapPan getLayer2()
 	{
 		return this.layer2;
+	}
+	
+	/** Gives the layer related to the starting and finishing points
+	* @return the layer related to the starting and finishing points
+	*/
+	public MapPan getStartFinishLayer()
+	{
+		return this.startFinishLayer;
 	}
 	
 	/** Gives the TilesetPan related to this EditorPan
