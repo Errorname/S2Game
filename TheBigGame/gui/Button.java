@@ -45,7 +45,7 @@ public class Button {
         int my = mouseButtons.getY();
         isPressed = false;
         if (mx >= x && my >= y && mx < (x + w) && my < (y + h)) {
-            if (mouseButtons.isRelased(1)) {
+            if (mouseButtons.isReleased(1)) {
                 postClick();
             } else if (mouseButtons.isDown(1)) {
                 isPressed = true;

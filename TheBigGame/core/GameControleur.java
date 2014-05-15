@@ -3,6 +3,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 import javax.swing.JPanel;
 
@@ -19,7 +20,8 @@ public class GameControleur extends JPanel implements Runnable, KeyListener, Mou
 	private Image image;
 	private GameView gv;
 	private Level level;
-	private Menu menu;
+	
+	private Stack<Menu> menuStack = new Stack<Menu>(); // Menu -> Sous-Menu, etc...
 	
 	public MouseButtons mouseButtons = new MouseButtons();
 	private boolean mouseMoved = false;
@@ -32,8 +34,8 @@ public class GameControleur extends JPanel implements Runnable, KeyListener, Mou
 		
 		gv = new GameView(width, height);
 		level = null;
-		menu = new TitleMenu(width, height);
-		gv.setMenu(menu);
+		Menu menu = new TitleMenu(width, height);
+		addMenu(menu);
 		
 		
 		this.setFocusable(true);
@@ -69,11 +71,25 @@ public class GameControleur extends JPanel implements Runnable, KeyListener, Mou
 	
 	private void gameUpdate() {
 		// Do some stuff here, like moving the player or looking at the colliding things
+		mouseButtons.setPosition(getMousePosition());
+		mouseButtons.tick();
+		
 		if (level != null) {
 			level.update();
 		}
-		if (menu != null) {
-			menu.update(mouseButtons);
+		
+		if (!menuStack.isEmpty()) {
+            menuStack.peek().update(mouseButtons);
+			if (menuStack.peek().isClosed()) {
+				popMenu();
+				System.out.println("Start Game");
+			}
+        }
+		
+		if (level == null && menuStack.isEmpty()) {
+			level = new Level();
+			gv.setLevel(level);
+			clearMenus();
 		}
 	}
 	
@@ -98,11 +114,21 @@ public class GameControleur extends JPanel implements Runnable, KeyListener, Mou
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		level.keyPressed(e);
+		if (level != null) {
+			level.keyPressed(e);
+		}
+		if (!menuStack.isEmpty()) {
+            menuStack.peek().keyPressed(e);
+        }
 	}
 
 	public void keyReleased(KeyEvent e) {
-		level.keyReleased(e);
+		if (level != null) {
+			level.keyReleased(e);
+		}
+		if (!menuStack.isEmpty()) {
+            menuStack.peek().keyReleased(e);
+        }
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -129,9 +155,32 @@ public class GameControleur extends JPanel implements Runnable, KeyListener, Mou
 
     public void mousePressed(MouseEvent e) {
         mouseButtons.setNextState(e.getButton(), true);
+		//System.out.println("GameControleur.java -> mousePressed");
     }
 
     public void mouseReleased(MouseEvent e) {
         mouseButtons.setNextState(e.getButton(), false);
+    }
+	
+	private void addMenu(Menu menu) {
+        menuStack.add(menu);
+		gv.setMenu(menu); // Permet d'afficher le menu dans la vue
+        //menu.addButtonListener(this);
+    }
+	
+	private void popMenu() {
+        if (!menuStack.isEmpty()) {
+            menuStack.pop();
+			if (!menuStack.isEmpty()) {
+				gv.setMenu(menuStack.peek());
+			}
+        }
+    }
+	
+	private void clearMenus() {
+        while (!menuStack.isEmpty()) {
+            menuStack.pop();
+        }
+		gv.setMenu(null);
     }
 }

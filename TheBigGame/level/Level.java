@@ -44,7 +44,7 @@ public class Level  implements KeyListener {
 			}
 		}
 		
-		player = new Player(500,500,null);
+		player = new Player(500,500,bomb);
     }
 
     public void init() {
@@ -58,15 +58,13 @@ public class Level  implements KeyListener {
 		
 		// get the scrolling position of the map based on the player
 		
-		offsetX = Math.round(player.getX()) - screenWidth/2 - tileSize;
-		//int offsetX = 0;
-		offsetX = Math.max(offsetX, 0);
-		offsetX = Math.min(offsetX, mapWidth - screenWidth - 25); // THERE IS A PROBLEM HERE!!
+		offsetX = (int)player.getX() - screenWidth/2;
+		offsetX = (offsetX < 0) ? 0 : offsetX;
+		offsetX = (offsetX > mapWidth - screenWidth - 33) ? mapWidth - screenWidth -33 : offsetX;
 		
-		offsetY = Math.round(player.getY()) - screenHeight/2 - tileSize;
-		//int offsetY = 0;
-		offsetY = Math.max(offsetY, 0);
-		offsetY = Math.min(offsetY, mapHeight - screenHeight - 25); // Just a fix for an error
+		offsetY = (int)player.getY() - screenHeight/2;
+		offsetY = (offsetY < 0) ? 0 : offsetY;
+		offsetY = (offsetY > mapHeight - screenHeight - 33) ? mapHeight - screenHeight -33 : offsetY;
 		
 		// draw parallax background image
 		if (background != null) {
@@ -76,12 +74,20 @@ public class Level  implements KeyListener {
 		}
 		
 		// Define the view
-		System.out.println(offsetX + " " + offsetY);
+		System.out.print("Offset: " + offsetX + " " + offsetY);
+		//System.out.print("   Screen: " + screenWidth + " " + screenHeight);
+		//System.out.print("   Map: " + mapWidth + " " + mapHeight);
+		System.out.print("   Player: " + player.getX() + " " + player.getY());
 		
 		int firstTileX = GameView.pixelsToTiles(offsetX, tileSize);
-		int lastTileX = firstTileX + GameView.pixelsToTiles(screenWidth, tileSize) + 1;
+		int lastTileX = GameView.pixelsToTiles(offsetX + screenWidth, tileSize) + 1;
 		int firstTileY = GameView.pixelsToTiles(offsetY, tileSize);
-		int lastTileY = firstTileY + GameView.pixelsToTiles(screenHeight, tileSize) + 1;
+		int lastTileY = GameView.pixelsToTiles(offsetY + screenHeight, tileSize) + 1;
+		
+		System.out.print("   FirstTile: " + (GameView.tilesToPixels(firstTileX,tileSize)-offsetX) + 
+						" " + (GameView.tilesToPixels(firstTileY,tileSize)-offsetY));
+		System.out.println("   LastTile: " + (GameView.tilesToPixels(lastTileX,tileSize)-offsetX) + 
+						" " + (GameView.tilesToPixels(lastTileY,tileSize)-offsetY));
 		
 		for (int y = firstTileY; y <= lastTileY; y++) {
 			for (int x = firstTileX; x <= lastTileX; x++) {
@@ -92,6 +98,8 @@ public class Level  implements KeyListener {
 				}
 			}
 		}
+		
+		player.draw(g,screenWidth,screenHeight);
     }
     
     public int getOffsetX() {
@@ -166,11 +174,11 @@ public class Level  implements KeyListener {
 		
 	}
     
-    /*public Player getPlayer() {
+    public Player getPlayer() {
 		return player;
 	}
     
     public void setPlayer(Player player) {
 		this.player = player;
-	}*/
+	}
 }

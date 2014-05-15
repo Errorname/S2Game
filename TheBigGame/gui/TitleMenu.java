@@ -19,6 +19,7 @@ public class TitleMenu extends Menu {
 	private BufferedImage img;
 	
 	private int selectedItem = 0;
+	private int nbItem = 2;
 	
 	public TitleMenu(int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;
@@ -36,18 +37,32 @@ public class TitleMenu extends Menu {
 		super.draw(g,screenWidth,screenHeight);
 	}
 	
+	public void update(MouseButtons mouseButtons) {
+		super.update(mouseButtons);
+		for (Button button : buttons) {
+            if (button.isPressed()) {
+				buttonPressed(button);
+			}
+        }
+	}
+	
 	public void buttonPressed(Button button) {
+		//System.out.println(button.getId());
+		if (button.getId() == START_GAME_ID) {
+			isClosed = true;
+			System.out.println("Start Button");
+		}
     }
 	
 	public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             selectedItem--;
             if (selectedItem < 0) {
-                selectedItem = 1;
+                selectedItem = nbItem-1;
             }
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             selectedItem++;
-            if (selectedItem > 1) {
+            if (selectedItem > nbItem-1) {
                 selectedItem = 0;
             }
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {

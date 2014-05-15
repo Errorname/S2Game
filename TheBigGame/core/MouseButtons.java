@@ -22,7 +22,7 @@ public class MouseButtons {
         return !currentState[button] && nextState[button];
     }
 
-    public boolean isRelased(int button) {
+    public boolean isReleased(int button) {
         return currentState[button] && !nextState[button];
     }
 

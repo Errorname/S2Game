@@ -2,6 +2,9 @@ package player;
 
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.*;
 
 public class Player implements KeyListener {
 	protected float x;
@@ -27,7 +30,7 @@ public class Player implements KeyListener {
     }
     
     public void setX(float x) {
-    	this.x = x;
+    	this.x = (x < 0) ? 0 : x;
     }
     
     public float getY() {
@@ -35,12 +38,19 @@ public class Player implements KeyListener {
     }
     
     public void setY(float y) {
-    	this.y = y;
+    	this.y = (y < 0) ? 0 : y;
     }
+	
+	public void draw(Graphics g, int screenWidth, int screenHeight) {
+		g.drawImage(img,400, 300,null);
+	}
     
     public void update() {
     	x += (KL?-1:0) * vitesse + (KR?1:0) * vitesse;
     	y += (KU?-1:0) * vitesse + (KD?1:0) * vitesse;
+		
+		x = (x < 0) ? 0 : x;
+		y = (y < 0) ? 0 : y;
     }
 	
 	public void keyReleased(KeyEvent e) {

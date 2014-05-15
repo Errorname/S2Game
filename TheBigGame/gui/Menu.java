@@ -11,6 +11,8 @@ public abstract class Menu implements ButtonListener, KeyListener {
     protected int gameWidth;
 	protected int gameHeight;
 	
+	protected boolean isClosed = false;
+	
 	protected Button addButton(Button button) {
 		buttons.add(button);
 		button.addListener(this);
@@ -26,6 +28,11 @@ public abstract class Menu implements ButtonListener, KeyListener {
 	public void update(MouseButtons mouseButtons) {
 		for (Button button : buttons) {
             button.update(mouseButtons);
+			
         }
+	}
+	
+	public boolean isClosed() {
+		return isClosed;
 	}
 }
