@@ -19,6 +19,7 @@ public class Map
 	/** Constructor which makes a new map with the given dimensions
 	* @param dim the map's dimensions
 	* @param collisionType the collision type
+	* @param startingPoint the point where the player starts
 	*/
 	public Map(Dimension dim, int collisionType)
 	{

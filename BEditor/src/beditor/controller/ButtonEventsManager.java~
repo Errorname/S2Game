@@ -101,9 +101,9 @@ public class ButtonEventsManager
 						mapFileWriter.write("rubber\n");
 					int startX = -1, startY = -1, finishX = -1, finishY = -1;
 					boolean foundStart = false, foundFinish = false;
-					for(int x = 0 ; x < mapStartFinish.getWidth() && (!foundStart || !foundFinish) ; x++)
+					for(int x = 0 ; x < mapStartFinish.getWidth() && !foundStart && !foundFinish ; x++)
 					{
-						for(int y = 0 ; y < mapStartFinish.getHeight() && (!foundStart || !foundFinish) ; y++)
+						for(int y = 0 ; y < mapStartFinish.getHeight() && !foundStart && !foundFinish ; y++)
 						{
 							if(mapStartFinish.getTile(x, y) == 0)
 							{

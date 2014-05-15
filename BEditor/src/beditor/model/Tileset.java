@@ -24,7 +24,7 @@ public class Tileset
 		{
 			for(int y = 0 ; y < dim.getHeight() ; y++)
 			{
-				this.tiles[x][y] = new Tile(false, false);
+				this.tiles[x][y] = new Tile(true, false);
 			}
 		}
 	}

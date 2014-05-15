@@ -15,9 +15,11 @@ import java.awt.*;
 public class EditorPan extends JPanel
 {
 	private MainWindow mainWindow;
-	private MapPan mapPan;
+	private MapPan layer1, layer2, startFinishLayer, currentlyEdited;
 	private TilesetPan tilesetPan;
 	private PropertiesPan propertiesPan;
+	private JScrollPane mapScroll, tilesetScroll, propertiesScroll;
+	private JSplitPane propertiesSplit, editorSplit;
 	
 	private final Dimension MAP_SCROLL_SIZE = new Dimension(512, 700);
 	private final Dimension TILESET_SCROLL_SIZE = new Dimension(512, 500);
@@ -38,24 +40,55 @@ public class EditorPan extends JPanel
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.white);
 		
-		this.mapPan = new MapPan(mapDim, tileDim, collisionType, this);		
+		this.layer1 = new MapPan(mapDim, tileDim, collisionType, MapPanType.REGULAR, this);
+		this.layer2 = new MapPan(mapDim, tileDim, collisionType, MapPanType.REGULAR, this);
+		this.startFinishLayer = new MapPan(mapDim, tileDim, collisionType, MapPanType.START_FINISH, this);
+		this.currentlyEdited = this.layer1;
+		
 		this.tilesetPan = new TilesetPan(tilesetPath, tileDim, this);
 		this.propertiesPan = new PropertiesPan(this);
 		
-		JScrollPane mapScroll = new JScrollPane(this.mapPan);
-		mapScroll.setPreferredSize(MAP_SCROLL_SIZE);
-		JScrollPane tilesetScroll = new JScrollPane(this.tilesetPan);
-		tilesetScroll.setPreferredSize(TILESET_SCROLL_SIZE);
-		JScrollPane propertiesScroll = new JScrollPane(this.propertiesPan);
-		propertiesScroll.setPreferredSize(PROPERTIES_SCROLL_SIZE);
+		this.mapScroll = new JScrollPane(this.currentlyEdited);
+		this.mapScroll.setPreferredSize(MAP_SCROLL_SIZE);
+		this.tilesetScroll = new JScrollPane(this.tilesetPan);
+		this.tilesetScroll.setPreferredSize(TILESET_SCROLL_SIZE);
+		this.propertiesScroll = new JScrollPane(this.propertiesPan);
+		this.propertiesScroll.setPreferredSize(PROPERTIES_SCROLL_SIZE);
 		
-		JSplitPane propertiesSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tilesetScroll, propertiesScroll);
-		propertiesSplit.setDividerLocation(SPLIT_PROPERTIES_LOCATION);
-		propertiesSplit.setContinuousLayout(true);
-		JSplitPane editorSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mapScroll, propertiesSplit);
-		editorSplit.setDividerLocation(SPLIT_EDITOR_LOCATION);
-		editorSplit.setContinuousLayout(true);
-		this.add(editorSplit, BorderLayout.CENTER);
+		this.propertiesSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT, this.tilesetScroll, this.propertiesScroll);
+		this.propertiesSplit.setDividerLocation(SPLIT_PROPERTIES_LOCATION);
+		this.propertiesSplit.setContinuousLayout(true);
+		this.editorSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.mapScroll, this.propertiesSplit);
+		this.editorSplit.setDividerLocation(SPLIT_EDITOR_LOCATION);
+		this.editorSplit.setContinuousLayout(true);
+		this.add(this.editorSplit, BorderLayout.CENTER);
+	}
+	
+	/** Allows to edit the layer 1
+	*/
+	public void editLayer1()
+	{
+		this.currentlyEdited = this.layer1;
+		this.mapScroll.setViewportView(this.currentlyEdited);
+		this.currentlyEdited.reloadMap();
+	}
+	
+	/** Allows to edit the layer 2
+	*/
+	public void editLayer2()
+	{
+		this.currentlyEdited = this.layer2;
+		this.mapScroll.setViewportView(this.currentlyEdited);
+		this.currentlyEdited.reloadMap();
+	}
+	
+	/** Allows to edit the layer related to the starting and finishing points
+	*/
+	public void editStartFinishLayer()
+	{
+		this.currentlyEdited = this.startFinishLayer;
+		this.mapScroll.setViewportView(this.currentlyEdited);
+		this.currentlyEdited.reloadMap();
 	}
 	
 	/** Gives the selected tile in the tileset
@@ -66,12 +99,36 @@ public class EditorPan extends JPanel
 		return this.tilesetPan.getSelectedSprite();
 	}
 	
-	/** Gives the MapPan related to this EditorPan
-	* @return the MapPan related to this EditorPan
+	/** Gives the currently edited MapPan related to this EditorPan
+	* @return the currently edited MapPan related to this EditorPan
 	*/
-	public MapPan getMapPan()
+	public MapPan getCurrentlyEdited()
 	{
-		return this.mapPan;
+		return this.currentlyEdited;
+	}
+	
+	/** Gives the layer 1
+	* @return the layer 1
+	*/
+	public MapPan getLayer1()
+	{
+		return this.layer1;
+	}
+	
+	/** Gives the layer 2
+	* @return the layer 2
+	*/
+	public MapPan getLayer2()
+	{
+		return this.layer2;
+	}
+	
+	/** Gives the layer related to the starting and finishing points
+	* @return the layer related to the starting and finishing points
+	*/
+	public MapPan getStartFinishLayer()
+	{
+		return this.startFinishLayer;
 	}
 	
 	/** Gives the TilesetPan related to this EditorPan

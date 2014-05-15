@@ -89,7 +89,6 @@ public class MouseEventsManager extends MouseAdapter
 						}
 						this.map.setTile(tileX, tileY, 1); // 1 is for finishing point
 					}
-					((MapPan) this.sprite.getPanel()).reloadMap();
 				}
 			}
 			

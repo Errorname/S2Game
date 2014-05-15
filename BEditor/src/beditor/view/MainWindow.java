@@ -16,23 +16,25 @@ public class MainWindow extends JFrame
 {	
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
-	private JMenuItem quitFileMenu;
-	private JMenuItem newFileMenu;
-	private JMenuItem saveFileMenu;
+	private JMenuItem quitFileMenu, newFileMenu, saveFileMenu;
 	private JMenu mapMenu;
-	private JMenuItem mapPropertiesMenu;
+	private JMenuItem mapPropertiesMenu, mapLayer1Menu, mapLayer2Menu, mapStartFinishMenu;
 	private EditorPan editorPan;
 	private NewMapPan newMapPan;
 	private ButtonEventsManager buttons;
+	private MapPropertiesWindow mapPropertiesWindow;
 	
 	private final String WINDOW_TITLE = "BEditor";
-	private final Dimension WINDOW_SIZE = new Dimension(/*1024, 768*/800, 500);
+	private final Dimension WINDOW_SIZE = new Dimension(1024, 768);
 	private final String FILE_MENU = "File";
 	private final String NEW_MAP_MENU = "New map";
 	private final String SAVE_MAP_MENU = "Save the map";
 	private final String QUIT_MENU = "Quit";
 	private final String MAP_MENU = "Map";
 	private final String MAP_PROPERTIES_MENU = "Properties";
+	private final String MAP_LAYER_1_MENU = "Edit layer 1";
+	private final String MAP_LAYER_2_MENU = "Edit layer 2";
+	private final String MAP_START_FINISH_MENU = "Edit starting and finishing points";
 	
 	/** Constructor to make a new window
 	*/
@@ -77,12 +79,6 @@ public class MainWindow extends JFrame
     	this.quitFileMenu = new JMenuItem(QUIT_MENU);
     	this.fileMenu.add(this.quitFileMenu);
     	
-    	this.mapMenu = new JMenu(MAP_MENU);
-    	this.menuBar.add(this.mapMenu);
-    	
-    	this.mapPropertiesMenu = new JMenuItem(MAP_PROPERTIES_MENU);
-    	this.mapMenu.add(this.mapPropertiesMenu);
-    	
     	this.setJMenuBar(menuBar); 
 	}
 	
@@ -108,6 +104,30 @@ public class MainWindow extends JFrame
 	public JMenuItem getSaveFileMenu()
 	{
 		return this.saveFileMenu;
+	}
+
+	/** Gives the map menu's "layer 1" button
+	* @return the map menu's "layer 1" button
+	*/
+	public JMenuItem getMapLayer1Menu()
+	{
+		return this.mapLayer1Menu;
+	}
+
+	/** Gives the map menu's "layer 2" button
+	* @return the map menu's "layer 2" button
+	*/
+	public JMenuItem getMapLayer2Menu()
+	{
+		return this.mapLayer2Menu;
+	}
+
+	/** Gives the map menu's "starting and finishing points" button
+	* @return the map menu's "starting and finishing points" button
+	*/
+	public JMenuItem getMapStartFinishMenu()
+	{
+		return this.mapStartFinishMenu;
 	}
 
 	/** Gives the map menu's "properties" button
@@ -139,6 +159,26 @@ public class MainWindow extends JFrame
 	*/
 	public void switchMap(EditorPan editorPan)
 	{
+		if(this.mapMenu == null)
+		{
+			this.mapMenu = new JMenu(MAP_MENU);
+			this.menuBar.add(this.mapMenu);
+			
+			this.mapLayer1Menu = new JMenuItem(MAP_LAYER_1_MENU);
+			this.mapMenu.add(this.mapLayer1Menu);
+			
+			this.mapLayer2Menu = new JMenuItem(MAP_LAYER_2_MENU);
+			this.mapMenu.add(this.mapLayer2Menu);
+			
+			this.mapStartFinishMenu = new JMenuItem(MAP_START_FINISH_MENU);
+			this.mapMenu.add(this.mapStartFinishMenu);
+			
+			this.mapPropertiesMenu = new JMenuItem(MAP_PROPERTIES_MENU);
+			this.mapMenu.add(this.mapPropertiesMenu);
+			
+			this.buttons.addMapMenuListeners();
+    	}
+    	
 		this.editorPan = editorPan;
 		this.buttons.addPropertiesPanListeners();
 		this.setContentPane(this.editorPan);
@@ -159,5 +199,23 @@ public class MainWindow extends JFrame
 	public ButtonEventsManager getButtonEventsManager()
 	{
 		return this.buttons;
+	}
+	
+	/** Gives the window allowing to set the map's properties
+	* @return the window allowing to set the map's properties
+	*/
+	public MapPropertiesWindow getMapPropertiesWindow()
+	{
+		return this.mapPropertiesWindow;
+	}
+	
+	/** Sets the window allowing to set the map's properties
+	* @param mpWin the new window allowing to set the map's properties
+	*/
+	public void setMapPropertiesWindow(MapPropertiesWindow mpWin)
+	{
+		this.mapPropertiesWindow = mpWin;
+		if(mpWin != null)
+			this.buttons.addMapPropertiesWindowListeners();
 	}
 }
