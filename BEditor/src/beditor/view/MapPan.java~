@@ -160,7 +160,7 @@ public class MapPan extends JPanel
 					else if(this.map.getTile(x, y) == 1)
 						this.tiles[x][y].getImage().setBackground(Color.RED);
 					else
-						this.tiles[x][y].getImage().setBackground(null);
+						this.tiles[x][y].getImage().setBackground(Color.TRANSLUCENT);
 				}
 			}
 		}

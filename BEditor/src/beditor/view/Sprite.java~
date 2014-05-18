@@ -37,7 +37,6 @@ public class Sprite
 		this.dim = dim;
 		
 		this.img = new JLabel();
-		this.img.setOpaque(true);
 		
 		if(this.panel instanceof MapPan)
 		{
