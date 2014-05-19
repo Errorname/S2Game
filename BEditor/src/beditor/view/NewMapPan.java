@@ -26,10 +26,10 @@ public class NewMapPan extends JPanel
 	
 	private final String LABEL_PATH_TILESET = "Path to the tileset : ";
 	private final String LABEL_BROWSE_TILESET = "Browse...";
-	private final String LABEL_MAP_WIDTH = "Map's width (in tiles) :";
-	private final String LABEL_MAP_HEIGHT = "Map's height (in tiles) :";
-	private final String LABEL_TILE_WIDTH = "One tile's width (in pixels) :";
-	private final String LABEL_TILE_HEIGHT = "One tile's height (in pixels) :";
+	private final String LABEL_MAP_WIDTH = "Map width (in tiles) :";
+	private final String LABEL_MAP_HEIGHT = "Map height (in tiles) :";
+	private final String LABEL_TILE_WIDTH = "Width of a tile (in pixels) :";
+	private final String LABEL_TILE_HEIGHT = "Height of a tile (in pixels) :";
 	private final String LABEL_COLLISION = "Collision type :";
 	private final String LABEL_SOLID = "Solid";
 	private final String LABEL_RUBBER = "Rubber";

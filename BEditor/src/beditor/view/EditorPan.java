@@ -26,6 +26,8 @@ public class EditorPan extends JPanel
 	private final Dimension PROPERTIES_SCROLL_SIZE = new Dimension(512, 200);
 	private final int SPLIT_EDITOR_LOCATION = (int) MAP_SCROLL_SIZE.getWidth();
 	private final int SPLIT_PROPERTIES_LOCATION = (int) TILESET_SCROLL_SIZE.getHeight();
+	private final String GREEN_LABEL = "Starting point = green = left click";
+	private final String RED_LABEL = "Finishing point = red = right click";
 	
 	/** Constructor to make a new map
 	* @param mapDim the map's dimensions
@@ -70,6 +72,7 @@ public class EditorPan extends JPanel
 	{
 		this.currentlyEdited = this.layer1;
 		this.mapScroll.setViewportView(this.currentlyEdited);
+		this.tilesetScroll.setViewportView(this.tilesetPan);
 		this.currentlyEdited.reloadMap();
 	}
 	
@@ -79,6 +82,7 @@ public class EditorPan extends JPanel
 	{
 		this.currentlyEdited = this.layer2;
 		this.mapScroll.setViewportView(this.currentlyEdited);
+		this.tilesetScroll.setViewportView(this.tilesetPan);
 		this.currentlyEdited.reloadMap();
 	}
 	
@@ -86,8 +90,16 @@ public class EditorPan extends JPanel
 	*/
 	public void editStartFinishLayer()
 	{
+		JPanel helpPan = new JPanel();
+		helpPan.setLayout(new GridLayout(2, 1));
+		JLabel green = new JLabel(GREEN_LABEL);
+		JLabel red = new JLabel(RED_LABEL);
+		helpPan.add(green);
+		helpPan.add(red);
+		
 		this.currentlyEdited = this.startFinishLayer;
 		this.mapScroll.setViewportView(this.currentlyEdited);
+		this.tilesetScroll.setViewportView(helpPan);
 		this.currentlyEdited.reloadMap();
 	}
 	
