@@ -71,103 +71,117 @@ public class ButtonEventsManager
     				Map mapLayer2 = win.getEditorPan().getLayer2().getMap();
     				Map mapStartFinish = win.getEditorPan().getStartFinishLayer().getMap();
     				
-    				File mapFile = new File("newMap.map");
-					mapFile.createNewFile();
-					FileWriter mapFileWriter = new FileWriter(mapFile);
+					String filesAllowed[] = new String[1];
+					filesAllowed[0] = "map";
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("map file", filesAllowed);
+					chooser.setFileFilter(filter);
+    				JFileChooser chooser = new JFileChooser();
+					int choice = chooser.showSaveDialog(win);
+					if(choice == JFileChooser.APPROVE_OPTION)
+					{
+						File mapFile = new File(chooser.getSelectedFile().getPath());
+						mapFile.createNewFile();
+						FileWriter mapFileWriter = new FileWriter(mapFile);
 				
-					mapFileWriter.write("Tilemapping Version 1.0\n");
-					mapFileWriter.write("#nbTilesLengthWorld\n");
-					mapFileWriter.write(mapLayer1.getHeight() + "\n");
-					mapFileWriter.write("#nbTilesWidthWorld\n");
-					mapFileWriter.write(mapLayer1.getWidth() + "\n");
-					mapFileWriter.write("#nbTilesX\n");
-					mapFileWriter.write(win.getEditorPan().getTilesetPan().getTilesetWidth() + "\n");
-					mapFileWriter.write("#nbTilesY\n");
-					mapFileWriter.write(win.getEditorPan().getTilesetPan().getTilesetHeight() + "\n");
-					mapFileWriter.write("#lengthTile\n");
-					mapFileWriter.write((int) win.getEditorPan().getLayer1().getTilesDim().getHeight() + "\n");
-					mapFileWriter.write("#widthTile\n");
-					mapFileWriter.write((int) win.getEditorPan().getLayer1().getTilesDim().getWidth() + "\n");
-					mapFileWriter.write("#scrollX\n");
-					mapFileWriter.write(SCROLLX + "\n");
-					mapFileWriter.write("#scrollY\n");
-					mapFileWriter.write(SCROLLY + "\n");
-					mapFileWriter.write("#nbItem\n");
-					mapFileWriter.write("XXXXXXX  TO DO  XXXXXXX\n");
-					mapFileWriter.write("#collisionType\n");
-					if(mapLayer1.getCollisionType() == 0)
-						mapFileWriter.write("solid\n");
-					else if(mapLayer1.getCollisionType() == 1)
-						mapFileWriter.write("rubber\n");
-					int startX = -1, startY = -1, finishX = -1, finishY = -1;
-					boolean foundStart = false, foundFinish = false;
-					for(int x = 0 ; x < mapStartFinish.getWidth() && !foundStart && !foundFinish ; x++)
-					{
-						for(int y = 0 ; y < mapStartFinish.getHeight() && !foundStart && !foundFinish ; y++)
+						mapFileWriter.write("Tilemapping Version 1.0\n");
+						mapFileWriter.write("#nbTilesLengthWorld\n");
+						mapFileWriter.write(mapLayer1.getHeight() + "\n");
+						mapFileWriter.write("#nbTilesWidthWorld\n");
+						mapFileWriter.write(mapLayer1.getWidth() + "\n");
+						mapFileWriter.write("#nbTilesX\n");
+						mapFileWriter.write(win.getEditorPan().getTilesetPan().getTilesetWidth() + "\n");
+						mapFileWriter.write("#nbTilesY\n");
+						mapFileWriter.write(win.getEditorPan().getTilesetPan().getTilesetHeight() + "\n");
+						mapFileWriter.write("#lengthTile\n");
+						mapFileWriter.write((int) win.getEditorPan().getLayer1().getTilesDim().getHeight() + "\n");
+						mapFileWriter.write("#widthTile\n");
+						mapFileWriter.write((int) win.getEditorPan().getLayer1().getTilesDim().getWidth() + "\n");
+						mapFileWriter.write("#scrollX\n");
+						mapFileWriter.write(SCROLLX + "\n");
+						mapFileWriter.write("#scrollY\n");
+						mapFileWriter.write(SCROLLY + "\n");
+						mapFileWriter.write("#nbItem\n");
+						mapFileWriter.write("XXXXXXX  TO DO  XXXXXXX\n");
+						mapFileWriter.write("#collisionType\n");
+						if(mapLayer1.getCollisionType() == 0)
+							mapFileWriter.write("solid\n");
+						else if(mapLayer1.getCollisionType() == 1)
+							mapFileWriter.write("rubber\n");
+						int startX = -1, startY = -1, finishX = -1, finishY = -1;
+						boolean foundStart = false, foundFinish = false;
+						for(int x = 0 ; x < mapStartFinish.getWidth() && (!foundStart || !foundFinish) ; x++)
 						{
-							if(mapStartFinish.getTile(x, y) == 0)
+							for(int y = 0 ; y < mapStartFinish.getHeight() && (!foundStart || !foundFinish) ; y++)
 							{
-								startX = x;
-								startY = y;
-								foundStart = true;
+								if(mapStartFinish.getTile(x, y) == 0)
+								{
+									startX = x;
+									startY = y;
+									foundStart = true;
+								}
+								else if(mapStartFinish.getTile(x, y) == 1)
+								{
+									finishX = x;
+									finishY = y;
+									foundFinish = true;
+								}
 							}
-							else if(mapStartFinish.getTile(x, y) == 1)
+						}
+						mapFileWriter.write("#coordinateStart\n");
+						mapFileWriter.write(startX + " " + startY + "\n");
+						mapFileWriter.write("#coordinateFinish\n");
+						mapFileWriter.write(finishX + " " + finishY + "\n");
+						mapFileWriter.write("#tileset\n");
+						for(int y = 0 ; y < win.getEditorPan().getTilesetPan().getTilesetHeight() ; y++)
+						{
+							for(int x = 0 ; x < win.getEditorPan().getTilesetPan().getTilesetWidth() ; x++)
 							{
-								finishX = x;
-								finishY = y;
-								foundFinish = true;
+								mapFileWriter.write("tile " + (x + y * win.getEditorPan().getTilesetPan().getTilesetWidth()));
+								if(win.getEditorPan().getTilesetPan().getTileset().getTile(new Point(x, y)).getSolid())
+									mapFileWriter.write(" solid ");
+								else
+									mapFileWriter.write(" empty ");
+								if(win.getEditorPan().getTilesetPan().getTileset().getTile(new Point(x, y)).getBreakable())
+									mapFileWriter.write("breakable\n");
+								else
+									mapFileWriter.write("not breakable\n");
 							}
 						}
-					}
-					mapFileWriter.write("#coordinateStart\n");
-					mapFileWriter.write(startX + " " + startY + "\n");
-					mapFileWriter.write("#coordinateFinish\n");
-					mapFileWriter.write(finishX + " " + finishY + "\n");
-					mapFileWriter.write("#tileset\n");
-					for(int y = 0 ; y < win.getEditorPan().getTilesetPan().getTilesetHeight() ; y++)
-					{
-						for(int x = 0 ; x < win.getEditorPan().getTilesetPan().getTilesetWidth() ; x++)
-						{
-							mapFileWriter.write("tile " + (x + y * win.getEditorPan().getTilesetPan().getTilesetWidth()));
-							if(win.getEditorPan().getTilesetPan().getTileset().getTile(new Point(x, y)).getSolid())
-								mapFileWriter.write(" solid ");
-							else
-								mapFileWriter.write(" empty ");
-							if(win.getEditorPan().getTilesetPan().getTileset().getTile(new Point(x, y)).getBreakable())
-								mapFileWriter.write("breakable\n");
-							else
-								mapFileWriter.write("not breakable\n");
-						}
-					}
 					
-					mapFileWriter.write("#level_layer1\n");
-					for(int y = 0 ; y < mapLayer1.getHeight() ; y++)
-					{
-						for(int x = 0 ; x < mapLayer1.getWidth() ; x++)
+						mapFileWriter.write("#level_layer1\n");
+						for(int y = 0 ; y < mapLayer1.getHeight() ; y++)
 						{
-							if(mapLayer1.getTile(x, y) == -1)
-								mapFileWriter.write("  ");
-							else
-								mapFileWriter.write(mapLayer1.getTile(x, y) + " ");
+							for(int x = 0 ; x < mapLayer1.getWidth() ; x++)
+							{
+								if(mapLayer1.getTile(x, y) == -1)
+									mapFileWriter.write("  ");
+								else
+									mapFileWriter.write(mapLayer1.getTile(x, y) + " ");
+							}
+							mapFileWriter.write("\n");
 						}
-						mapFileWriter.write("\n");
-					}
-					mapFileWriter.write("#level_layer2\n");
-					for(int y = 0 ; y < mapLayer2.getHeight() ; y++)
-					{
-						for(int x = 0 ; x < mapLayer2.getWidth() ; x++)
+						mapFileWriter.write("#level_layer2\n");
+						for(int y = 0 ; y < mapLayer2.getHeight() ; y++)
 						{
-							if(mapLayer2.getTile(x, y) == -1)
-								mapFileWriter.write("  ");
-							else
-								mapFileWriter.write(mapLayer2.getTile(x, y) + " ");
+							for(int x = 0 ; x < mapLayer2.getWidth() ; x++)
+							{
+								if(mapLayer2.getTile(x, y) == -1)
+									mapFileWriter.write("  ");
+								else
+									mapFileWriter.write(mapLayer2.getTile(x, y) + " ");
+							}
+							mapFileWriter.write("\n");
 						}
-						mapFileWriter.write("\n");
-					}
-					mapFileWriter.close();
+						mapFileWriter.close();
 					
-					JOptionPane savedMsg = new JOptionPane();
-					savedMsg.showMessageDialog(win, MAP_SAVED_MSG, MAP_SAVED_TITLE, JOptionPane.INFORMATION_MESSAGE); 
+						JOptionPane savedMsg = new JOptionPane();
+						savedMsg.showMessageDialog(win, MAP_SAVED_MSG, MAP_SAVED_TITLE, JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+					{
+    					JOptionPane errorMsg = new JOptionPane();
+    					errorMsg.showMessageDialog(win, MAP_NOT_SAVED_MSG, MAP_NOT_SAVED_TITLE, JOptionPane.ERROR_MESSAGE);
+					}
     			}
     			catch(NullPointerException e)
     			{
