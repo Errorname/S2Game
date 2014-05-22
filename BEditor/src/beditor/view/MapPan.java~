@@ -76,6 +76,8 @@ public class MapPan extends JPanel
 		{
 			for(int x = 0 ; x < width ; x++)
 			{
+			
+				//System.out.println(x + " " + y);
 				int coordX = x * (int) this.tileDim.getWidth();
 				int coordY = y * (int) this.tileDim.getHeight();
 				
@@ -91,15 +93,19 @@ public class MapPan extends JPanel
 							this.map.setTile(x, y, -1);
     					tmpTiles[x][y] = new Sprite(this, new Point(coordX, coordY), this.tileDim, true, true);
     				}
-					else
+					else {
+						//System.out.println("Boobz");
     					tmpTiles[x][y] = this.tiles[x][y];
+    				}
     			}
     			else
     				tmpTiles[x][y] = new Sprite(this, new Point(coordX, coordY), this.tileDim, true, true);
+    				
     			tmpTiles[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
     			this.add(tmpTiles[x][y].getImage());
 			}
 		}
+		
 		this.tiles = tmpTiles;
 		
 		this.map.setWidth(width);
@@ -160,7 +166,7 @@ public class MapPan extends JPanel
 		{
 			for(int y = 0 ; y < this.map.getHeight() ; y++)
 			{
-				if(this.type == MapPanType.REGULAR)
+				if(this.type != MapPanType.START_FINISH)
 				{
 					if(this.map.getTile(x, y) != -1)
 						this.tiles[x][y].setImage(new ImageIcon(this.editorPan.getTilesetPan().getSpriteImage(this.map.getTile(x, y))));

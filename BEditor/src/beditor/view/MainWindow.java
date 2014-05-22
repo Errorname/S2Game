@@ -16,7 +16,7 @@ public class MainWindow extends JFrame
 {	
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
-	private JMenuItem quitFileMenu, newFileMenu, saveFileMenu;
+	private JMenuItem quitFileMenu, newFileMenu, openFileMenu, saveFileMenu;
 	private JMenu mapMenu;
 	private JMenuItem mapPropertiesMenu, mapLayer1Menu, mapLayer2Menu, mapItemsLayerMenu, mapStartFinishMenu;
 	private EditorPan editorPan;
@@ -28,6 +28,7 @@ public class MainWindow extends JFrame
 	private final Dimension WINDOW_SIZE = new Dimension(1024, 768);
 	private final String FILE_MENU = "File";
 	private final String NEW_MAP_MENU = "New map";
+	private final String OPEN_MAP_MENU = "Open an existing map";
 	private final String SAVE_MAP_MENU = "Save the map";
 	private final String QUIT_MENU = "Quit";
 	private final String MAP_MENU = "Map";
@@ -74,6 +75,9 @@ public class MainWindow extends JFrame
     	this.newFileMenu = new JMenuItem(NEW_MAP_MENU);
     	this.fileMenu.add(this.newFileMenu);
     	
+    	this.openFileMenu = new JMenuItem(OPEN_MAP_MENU);
+    	this.fileMenu.add(this.openFileMenu);
+    	
     	this.saveFileMenu = new JMenuItem(SAVE_MAP_MENU);
     	this.fileMenu.add(this.saveFileMenu);
     	
@@ -89,6 +93,14 @@ public class MainWindow extends JFrame
 	public JMenuItem getQuitFileMenu()
 	{
 		return this.quitFileMenu;
+	}
+	
+	/** Gives the menu's "open map" button
+	* @return the menu's "open map" button
+	*/
+	public JMenuItem getOpenFileMenu()
+	{
+		return this.openFileMenu;
 	}
 	
 	/** Gives the menu's "new map" button

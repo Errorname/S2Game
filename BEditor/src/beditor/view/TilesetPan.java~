@@ -63,7 +63,7 @@ public class TilesetPan extends JPanel
 			}
 			this.setSelectedSprite(sprites[0][0]);
 			
-			this.setLayout(new GridLayout(tilesetWidth + 1, tilesetHeight + 1, 0, 0));
+			this.setLayout(new GridLayout(tilesetWidth + 1, tilesetHeight - 1, 0, 0));
 			this.revalidate();
 		}
 	}

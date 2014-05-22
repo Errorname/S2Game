@@ -96,10 +96,12 @@ public class MapPan extends JPanel
     			}
     			else
     				tmpTiles[x][y] = new Sprite(this, new Point(coordX, coordY), this.tileDim, true, true);
+    				
     			tmpTiles[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
     			this.add(tmpTiles[x][y].getImage());
 			}
 		}
+		
 		this.tiles = tmpTiles;
 		
 		this.map.setWidth(width);

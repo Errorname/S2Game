@@ -43,10 +43,10 @@ public class EditorPan extends JPanel
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.white);
 		
-		this.layer1 = new MapPan(mapDim, tileDim, collisionType, MapPanType.REGULAR, this);
-		this.layer2 = new MapPan(mapDim, tileDim, collisionType, MapPanType.REGULAR, this);
-		this.itemsLayer = new MapPan(mapDim, tileDim, collisionType, MapPanType.ITEM, this);
-		this.startFinishLayer = new MapPan(mapDim, tileDim, collisionType, MapPanType.START_FINISH, this);
+		this.layer1 = new MapPan(new Dimension(mapDim), tileDim, collisionType, MapPanType.REGULAR, this);
+		this.layer2 = new MapPan(new Dimension(mapDim), tileDim, collisionType, MapPanType.REGULAR, this);
+		this.itemsLayer = new MapPan(new Dimension(mapDim), tileDim, collisionType, MapPanType.ITEM, this);
+		this.startFinishLayer = new MapPan(new Dimension(mapDim), tileDim, collisionType, MapPanType.START_FINISH, this);
 		this.currentlyEdited = this.layer1;
 		
 		this.tilesetPan = new TilesetPan(tilesetPath, tileDim, this);

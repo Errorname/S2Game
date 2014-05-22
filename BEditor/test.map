@@ -1,0 +1,252 @@
+Tilemapping Version 1.0
+#nbTilesLengthWorld
+16
+#nbTilesWidthWorld
+16
+#nbTilesX
+12
+#nbTilesY
+13
+#lengthTile
+72
+#widthTile
+72
+#scrollX
+10
+#scrollY
+10
+#nbItem
+0
+#collisionType
+solid
+#coordinateStart
+0 0
+#coordinateFinish
+0 1
+#image
+tiles_spritesheet.png
+#tileset
+tile 0 solid not breakable
+tile 1 solid not breakable
+tile 2 solid not breakable
+tile 3 solid not breakable
+tile 4 solid not breakable
+tile 5 solid not breakable
+tile 6 solid not breakable
+tile 7 solid not breakable
+tile 8 solid not breakable
+tile 9 solid not breakable
+tile 10 solid not breakable
+tile 11 solid not breakable
+tile 12 solid not breakable
+tile 13 solid not breakable
+tile 14 solid not breakable
+tile 15 solid not breakable
+tile 16 solid not breakable
+tile 17 solid not breakable
+tile 18 solid not breakable
+tile 19 solid not breakable
+tile 20 solid not breakable
+tile 21 solid not breakable
+tile 22 solid not breakable
+tile 23 solid not breakable
+tile 24 solid not breakable
+tile 25 solid not breakable
+tile 26 solid not breakable
+tile 27 solid not breakable
+tile 28 solid not breakable
+tile 29 solid not breakable
+tile 30 solid not breakable
+tile 31 solid not breakable
+tile 32 solid not breakable
+tile 33 solid not breakable
+tile 34 solid not breakable
+tile 35 solid not breakable
+tile 36 solid not breakable
+tile 37 solid not breakable
+tile 38 solid not breakable
+tile 39 solid not breakable
+tile 40 solid not breakable
+tile 41 solid not breakable
+tile 42 solid not breakable
+tile 43 solid not breakable
+tile 44 solid not breakable
+tile 45 solid not breakable
+tile 46 solid not breakable
+tile 47 solid not breakable
+tile 48 solid not breakable
+tile 49 solid not breakable
+tile 50 solid not breakable
+tile 51 solid not breakable
+tile 52 solid not breakable
+tile 53 solid not breakable
+tile 54 solid not breakable
+tile 55 solid not breakable
+tile 56 solid not breakable
+tile 57 solid not breakable
+tile 58 solid not breakable
+tile 59 solid not breakable
+tile 60 solid not breakable
+tile 61 solid not breakable
+tile 62 solid not breakable
+tile 63 solid not breakable
+tile 64 solid not breakable
+tile 65 solid not breakable
+tile 66 solid not breakable
+tile 67 solid not breakable
+tile 68 solid not breakable
+tile 69 solid not breakable
+tile 70 solid not breakable
+tile 71 solid not breakable
+tile 72 solid not breakable
+tile 73 solid not breakable
+tile 74 solid not breakable
+tile 75 solid not breakable
+tile 76 solid not breakable
+tile 77 solid not breakable
+tile 78 solid not breakable
+tile 79 solid not breakable
+tile 80 solid not breakable
+tile 81 solid not breakable
+tile 82 solid not breakable
+tile 83 solid not breakable
+tile 84 solid not breakable
+tile 85 solid not breakable
+tile 86 solid not breakable
+tile 87 solid not breakable
+tile 88 solid not breakable
+tile 89 solid not breakable
+tile 90 solid not breakable
+tile 91 solid not breakable
+tile 92 solid not breakable
+tile 93 solid not breakable
+tile 94 solid not breakable
+tile 95 solid not breakable
+tile 96 solid not breakable
+tile 97 solid not breakable
+tile 98 solid not breakable
+tile 99 solid not breakable
+tile 100 solid not breakable
+tile 101 solid not breakable
+tile 102 solid not breakable
+tile 103 solid not breakable
+tile 104 solid not breakable
+tile 105 solid not breakable
+tile 106 solid not breakable
+tile 107 solid not breakable
+tile 108 solid not breakable
+tile 109 solid not breakable
+tile 110 solid not breakable
+tile 111 solid not breakable
+tile 112 solid not breakable
+tile 113 solid not breakable
+tile 114 solid not breakable
+tile 115 solid not breakable
+tile 116 solid not breakable
+tile 117 solid not breakable
+tile 118 solid not breakable
+tile 119 solid not breakable
+tile 120 solid not breakable
+tile 121 solid not breakable
+tile 122 solid not breakable
+tile 123 solid not breakable
+tile 124 solid not breakable
+tile 125 solid not breakable
+tile 126 solid not breakable
+tile 127 solid not breakable
+tile 128 solid not breakable
+tile 129 solid not breakable
+tile 130 solid not breakable
+tile 131 solid not breakable
+tile 132 solid not breakable
+tile 133 solid not breakable
+tile 134 solid not breakable
+tile 135 solid not breakable
+tile 136 solid not breakable
+tile 137 solid not breakable
+tile 138 solid not breakable
+tile 139 solid not breakable
+tile 140 solid not breakable
+tile 141 solid not breakable
+tile 142 solid not breakable
+tile 143 solid not breakable
+tile 144 solid not breakable
+tile 145 solid not breakable
+tile 146 solid not breakable
+tile 147 solid not breakable
+tile 148 solid not breakable
+tile 149 solid not breakable
+tile 150 solid not breakable
+tile 151 solid not breakable
+tile 152 solid not breakable
+tile 153 solid not breakable
+tile 154 solid not breakable
+tile 155 solid not breakable
+#level_layer1
+                                
+    0                            
+                                
+  0                              
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+#level_layer2
+ 0                               
+                                
+   0                             
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+#items
+#end

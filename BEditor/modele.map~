@@ -16,7 +16,7 @@ Tilemapping Version 1.0
 #scrollY
 10
 #nbItem
-5
+4
 #collisionType
 normal
 #coordinateStart 
@@ -24,7 +24,7 @@ normal
 #coordinateFinish
 18 2  
 #image
-1.png
+tiles_spritesheet.png
 #tileset
 tile 0 empty notBreakable
 tile 1 solid notBreakable

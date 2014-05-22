@@ -58,6 +58,54 @@ public class ButtonEventsManager
     			System.exit(0);
     		}
     	});
+		
+    	// Called when clicking on "open"
+    	this.win.getOpenFileMenu().addActionListener(new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent arg0)
+    		{
+    			String [] file = new String[1000];
+    			int i = 0;  
+		
+				//reading the text file	
+				try
+				{
+					FileInputStream fstream = new FileInputStream(System.getProperty("user.dir") + "/test.map");
+					 
+					// Get the object of DataInputStream
+					DataInputStream in = new DataInputStream(fstream);
+					BufferedReader br = new BufferedReader(new InputStreamReader(in));
+					String strLine;
+					 
+					//Read File Line By Line
+					while ((strLine = br.readLine()) != null)
+					{
+						file[i] = strLine; 
+						i++;
+					}
+					 
+					//Close the input stream
+					in.close();
+					 
+				}
+				catch (Exception e)
+				{
+				    System.err.println("Error: " + e.getMessage());
+				}
+				
+				final int mapWidth = Integer.parseInt(file[2]);
+				final int mapHeight = Integer.parseInt(file[4]);
+				final int tileWidth = Integer.parseInt(file[10]);
+				final int tileHeight = Integer.parseInt(file[12]);
+				final String tilesetPath = file[26];
+				String collision = file[20];
+				int collisionType = 0;
+				if(collision.equals("rubber"))
+					collisionType = 1;
+				
+    			win.switchMap(new EditorPan(new Dimension(mapWidth, mapHeight), new Dimension(tileWidth, tileHeight), tilesetPath, collisionType, win));
+    		}
+    	});
     	
     	// Called when clicking on "save the map"
     	this.win.getSaveFileMenu().addActionListener(new ActionListener()
