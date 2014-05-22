@@ -69,17 +69,18 @@ public class ButtonEventsManager
     			{
     				Map mapLayer1 = win.getEditorPan().getLayer1().getMap();
     				Map mapLayer2 = win.getEditorPan().getLayer2().getMap();
+    				Map mapItemsLayer = win.getEditorPan().getItemsLayer().getMap();
     				Map mapStartFinish = win.getEditorPan().getStartFinishLayer().getMap();
     				
     				JFileChooser chooser = new JFileChooser();
 					String filesAllowed[] = new String[1];
 					filesAllowed[0] = "map";
-					FileNameExtensionFilter filter = new FileNameExtensionFilter("map file", filesAllowed);
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("Map file (.map)", filesAllowed);
 					chooser.setFileFilter(filter);
 					int choice = chooser.showSaveDialog(win);
 					if(choice == JFileChooser.APPROVE_OPTION)
 					{
-						File mapFile = new File(chooser.getSelectedFile().getPath());
+						File mapFile = new File(chooser.getSelectedFile().getPath() + ".map");
 						mapFile.createNewFile();
 						FileWriter mapFileWriter = new FileWriter(mapFile);
 				
@@ -93,15 +94,30 @@ public class ButtonEventsManager
 						mapFileWriter.write("#nbTilesY\n");
 						mapFileWriter.write(win.getEditorPan().getTilesetPan().getTilesetHeight() + "\n");
 						mapFileWriter.write("#lengthTile\n");
-						mapFileWriter.write((int) win.getEditorPan().getLayer1().getTilesDim().getHeight() + "\n");
-						mapFileWriter.write("#widthTile\n");
 						mapFileWriter.write((int) win.getEditorPan().getLayer1().getTilesDim().getWidth() + "\n");
+						mapFileWriter.write("#widthTile\n");
+						mapFileWriter.write((int) win.getEditorPan().getLayer1().getTilesDim().getHeight() + "\n");
 						mapFileWriter.write("#scrollX\n");
 						mapFileWriter.write(SCROLLX + "\n");
 						mapFileWriter.write("#scrollY\n");
 						mapFileWriter.write(SCROLLY + "\n");
 						mapFileWriter.write("#nbItem\n");
-						mapFileWriter.write("XXXXXXX  TO DO  XXXXXXX\n");
+						int nbItem = 0;
+						for(int y = 0 ; y < mapItemsLayer.getHeight() ; y++)
+						{
+							for(int x = 0 ; x < mapItemsLayer.getWidth() ; x++)
+							{
+								if(mapItemsLayer.getTile(x, y) != -1)
+								{
+									final int indexY = mapItemsLayer.getTile(x, y) / win.getEditorPan().getTilesetPan().getTilesetWidth();
+									final int indexX = mapItemsLayer.getTile(x, y) - (win.getEditorPan().getTilesetPan().getTilesetWidth() * indexY);
+									
+									if(win.getEditorPan().getTilesetPan().getTileset().getItem(new Point(indexX, indexY)).getType() != ItemType.NOT_AN_ITEM)
+										nbItem++;
+								}
+							}
+						}
+						mapFileWriter.write(nbItem + "\n");
 						mapFileWriter.write("#collisionType\n");
 						if(mapLayer1.getCollisionType() == 0)
 							mapFileWriter.write("solid\n");
@@ -131,6 +147,10 @@ public class ButtonEventsManager
 						mapFileWriter.write(startX + " " + startY + "\n");
 						mapFileWriter.write("#coordinateFinish\n");
 						mapFileWriter.write(finishX + " " + finishY + "\n");
+						mapFileWriter.write("#image\n");
+						String tilesetPath = win.getEditorPan().getTilesetPan().getTilesetPath();
+						tilesetPath = tilesetPath.substring(tilesetPath.lastIndexOf("/") + 1);
+						mapFileWriter.write(tilesetPath + "\n");
 						mapFileWriter.write("#tileset\n");
 						for(int y = 0 ; y < win.getEditorPan().getTilesetPan().getTilesetHeight() ; y++)
 						{
@@ -154,7 +174,7 @@ public class ButtonEventsManager
 							for(int x = 0 ; x < mapLayer1.getWidth() ; x++)
 							{
 								if(mapLayer1.getTile(x, y) == -1)
-									mapFileWriter.write("  ");
+									mapFileWriter.write(" ");
 								else
 									mapFileWriter.write(mapLayer1.getTile(x, y) + " ");
 							}
@@ -166,12 +186,33 @@ public class ButtonEventsManager
 							for(int x = 0 ; x < mapLayer2.getWidth() ; x++)
 							{
 								if(mapLayer2.getTile(x, y) == -1)
-									mapFileWriter.write("  ");
+									mapFileWriter.write(" ");
 								else
 									mapFileWriter.write(mapLayer2.getTile(x, y) + " ");
 							}
 							mapFileWriter.write("\n");
 						}
+						mapFileWriter.write("#items\n");
+						for(int y = 0 ; y < mapItemsLayer.getHeight() ; y++)
+						{
+							for(int x = 0 ; x < mapItemsLayer.getWidth() ; x++)
+							{
+								if(mapItemsLayer.getTile(x, y) != -1)
+								{
+									final int indexY = mapItemsLayer.getTile(x, y) / win.getEditorPan().getTilesetPan().getTilesetWidth();
+									final int indexX = mapItemsLayer.getTile(x, y) - (win.getEditorPan().getTilesetPan().getTilesetWidth() * indexY);
+									
+									if(win.getEditorPan().getTilesetPan().getTileset().getItem(new Point(indexX, indexY)).getType() == ItemType.KEY)
+										mapFileWriter.write("goldenkey " + x + " " + y + "\n");
+									else if(win.getEditorPan().getTilesetPan().getTileset().getItem(new Point(indexX, indexY)).getType() == ItemType.LOLLIPOP)
+										mapFileWriter.write("lollipop " + x + " " + y + "\n");
+									else if(win.getEditorPan().getTilesetPan().getTileset().getItem(new Point(indexX, indexY)).getType() == ItemType.DOOR)
+										mapFileWriter.write("door " + x + " " + y + "\n");
+								}
+							}
+						}
+						mapFileWriter.write("#end");
+						
 						mapFileWriter.close();
 					
 						JOptionPane savedMsg = new JOptionPane();
@@ -232,10 +273,10 @@ public class ButtonEventsManager
     	});
 	}
 	
-	public void addPropertiesPanListeners()
+	public void addTilePropertiesPanListeners()
 	{	
     	// Called when clicking on the "empty" radio button in the properties
-    	this.win.getEditorPan().getPropertiesPan().getEmptyRadio().addActionListener(new ActionListener()
+    	this.win.getEditorPan().getTilePropertiesPan().getEmptyRadio().addActionListener(new ActionListener()
     	{
     		public void actionPerformed(ActionEvent arg0)
     		{
@@ -244,7 +285,7 @@ public class ButtonEventsManager
     	});
     	
     	// Called when clicking on the "solid" radio button in the properties
-    	this.win.getEditorPan().getPropertiesPan().getSolidRadio().addActionListener(new ActionListener()
+    	this.win.getEditorPan().getTilePropertiesPan().getSolidRadio().addActionListener(new ActionListener()
     	{
     		public void actionPerformed(ActionEvent arg0)
     		{
@@ -253,7 +294,7 @@ public class ButtonEventsManager
     	});
     	
     	// Called when clicking on the "not breakable" radio button in the properties
-    	this.win.getEditorPan().getPropertiesPan().getNotBreakableRadio().addActionListener(new ActionListener()
+    	this.win.getEditorPan().getTilePropertiesPan().getNotBreakableRadio().addActionListener(new ActionListener()
     	{
     		public void actionPerformed(ActionEvent arg0)
     		{
@@ -262,11 +303,50 @@ public class ButtonEventsManager
     	});
     	
     	// Called when clicking on the "breakable" radio button in the properties
-    	this.win.getEditorPan().getPropertiesPan().getBreakableRadio().addActionListener(new ActionListener()
+    	this.win.getEditorPan().getTilePropertiesPan().getBreakableRadio().addActionListener(new ActionListener()
     	{
     		public void actionPerformed(ActionEvent arg0)
     		{
 	    		win.getEditorPan().getTilesetPan().getTileset().getTile(win.getEditorPan().getTilesetPan().getSelectedSpriteIndex()).setBreakable(true);
+    		}
+    	});
+	}
+	
+	public void addItemPropertiesPanListeners()
+	{	
+		// Called when clicking on the "not an item" radio button in the properties
+    	this.win.getEditorPan().getItemPropertiesPan().getNotAnItemRadio().addActionListener(new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent arg0)
+    		{
+	    		win.getEditorPan().getTilesetPan().getTileset().getItem(win.getEditorPan().getTilesetPan().getSelectedSpriteIndex()).setType(ItemType.NOT_AN_ITEM);
+    		}
+    	});
+	
+    	// Called when clicking on the "key" radio button in the properties
+    	this.win.getEditorPan().getItemPropertiesPan().getKeyRadio().addActionListener(new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent arg0)
+    		{
+	    		win.getEditorPan().getTilesetPan().getTileset().getItem(win.getEditorPan().getTilesetPan().getSelectedSpriteIndex()).setType(ItemType.KEY);
+    		}
+    	});
+    	
+    	// Called when clicking on the "lollipop" radio button in the properties
+    	this.win.getEditorPan().getItemPropertiesPan().getLollipopRadio().addActionListener(new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent arg0)
+    		{
+	    		win.getEditorPan().getTilesetPan().getTileset().getItem(win.getEditorPan().getTilesetPan().getSelectedSpriteIndex()).setType(ItemType.LOLLIPOP);
+    		}
+    	});
+    	
+    	// Called when clicking on the "door" radio button in the properties
+    	this.win.getEditorPan().getItemPropertiesPan().getDoorRadio().addActionListener(new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent arg0)
+    		{
+	    		win.getEditorPan().getTilesetPan().getTileset().getItem(win.getEditorPan().getTilesetPan().getSelectedSpriteIndex()).setType(ItemType.DOOR);
     		}
     	});
 	}
@@ -298,6 +378,23 @@ public class ButtonEventsManager
 				if(win.getEditorPan() != null)
 				{
 					win.getEditorPan().editLayer2();
+				}
+				else
+				{
+    				JOptionPane errorMsg = new JOptionPane();
+    				errorMsg.showMessageDialog(win, NO_EDITED_MAP_MSG, NO_EDITED_MAP_TITLE, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		//Called when clicking on "items layer"
+		this.win.getMapItemsLayerMenu().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(win.getEditorPan() != null)
+				{
+					win.getEditorPan().editItemsLayer();
 				}
 				else
 				{
@@ -351,6 +448,8 @@ public class ButtonEventsManager
     		{
     			win.getEditorPan().getLayer1().setMapDim(win.getMapPropertiesWindow().getMapWidth(), win.getMapPropertiesWindow().getMapHeight());
     			win.getEditorPan().getLayer2().setMapDim(win.getMapPropertiesWindow().getMapWidth(), win.getMapPropertiesWindow().getMapHeight());
+    			win.getEditorPan().getItemsLayer().setMapDim(win.getMapPropertiesWindow().getMapWidth(), win.getMapPropertiesWindow().getMapHeight());
+    			win.getEditorPan().getStartFinishLayer().setMapDim(win.getMapPropertiesWindow().getMapWidth(), win.getMapPropertiesWindow().getMapHeight());
     		}
     	});
     	

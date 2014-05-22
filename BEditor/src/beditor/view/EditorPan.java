@@ -15,9 +15,10 @@ import java.awt.*;
 public class EditorPan extends JPanel
 {
 	private MainWindow mainWindow;
-	private MapPan layer1, layer2, startFinishLayer, currentlyEdited;
+	private MapPan layer1, layer2, itemsLayer, startFinishLayer, currentlyEdited;
 	private TilesetPan tilesetPan;
-	private PropertiesPan propertiesPan;
+	private TilePropertiesPan tilePropertiesPan;
+	private ItemPropertiesPan itemPropertiesPan;
 	private JScrollPane mapScroll, tilesetScroll, propertiesScroll;
 	private JSplitPane propertiesSplit, editorSplit;
 	
@@ -44,17 +45,19 @@ public class EditorPan extends JPanel
 		
 		this.layer1 = new MapPan(mapDim, tileDim, collisionType, MapPanType.REGULAR, this);
 		this.layer2 = new MapPan(mapDim, tileDim, collisionType, MapPanType.REGULAR, this);
+		this.itemsLayer = new MapPan(mapDim, tileDim, collisionType, MapPanType.ITEM, this);
 		this.startFinishLayer = new MapPan(mapDim, tileDim, collisionType, MapPanType.START_FINISH, this);
 		this.currentlyEdited = this.layer1;
 		
 		this.tilesetPan = new TilesetPan(tilesetPath, tileDim, this);
-		this.propertiesPan = new PropertiesPan(this);
+		this.tilePropertiesPan = new TilePropertiesPan(this);
+		this.itemPropertiesPan = new ItemPropertiesPan(this);
 		
 		this.mapScroll = new JScrollPane(this.currentlyEdited);
 		this.mapScroll.setPreferredSize(MAP_SCROLL_SIZE);
 		this.tilesetScroll = new JScrollPane(this.tilesetPan);
 		this.tilesetScroll.setPreferredSize(TILESET_SCROLL_SIZE);
-		this.propertiesScroll = new JScrollPane(this.propertiesPan);
+		this.propertiesScroll = new JScrollPane(this.tilePropertiesPan);
 		this.propertiesScroll.setPreferredSize(PROPERTIES_SCROLL_SIZE);
 		
 		this.propertiesSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT, this.tilesetScroll, this.propertiesScroll);
@@ -72,7 +75,7 @@ public class EditorPan extends JPanel
 	{
 		this.currentlyEdited = this.layer1;
 		this.mapScroll.setViewportView(this.currentlyEdited);
-		this.tilesetScroll.setViewportView(this.tilesetPan);
+		this.propertiesScroll.setViewportView(this.tilePropertiesPan);
 		this.currentlyEdited.reloadMap();
 	}
 	
@@ -82,7 +85,17 @@ public class EditorPan extends JPanel
 	{
 		this.currentlyEdited = this.layer2;
 		this.mapScroll.setViewportView(this.currentlyEdited);
-		this.tilesetScroll.setViewportView(this.tilesetPan);
+		this.propertiesScroll.setViewportView(this.tilePropertiesPan);
+		this.currentlyEdited.reloadMap();
+	}
+	
+	/** Allows to edit the items layer
+	*/
+	public void editItemsLayer()
+	{
+		this.currentlyEdited = this.itemsLayer;
+		this.mapScroll.setViewportView(this.currentlyEdited);
+		this.propertiesScroll.setViewportView(this.itemPropertiesPan);
 		this.currentlyEdited.reloadMap();
 	}
 	
@@ -99,7 +112,7 @@ public class EditorPan extends JPanel
 		
 		this.currentlyEdited = this.startFinishLayer;
 		this.mapScroll.setViewportView(this.currentlyEdited);
-		this.tilesetScroll.setViewportView(helpPan);
+		this.propertiesScroll.setViewportView(helpPan);
 		this.currentlyEdited.reloadMap();
 	}
 	
@@ -135,6 +148,14 @@ public class EditorPan extends JPanel
 		return this.layer2;
 	}
 	
+	/** Gives the items layer
+	* @return the items layer
+	*/
+	public MapPan getItemsLayer()
+	{
+		return this.itemsLayer;
+	}
+	
 	/** Gives the layer related to the starting and finishing points
 	* @return the layer related to the starting and finishing points
 	*/
@@ -151,12 +172,20 @@ public class EditorPan extends JPanel
 		return this.tilesetPan;
 	}
 	
-	/** Gives the PropertiesPan related to this EditorPan
-	* @return the PropertiesPan related to this EditorPan
+	/** Gives the TilePropertiesPan related to this EditorPan
+	* @return the TilePropertiesPan related to this EditorPan
 	*/
-	public PropertiesPan getPropertiesPan()
+	public TilePropertiesPan getTilePropertiesPan()
 	{
-		return this.propertiesPan;
+		return this.tilePropertiesPan;
+	}
+	
+	/** Gives the ItemPropertiesPan related to this EditorPan
+	* @return the ItemPropertiesPan related to this EditorPan
+	*/
+	public ItemPropertiesPan getItemPropertiesPan()
+	{
+		return this.itemPropertiesPan;
 	}
 	
 	/** Gives the MainWindow containing this EditorPan

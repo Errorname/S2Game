@@ -4,5 +4,5 @@ public enum MapPanType
 {
 	REGULAR,
 	START_FINISH,
-	ITEMS
+	ITEM
 }

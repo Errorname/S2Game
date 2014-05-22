@@ -1,0 +1,8 @@
+package beditor.model;
+
+public enum ItemType
+{
+	KEY,
+	LOLLIPOP,
+	DOOR
+}

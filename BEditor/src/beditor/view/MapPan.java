@@ -80,7 +80,20 @@ public class MapPan extends JPanel
 				int coordY = y * (int) this.tileDim.getHeight();
 				
 				if(x < this.map.getWidth() && y < this.map.getHeight())
-    				tmpTiles[x][y] = this.tiles[x][y];
+				{
+					if(this.type == MapPanType.START_FINISH)
+					{
+						if(x == 0 && y == 0)
+							this.map.setTile(x, y, 0);
+						else if(x == 0 && y == 1)
+							this.map.setTile(x, y, 1);
+						else
+							this.map.setTile(x, y, -1);
+    					tmpTiles[x][y] = new Sprite(this, new Point(coordX, coordY), this.tileDim, true, true);
+    				}
+					else
+    					tmpTiles[x][y] = this.tiles[x][y];
+    			}
     			else
     				tmpTiles[x][y] = new Sprite(this, new Point(coordX, coordY), this.tileDim, true, true);
     			tmpTiles[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
@@ -94,6 +107,7 @@ public class MapPan extends JPanel
 		this.setLayout(new GridLayout(height, width, 0, 0));
 		this.setPreferredSize(new Dimension((int) (width * this.tileDim.getWidth()), (int) (height * this.tileDim.getHeight())));
 		
+		this.reloadMap();
 		this.revalidate();
 	}
 	
@@ -146,7 +160,7 @@ public class MapPan extends JPanel
 		{
 			for(int y = 0 ; y < this.map.getHeight() ; y++)
 			{
-				if(this.type == MapPanType.REGULAR)
+				if(this.type != MapPanType.START_FINISH)
 				{
 					if(this.map.getTile(x, y) != -1)
 						this.tiles[x][y].setImage(new ImageIcon(this.editorPan.getTilesetPan().getSpriteImage(this.map.getTile(x, y))));

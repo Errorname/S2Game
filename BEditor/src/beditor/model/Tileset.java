@@ -13,6 +13,7 @@ import java.awt.Point;
 public class Tileset
 {
 	private Tile tiles[][];
+	private Item items[][];
 	
 	/** Constructor which makes a new tileset with the given dimensions (in tiles)
 	* @param dim the tileset's dimensions in tiles
@@ -20,11 +21,13 @@ public class Tileset
 	public Tileset(Dimension dim)
 	{
 		this.tiles = new Tile[(int) dim.getWidth()][(int) dim.getHeight()];
+		this.items = new Item[(int) dim.getWidth()][(int) dim.getHeight()];
 		for(int x = 0 ; x < dim.getWidth() ; x++)
 		{
 			for(int y = 0 ; y < dim.getHeight() ; y++)
 			{
 				this.tiles[x][y] = new Tile(true, false);
+				this.items[x][y] = new Item(ItemType.NOT_AN_ITEM);
 			}
 		}
 	}
@@ -36,5 +39,14 @@ public class Tileset
 	public Tile getTile(Point pos)
 	{
 		return this.tiles[(int) pos.getX()][(int) pos.getY()];
+	}
+	
+	/** Gives the item at the specified position
+	* @param pos the position of the item to get
+	* @return the item at the specified position
+	*/
+	public Item getItem(Point pos)
+	{
+		return this.items[(int) pos.getX()][(int) pos.getY()];
 	}
 }

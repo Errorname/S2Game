@@ -20,6 +20,9 @@ public class MouseEventsManager extends MouseAdapter
 	private boolean checkClicks;
 	private boolean checkMoves;
 	
+	private final String NOT_AN_ITEM_MSG = "You can't place it in this layer, it's not an item";
+	private final String NOT_AN_ITEM_TITLE = "Error";
+	
 	/** Constructor which needs the observed sprite, the map and options
 	* @param sprite the observed sprite
 	* @param map the map to change
@@ -44,7 +47,8 @@ public class MouseEventsManager extends MouseAdapter
 			if(this.sprite.getPanel() instanceof TilesetPan)
 			{
 				((TilesetPan) this.sprite.getPanel()).setSelectedSprite(this.sprite);
-				((TilesetPan) this.sprite.getPanel()).getEditorPan().getPropertiesPan().revalidate();
+				((TilesetPan) this.sprite.getPanel()).getEditorPan().getTilePropertiesPan().revalidate();
+				((TilesetPan) this.sprite.getPanel()).getEditorPan().getItemPropertiesPan().revalidate();
 			}
 			else if(this.sprite.getPanel() instanceof MapPan)
 			{
@@ -61,6 +65,26 @@ public class MouseEventsManager extends MouseAdapter
 						this.map.setTile(tileX, tileY, indexX + ((MapPan) this.sprite.getPanel()).getEditorPan().getTilesetPan().getTilesetWidth() * indexY);
 					else
 						this.map.setTile(tileX, tileY, -1);
+						
+					((MapPan) this.sprite.getPanel()).reloadMap();
+				}
+				else if(((MapPan) this.sprite.getPanel()).getType().equals(MapPanType.ITEM))
+				{
+					if(e.getButton() == MouseEvent.BUTTON1)
+					{
+						if(((MapPan) this.sprite.getPanel()).getEditorPan().getTilesetPan().getTileset().getItem(new Point(indexX, indexY)).getType() != ItemType.NOT_AN_ITEM)
+						{
+							this.map.setTile(tileX, tileY, indexX + ((MapPan) this.sprite.getPanel()).getEditorPan().getTilesetPan().getTilesetWidth() * indexY);
+						}
+						else
+						{
+							JOptionPane notAnItemMsg = new JOptionPane();
+							notAnItemMsg.showMessageDialog(((MapPan) this.sprite.getPanel()).getEditorPan().getMainWindow(), NOT_AN_ITEM_MSG, NOT_AN_ITEM_TITLE, JOptionPane.ERROR_MESSAGE);
+						}
+					}
+					else
+						this.map.setTile(tileX, tileY, -1);
+						
 					((MapPan) this.sprite.getPanel()).reloadMap();
 				}
 				else if(((MapPan) this.sprite.getPanel()).getType().equals(MapPanType.START_FINISH))

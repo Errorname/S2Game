@@ -4,20 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
-* PropertiesPan : a class to display and choose the properties of a tile
+* TilePropertiesPan : a class to display and choose the properties of a tile
 *
 * @author Hugo PIGEON
 * @version 1.0
 */
 
-public class PropertiesPan extends JPanel
+public class TilePropertiesPan extends JPanel
 {
 	private EditorPan editorPan;
 	private JLabel selectedSprite;
-	private JRadioButton emptyRadio;
-	private JRadioButton solidRadio;
-	private JRadioButton notBreakableRadio;
-	private JRadioButton breakableRadio;
+	private JRadioButton emptyRadio, solidRadio, notBreakableRadio, breakableRadio;
 
 	private final String MESSAGE = "Selected tile :";
 	private final String EMPTY_RADIO = "Empty";
@@ -25,10 +22,10 @@ public class PropertiesPan extends JPanel
 	private final String NOT_BREAKABLE_RADIO = "Not breakable";
 	private final String BREAKABLE_RADIO = "Breakable";
 
-	/** Constructor which makes a new properties panel
-	* @param editorPan the EditorPan which contains this PropertiesPan
+	/** Constructor which makes a new properties panel for the tiles
+	* @param editorPan the EditorPan which contains this TilePropertiesPan
 	*/
-	public PropertiesPan(EditorPan editorPan)
+	public TilePropertiesPan(EditorPan editorPan)
 	{	
 		this.setLayout(new GridLayout(4, 1));
 		
