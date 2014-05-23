@@ -19,6 +19,8 @@ public class MainWindow extends JFrame
 	private JMenuItem quitFileMenu, newFileMenu, openFileMenu, saveFileMenu;
 	private JMenu mapMenu;
 	private JMenuItem mapPropertiesMenu, mapLayer1Menu, mapLayer2Menu, mapItemsLayerMenu, mapStartFinishMenu;
+	private JMenu helpMenu;
+	private JMenuItem helpHowToMenu, helpAboutMenu;
 	private EditorPan editorPan;
 	private NewMapPan newMapPan;
 	private ButtonEventsManager buttons;
@@ -37,6 +39,9 @@ public class MainWindow extends JFrame
 	private final String MAP_LAYER_2_MENU = "Edit layer 2";
 	private final String MAP_ITEMS_LAYER_MENU = "Edit items layer";
 	private final String MAP_START_FINISH_MENU = "Edit starting and finishing points";
+	private final String HELP_MENU = "Help";
+	private final String HELP_HOW_TO_MENU = "How to use BEditor";
+	private final String HELP_ABOUT_MENU = "About";
 	
 	/** Constructor to make a new window
 	*/
@@ -83,6 +88,16 @@ public class MainWindow extends JFrame
     	
     	this.quitFileMenu = new JMenuItem(QUIT_MENU);
     	this.fileMenu.add(this.quitFileMenu);
+    	
+    	
+    	this.helpMenu = new JMenu(HELP_MENU);
+    	this.menuBar.add(this.helpMenu);
+    	
+    	this.helpHowToMenu = new JMenuItem(HELP_HOW_TO_MENU);
+    	this.helpMenu.add(helpHowToMenu);
+    	
+    	this.helpAboutMenu = new JMenuItem(HELP_ABOUT_MENU);
+    	this.helpMenu.add(helpAboutMenu);
     	
     	this.setJMenuBar(menuBar); 
 	}

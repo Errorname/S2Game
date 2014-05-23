@@ -64,7 +64,7 @@ public class ButtonEventsManager
     	{
     		public void actionPerformed(ActionEvent arg0)
     		{
-    			String [] file = new String[200];
+    			String [] file = new String[1000];
     			int i = 0;  
 		
 				//reading the text file	
@@ -95,6 +95,8 @@ public class ButtonEventsManager
 				
 				final int mapWidth = Integer.parseInt(file[2]);
 				final int mapHeight = Integer.parseInt(file[4]);
+				final int nbTilesY = Integer.parseInt(file[6]);
+				final int nbTilesX = Integer.parseInt(file[8]);
 				final int tileWidth = Integer.parseInt(file[10]);
 				final int tileHeight = Integer.parseInt(file[12]);
 				final String tilesetPath = file[26];
@@ -104,6 +106,88 @@ public class ButtonEventsManager
 					collisionType = 1;
 				
     			win.switchMap(new EditorPan(new Dimension(mapWidth, mapHeight), new Dimension(tileWidth, tileHeight), tilesetPath, collisionType, win));
+		
+				String [] coordinate = file[22].split(" "); 
+				Point start = new Point(Integer.parseInt(coordinate[0]), Integer.parseInt(coordinate[1]));
+				coordinate = file[24].split(" "); 
+				Point finish = new Point(Integer.parseInt(coordinate[0]), Integer.parseInt(coordinate[1]));
+				
+				win.getEditorPan().getStartFinishLayer().getMap().setTile(0, 0, -1);
+				win.getEditorPan().getStartFinishLayer().getMap().setTile(0, 1, -1);
+				win.getEditorPan().getStartFinishLayer().getMap().setTile((int) start.getX(), (int) start.getY(), 0);
+				win.getEditorPan().getStartFinishLayer().getMap().setTile((int) finish.getX(), (int) finish.getY(), 1);
+				
+				// loading solid and breakable properties of the tiles
+				String props[][] = new String [nbTilesY*nbTilesX][4];
+				for(int j=28 ; j < (nbTilesY*nbTilesX)+28 ; j++)
+				{
+					String [] prop = file[j].split("[\\s\\s\\s]");
+					for(int k=0; k<4; k++)
+					{
+						props[j-28][k] = prop[k]; 
+					}
+					Point coord = new Point(Integer.parseInt(props[j-28][1]) - (win.getEditorPan().getTilesetPan().getTilesetWidth() * (Integer.parseInt(props[j-28][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth())), Integer.parseInt(props[j-28][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth());
+					win.getEditorPan().getTilesetPan().getTileset().getTile(coord).setSolid(props[j-28][2].equals("solid"));
+					win.getEditorPan().getTilesetPan().getTileset().getTile(coord).setBreakable(props[j-28][3].equals("breakable"));
+				}
+				
+				// loading layer 1
+				int map1Int[][] = new int[mapWidth][mapHeight];
+		
+				for(int j=29+(nbTilesY*nbTilesX); j<29+(nbTilesY*nbTilesX)+mapHeight; j++) 
+				{
+					String [] tile = file[j].split("\\s"); 
+					
+					for (int q=0; q<tile.length; q++)
+					{	
+						if(tile[q].equals(""))
+							map1Int[q][j-(29+(nbTilesY*nbTilesX))] = -1;
+						else 
+							map1Int[q][j-(29+(nbTilesY*nbTilesX))] = Integer.parseInt(tile[q]); 
+					}
+
+					if(tile.length < mapWidth) 
+					{
+						for(int x=tile.length; x<mapWidth; x++) 
+						{
+							map1Int[x][j-(29+(nbTilesY*nbTilesX))] = -1; 
+						}
+					}
+				}
+		
+				// loading layer 2
+				int map2Int[][] = new int [mapWidth][mapHeight];
+		
+				for(int j=30+((nbTilesY*nbTilesX)+mapHeight); j<30+((nbTilesY*nbTilesX)+mapHeight*2); j++) 
+				{
+					String [] tile = file[j].split("\\s"); 
+
+					for (int q=0; q<tile.length; q++)
+					{	
+							if(tile[q].equals(""))
+								map2Int[q][j-(30+(nbTilesY*nbTilesX)+mapHeight)] = -1;
+							else 
+								map2Int[q][j-(30+(nbTilesY*nbTilesX)+mapHeight)] = Integer.parseInt(tile[q]);
+					}
+
+					if(tile.length < mapWidth) 
+					{
+						for(int x=tile.length; x<mapWidth; x++) 
+						{
+							map2Int[x][j-(30+(nbTilesY*nbTilesX)+mapHeight)] = -1; 
+						}
+					}
+
+				}
+				
+				for(int y = 0 ; y < mapHeight ; y++)
+				{
+					for(int x = 0 ; x < mapWidth ; x++)
+					{
+						win.getEditorPan().getLayer1().getMap().setTile(x, y, map1Int[x][y]);
+						win.getEditorPan().getLayer2().getMap().setTile(x, y, map2Int[x][y]);
+					}
+				}
     		}
     	});
     	
@@ -212,7 +296,7 @@ public class ButtonEventsManager
 								if(win.getEditorPan().getTilesetPan().getTileset().getTile(new Point(x, y)).getBreakable())
 									mapFileWriter.write("breakable\n");
 								else
-									mapFileWriter.write("not breakable\n");
+									mapFileWriter.write("notBreakable\n");
 							}
 						}
 					
