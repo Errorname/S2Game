@@ -26,7 +26,7 @@ public class TilePropertiesPan extends JPanel
 	* @param editorPan the EditorPan which contains this TilePropertiesPan
 	*/
 	public TilePropertiesPan(EditorPan editorPan)
-	{	
+	{		
 		this.setLayout(new GridLayout(4, 1));
 		
 		this.editorPan = editorPan;

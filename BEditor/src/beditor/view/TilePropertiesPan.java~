@@ -23,10 +23,11 @@ public class TilePropertiesPan extends JPanel
 	private final String BREAKABLE_RADIO = "Breakable";
 
 	/** Constructor which makes a new properties panel for the tiles
-	* @param editorPan the EditorPan which contains this ItemPropertiesPan
+	* @param editorPan the EditorPan which contains this TilePropertiesPan
 	*/
 	public TilePropertiesPan(EditorPan editorPan)
 	{	
+		this.setPreferredSize(new Dimension(512, 218));			
 		this.setLayout(new GridLayout(4, 1));
 		
 		this.editorPan = editorPan;
@@ -65,6 +66,8 @@ public class TilePropertiesPan extends JPanel
 		
 		JPanel messagePan = new JPanel();
 		messagePan.add(message);
+		JPanel selectedPan = new JPanel();
+		selectedPan.add(this.selectedSprite);
 		JPanel solidPan = new JPanel();
 		solidPan.add(this.emptyRadio);
 		solidPan.add(this.solidRadio);
@@ -73,7 +76,7 @@ public class TilePropertiesPan extends JPanel
 		breakablePan.add(this.breakableRadio);
 		
 		this.add(messagePan);
-		this.add(this.selectedSprite);
+		this.add(selectedPan);
 		this.add(solidPan);
 		this.add(breakablePan);
 	}

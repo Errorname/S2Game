@@ -27,7 +27,7 @@ public class ItemPropertiesPan extends JPanel
 	* @param editorPan the EditorPan which contains this ItemPropertiesPan
 	*/
 	public ItemPropertiesPan(EditorPan editorPan)
-	{	
+	{
 		this.setLayout(new GridLayout(6, 1));
 		
 		this.editorPan = editorPan;
@@ -79,6 +79,38 @@ public class ItemPropertiesPan extends JPanel
 		this.add(keyPan);
 		this.add(lollipopPan);
 		this.add(doorPan);
+	}
+	
+	/** Gives the "not an item" radio
+	* @return the "not an item" radio
+	*/
+	public JRadioButton getNotAnItemRadio()
+	{
+		return this.notAnItemRadio;
+	}
+	
+	/** Gives the "key" radio
+	* @return the "key" radio
+	*/
+	public JRadioButton getKeyRadio()
+	{
+		return this.keyRadio;
+	}
+	
+	/** Gives the "lollipop" radio
+	* @return the "lollipop" radio
+	*/
+	public JRadioButton getLollipopRadio()
+	{
+		return this.lollipopRadio;
+	}
+	
+	/** Gives the "door" radio
+	* @return the "door" radio
+	*/
+	public JRadioButton getDoorRadio()
+	{
+		return this.doorRadio;
 	}
 	
 	/** Refreshes the display of this PropertiesPan

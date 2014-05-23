@@ -22,9 +22,9 @@ public class EditorPan extends JPanel
 	private JScrollPane mapScroll, tilesetScroll, propertiesScroll;
 	private JSplitPane propertiesSplit, editorSplit;
 	
-	private final Dimension MAP_SCROLL_SIZE = new Dimension(512, 700);
+	private final Dimension MAP_SCROLL_SIZE = new Dimension(512, 550);
 	private final Dimension TILESET_SCROLL_SIZE = new Dimension(512, 500);
-	private final Dimension PROPERTIES_SCROLL_SIZE = new Dimension(512, 200);
+	private final Dimension PROPERTIES_SCROLL_SIZE = new Dimension(512, 218);
 	private final int SPLIT_EDITOR_LOCATION = (int) MAP_SCROLL_SIZE.getWidth();
 	private final int SPLIT_PROPERTIES_LOCATION = (int) TILESET_SCROLL_SIZE.getHeight();
 	private final String GREEN_LABEL = "Starting point = green = left click";
@@ -56,9 +56,7 @@ public class EditorPan extends JPanel
 		this.mapScroll = new JScrollPane(this.currentlyEdited);
 		this.mapScroll.setPreferredSize(MAP_SCROLL_SIZE);
 		this.tilesetScroll = new JScrollPane(this.tilesetPan);
-		this.tilesetScroll.setPreferredSize(TILESET_SCROLL_SIZE);
 		this.propertiesScroll = new JScrollPane(this.tilePropertiesPan);
-		this.propertiesScroll.setPreferredSize(PROPERTIES_SCROLL_SIZE);
 		
 		this.propertiesSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT, this.tilesetScroll, this.propertiesScroll);
 		this.propertiesSplit.setDividerLocation(SPLIT_PROPERTIES_LOCATION);

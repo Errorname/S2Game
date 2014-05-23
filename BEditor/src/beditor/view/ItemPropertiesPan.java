@@ -27,7 +27,7 @@ public class ItemPropertiesPan extends JPanel
 	* @param editorPan the EditorPan which contains this ItemPropertiesPan
 	*/
 	public ItemPropertiesPan(EditorPan editorPan)
-	{	
+	{
 		this.setLayout(new GridLayout(6, 1));
 		
 		this.editorPan = editorPan;

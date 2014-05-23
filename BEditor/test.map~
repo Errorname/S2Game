@@ -26,8 +26,8 @@ solid
 #image
 tiles_spritesheet.png
 #tileset
-tile 0 solid notBreakable
-tile 1 solid notBreakable
+tile 0 solid breakable
+tile 1 empty notBreakable
 tile 2 solid notBreakable
 tile 3 solid notBreakable
 tile 4 solid notBreakable

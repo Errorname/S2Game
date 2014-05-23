@@ -1,0 +1,71 @@
+package beditor.view;
+
+import beditor.model.*;
+import beditor.controller.*;
+import javax.swing.*;
+import java.awt.*;
+
+/**
+* HowToWindow : class for the window which explains how to use BEditor
+*
+* @author Hugo PIGEON
+* @version 1.0
+*/
+
+public class HowToWindow extends JFrame
+{	
+	private MainWindow win;
+	private JLabel text;
+	private JButton closeButton;
+
+	private final String WINDOW_TITLE = "How to use BEditor";
+	private final Dimension WINDOW_SIZE = new Dimension(400, 150);
+	private final String CLOSE_LABEL = "Close";
+
+	
+	/** Constructor to make a new window
+	* @param win the parent window
+	*/
+	public HowToWindow(MainWindow win)
+	{
+		this.win = win;
+		this.initWindow();
+		this.addContent();
+    	
+		this.setVisible(true);
+	}
+	
+	/** Initializes the window
+	*/
+	private void initWindow()
+	{
+   		this.setTitle(WINDOW_TITLE);
+		this.setSize(WINDOW_SIZE);
+   		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	}
+	
+	/** Adds the content to the window
+	*/
+	private void addContent()
+	{
+		this.getContentPane().setLayout(new BorderLayout());
+		
+		this.text = new JLabel("<html><center><b>How to use BEditor</b><br/>When you open BEditor, the program shows a window which allows you to create a new map. If you want to open an existing one, you can do it at any moment in the menu File > Load an existing map.</center></html>");
+		
+		JPanel closePan = new JPanel();
+		this.closeButton = new JButton(CLOSE_LABEL);
+		closePan.add(this.closeButton);
+		
+		this.getContentPane().add(this.text, BorderLayout.CENTER);
+		this.getContentPane().add(closePan, BorderLayout.SOUTH);
+	}
+	
+	/** Gives the close button
+	* @return the close button
+	*/
+	public JButton getCloseButton()
+	{
+		return this.closeButton;
+	}
+}

@@ -25,6 +25,8 @@ public class MainWindow extends JFrame
 	private NewMapPan newMapPan;
 	private ButtonEventsManager buttons;
 	private MapPropertiesWindow mapPropertiesWindow;
+	private AboutWindow aboutWindow;
+	private HowToWindow howToWindow;
 	
 	private final String WINDOW_TITLE = "BEditor";
 	private final Dimension WINDOW_SIZE = new Dimension(1024, 768);
@@ -91,7 +93,7 @@ public class MainWindow extends JFrame
     	
     	
     	this.helpMenu = new JMenu(HELP_MENU);
-    	this.menuBar.add(this.fileMenu);
+    	this.menuBar.add(this.helpMenu);
     	
     	this.helpHowToMenu = new JMenuItem(HELP_HOW_TO_MENU);
     	this.helpMenu.add(helpHowToMenu);
@@ -132,6 +134,22 @@ public class MainWindow extends JFrame
 	public JMenuItem getSaveFileMenu()
 	{
 		return this.saveFileMenu;
+	}
+	
+	/** Gives the menu's "how to" button
+	* @return the menu's "how to" button
+	*/
+	public JMenuItem getHelpHowToMenu()
+	{
+		return this.helpHowToMenu;
+	}
+	
+	/** Gives the menu's "about" button
+	* @return the menu's "about" button
+	*/
+	public JMenuItem getHelpAboutMenu()
+	{
+		return this.helpAboutMenu;
 	}
 
 	/** Gives the map menu's "layer 1" button
@@ -197,8 +215,10 @@ public class MainWindow extends JFrame
 	{
 		if(this.mapMenu == null)
 		{
+			this.menuBar.remove(this.helpMenu);
 			this.mapMenu = new JMenu(MAP_MENU);
 			this.menuBar.add(this.mapMenu);
+			this.menuBar.add(this.helpMenu);
 			
 			this.mapLayer1Menu = new JMenuItem(MAP_LAYER_1_MENU);
 			this.mapMenu.add(this.mapLayer1Menu);
@@ -257,5 +277,41 @@ public class MainWindow extends JFrame
 		this.mapPropertiesWindow = mpWin;
 		if(mpWin != null)
 			this.buttons.addMapPropertiesWindowListeners();
+	}
+	
+	/** Gives the window showing information about BEditor
+	* @return the window showing information about BEditor
+	*/
+	public AboutWindow getAboutWindow()
+	{
+		return this.aboutWindow;
+	}
+	
+	/** Sets the window showing information about BEditor
+	* @param aWin the new window showing information about BEditor
+	*/
+	public void setAboutWindow(AboutWindow mpWin)
+	{
+		this.aboutWindow = aWin;
+		if(aWin != null)
+			this.buttons.addAboutWindowListeners();
+	}
+	
+	/** Gives the window showing how to use BEditor
+	* @return the window showing how to use BEditor
+	*/
+	public HowToWindow getHowToWindow()
+	{
+		return this.howToWindow;
+	}
+	
+	/** Sets the window showing how to use BEditor
+	* @param htWin the new window showing how to use BEditor
+	*/
+	public void setHowToWindow(HowToWindow htWin)
+	{
+		this.howToWindow = htWin;
+		if(htWin != null)
+			this.buttons.addHowToWindowListeners();
 	}
 }

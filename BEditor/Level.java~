@@ -196,12 +196,12 @@ public class Level  implements KeyListener {
 
 		}
 		
-		itemInfo = new String[nbItem][4]; 
+		itemInfo = new String[nbItem][3]; 
 		
-		for(int counter=31+((nbTilesY*nbTilesX)+(nbTilesWidthWorld*2)); counter < 31+((nbTilesY*nbTilesX)+(nbTilesWidthWorld*2) + nbItem); counter++)
+		for(int counter=31+((nbTilesY*nbTilesX)+(nbTilesWidthWorld*2)); counter < 29+((nbTilesY*nbTilesX)+(nbTilesWidthWorld*2) + nbItem); counter++)
 		{
-			String [] info = file[counter].split("[\\s]"); 
-			for(int o=0; o <= 3; o++)
+			String [] info = file[counter].split("[\\s\\s]"); 
+			for(int o=0; o < 3; o++)
 			{
 				itemInfo[counter-(31+((nbTilesY*nbTilesX)+(nbTilesWidthWorld*2)))][o] = info[o]; 
 			}

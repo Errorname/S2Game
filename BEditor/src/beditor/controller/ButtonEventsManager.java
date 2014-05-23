@@ -65,131 +65,171 @@ public class ButtonEventsManager
     		public void actionPerformed(ActionEvent arg0)
     		{
     			String [] file = new String[1000];
-    			int i = 0;  
-		
-				//reading the text file	
-				try
-				{
-					FileInputStream fstream = new FileInputStream(System.getProperty("user.dir") + "/test.map");
-					 
-					// Get the object of DataInputStream
-					DataInputStream in = new DataInputStream(fstream);
-					BufferedReader br = new BufferedReader(new InputStreamReader(in));
-					String strLine;
-					 
-					//Read File Line By Line
-					while ((strLine = br.readLine()) != null)
+    			String path = "";
+    			int i = 0;
+    			
+				JFileChooser chooser = new JFileChooser();
+				String filesAllowed[] = new String[1];
+				filesAllowed[0] = "map";
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("Map file (.map)", filesAllowed);
+				chooser.setFileFilter(filter);
+				int choice = chooser.showOpenDialog(win);
+				if(choice == JFileChooser.APPROVE_OPTION)
+					path = chooser.getSelectedFile().getPath();
+	    		
+	    		if(path != "")
+	    		{
+					//reading the text file	
+					try
 					{
-						file[i] = strLine; 
-						i++;
+						FileInputStream fstream = new FileInputStream(path);
+						 
+						// Get the object of DataInputStream
+						DataInputStream in = new DataInputStream(fstream);
+						BufferedReader br = new BufferedReader(new InputStreamReader(in));
+						String strLine;
+						 
+						//Read File Line By Line
+						while ((strLine = br.readLine()) != null)
+						{
+							file[i] = strLine; 
+							i++;
+						}
+						 
+						//Close the input stream
+						in.close();
+						 
 					}
-					 
-					//Close the input stream
-					in.close();
-					 
-				}
-				catch (Exception e)
-				{
-				    System.err.println("Error: " + e.getMessage());
-				}
-				
-				final int mapWidth = Integer.parseInt(file[2]);
-				final int mapHeight = Integer.parseInt(file[4]);
-				final int nbTilesY = Integer.parseInt(file[6]);
-				final int nbTilesX = Integer.parseInt(file[8]);
-				final int tileWidth = Integer.parseInt(file[10]);
-				final int tileHeight = Integer.parseInt(file[12]);
-				final String tilesetPath = file[26];
-				String collision = file[20];
-				int collisionType = 0;
-				if(collision.equals("rubber"))
-					collisionType = 1;
-				
-    			win.switchMap(new EditorPan(new Dimension(mapWidth, mapHeight), new Dimension(tileWidth, tileHeight), tilesetPath, collisionType, win));
-		
-				String [] coordinate = file[22].split(" "); 
-				Point start = new Point(Integer.parseInt(coordinate[0]), Integer.parseInt(coordinate[1]));
-				coordinate = file[24].split(" "); 
-				Point finish = new Point(Integer.parseInt(coordinate[0]), Integer.parseInt(coordinate[1]));
-				
-				win.getEditorPan().getStartFinishLayer().getMap().setTile(0, 0, -1);
-				win.getEditorPan().getStartFinishLayer().getMap().setTile(0, 1, -1);
-				win.getEditorPan().getStartFinishLayer().getMap().setTile((int) start.getX(), (int) start.getY(), 0);
-				win.getEditorPan().getStartFinishLayer().getMap().setTile((int) finish.getX(), (int) finish.getY(), 1);
-				
-				// loading solid and breakable properties of the tiles
-				String props[][] = new String [nbTilesY*nbTilesX][4];
-				for(int j=28 ; j < (nbTilesY*nbTilesX)+28 ; j++)
-				{
-					String [] prop = file[j].split("[\\s\\s\\s]");
-					for(int k=0; k<4; k++)
+					catch (Exception e)
 					{
-						props[j-28][k] = prop[k]; 
+						System.err.println("Error: " + e.getMessage());
 					}
-					Point coord = new Point(Integer.parseInt(props[j-28][1]) - (win.getEditorPan().getTilesetPan().getTilesetWidth() * (Integer.parseInt(props[j-28][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth())), Integer.parseInt(props[j-28][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth());
-					win.getEditorPan().getTilesetPan().getTileset().getTile(coord).setSolid(props[j-28][2].equals("solid"));
-					win.getEditorPan().getTilesetPan().getTileset().getTile(coord).setBreakable(props[j-28][3].equals("breakable"));
-				}
 				
-				// loading layer 1
-				int map1Int[][] = new int[mapWidth][mapHeight];
+					final int mapWidth = Integer.parseInt(file[2]);
+					final int mapHeight = Integer.parseInt(file[4]);
+					final int nbTilesY = Integer.parseInt(file[6]);
+					final int nbTilesX = Integer.parseInt(file[8]);
+					final int tileWidth = Integer.parseInt(file[10]);
+					final int tileHeight = Integer.parseInt(file[12]);
+					final int nbItem = Integer.parseInt(file[18]);
+					final String tilesetPath = file[26];
+					String collision = file[20];
+					int collisionType = 0;
+					if(collision.equals("rubber"))
+						collisionType = 1;
+				
+					win.switchMap(new EditorPan(new Dimension(mapWidth, mapHeight), new Dimension(tileWidth, tileHeight), tilesetPath, collisionType, win));
 		
-				for(int j=29+(nbTilesY*nbTilesX); j<29+(nbTilesY*nbTilesX)+mapHeight; j++) 
-				{
-					String [] tile = file[j].split("\\s"); 
+					String [] coordinate = file[22].split(" "); 
+					Point start = new Point(Integer.parseInt(coordinate[0]), Integer.parseInt(coordinate[1]));
+					coordinate = file[24].split(" "); 
+					Point finish = new Point(Integer.parseInt(coordinate[0]), Integer.parseInt(coordinate[1]));
+				
+					win.getEditorPan().getStartFinishLayer().getMap().setTile(0, 0, -1);
+					win.getEditorPan().getStartFinishLayer().getMap().setTile(0, 1, -1);
+					win.getEditorPan().getStartFinishLayer().getMap().setTile((int) start.getX(), (int) start.getY(), 0);
+					win.getEditorPan().getStartFinishLayer().getMap().setTile((int) finish.getX(), (int) finish.getY(), 1);
+				
+					// loading solid and breakable properties of the tiles
+					String props[][] = new String [nbTilesY*nbTilesX][4];
+					for(int j=28 ; j < (nbTilesY*nbTilesX)+28 ; j++)
+					{
+						String [] prop = file[j].split("[\\s\\s\\s]");
+						for(int k=0; k<4; k++)
+						{
+							props[j-28][k] = prop[k]; 
+						}
+						Point coord = new Point(Integer.parseInt(props[j-28][1]) - (win.getEditorPan().getTilesetPan().getTilesetWidth() * (Integer.parseInt(props[j-28][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth())), Integer.parseInt(props[j-28][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth());
+						win.getEditorPan().getTilesetPan().getTileset().getTile(coord).setSolid(props[j-28][2].equals("solid"));
+						win.getEditorPan().getTilesetPan().getTileset().getTile(coord).setBreakable(props[j-28][3].equals("breakable"));
+					}
+				
+					// loading layer 1
+					int map1Int[][] = new int[mapWidth][mapHeight];
+		
+					for(int j=29+(nbTilesY*nbTilesX); j<29+(nbTilesY*nbTilesX)+mapHeight; j++) 
+					{
+						String [] tile = file[j].split("\\s"); 
 					
-					for (int q=0; q<tile.length; q++)
-					{	
-						if(tile[q].equals(""))
-							map1Int[q][j-(29+(nbTilesY*nbTilesX))] = -1;
-						else 
-							map1Int[q][j-(29+(nbTilesY*nbTilesX))] = Integer.parseInt(tile[q]); 
-					}
-
-					if(tile.length < mapWidth) 
-					{
-						for(int x=tile.length; x<mapWidth; x++) 
-						{
-							map1Int[x][j-(29+(nbTilesY*nbTilesX))] = -1; 
-						}
-					}
-				}
-		
-				// loading layer 2
-				int map2Int[][] = new int [mapWidth][mapHeight];
-		
-				for(int j=30+((nbTilesY*nbTilesX)+mapHeight); j<30+((nbTilesY*nbTilesX)+mapHeight*2); j++) 
-				{
-					String [] tile = file[j].split("\\s"); 
-
-					for (int q=0; q<tile.length; q++)
-					{	
+						for (int q=0; q<tile.length; q++)
+						{	
 							if(tile[q].equals(""))
-								map2Int[q][j-(30+(nbTilesY*nbTilesX)+mapHeight)] = -1;
+								map1Int[q][j-(29+(nbTilesY*nbTilesX))] = -1;
 							else 
-								map2Int[q][j-(30+(nbTilesY*nbTilesX)+mapHeight)] = Integer.parseInt(tile[q]);
-					}
+								map1Int[q][j-(29+(nbTilesY*nbTilesX))] = Integer.parseInt(tile[q]); 
+						}
 
-					if(tile.length < mapWidth) 
-					{
-						for(int x=tile.length; x<mapWidth; x++) 
+						if(tile.length < mapWidth) 
 						{
-							map2Int[x][j-(30+(nbTilesY*nbTilesX)+mapHeight)] = -1; 
+							for(int x=tile.length; x<mapWidth; x++) 
+							{
+								map1Int[x][j-(29+(nbTilesY*nbTilesX))] = -1; 
+							}
 						}
 					}
-
-				}
-				
-				for(int y = 0 ; y < mapHeight ; y++)
-				{
-					for(int x = 0 ; x < mapWidth ; x++)
+		
+					// loading layer 2
+					int map2Int[][] = new int [mapWidth][mapHeight];
+		
+					for(int j=30+((nbTilesY*nbTilesX)+mapHeight); j<30+((nbTilesY*nbTilesX)+mapHeight*2); j++) 
 					{
-						win.getEditorPan().getLayer1().getMap().setTile(x, y, map1Int[x][y]);
-						win.getEditorPan().getLayer2().getMap().setTile(x, y, map2Int[x][y]);
+						String [] tile = file[j].split("\\s"); 
+
+						for (int q=0; q<tile.length; q++)
+						{	
+								if(tile[q].equals(""))
+									map2Int[q][j-(30+(nbTilesY*nbTilesX)+mapHeight)] = -1;
+								else 
+									map2Int[q][j-(30+(nbTilesY*nbTilesX)+mapHeight)] = Integer.parseInt(tile[q]);
+						}
+
+						if(tile.length < mapWidth) 
+						{
+							for(int x=tile.length; x<mapWidth; x++) 
+							{
+								map2Int[x][j-(30+(nbTilesY*nbTilesX)+mapHeight)] = -1; 
+							}
+						}
+
 					}
-				}
 				
-				win.getEditorPan().getCurrentlyEdited().reloadMap();
+					// adding the two layers to the edited map	
+					for(int y = 0 ; y < mapHeight ; y++)
+					{
+						for(int x = 0 ; x < mapWidth ; x++)
+						{
+							win.getEditorPan().getLayer1().getMap().setTile(x, y, map1Int[x][y]);
+							win.getEditorPan().getLayer2().getMap().setTile(x, y, map2Int[x][y]);
+						}
+					}
+				
+					// loading items
+					String itemInfo[][] = new String[nbItem][4]; 
+		
+					for(int counter=31+((nbTilesY*nbTilesX)+(mapHeight*2)); counter < 31+((nbTilesY*nbTilesX)+(mapHeight*2) + nbItem); counter++)
+					{
+						String [] info = file[counter].split("[\\s]"); 
+						for(int o=0; o <= 3; o++)
+						{
+							itemInfo[counter-(31+((nbTilesY*nbTilesX)+(mapHeight*2)))][o] = info[o]; 
+							
+						}
+					
+						final int cpt = counter-(31+((nbTilesY*nbTilesX)+(mapHeight*2)));
+						win.getEditorPan().getItemsLayer().getMap().setTile(Integer.parseInt(itemInfo[cpt][1]), Integer.parseInt(itemInfo[cpt][2]), Integer.parseInt(itemInfo[cpt][3]));
+						Point coord = new Point(Integer.parseInt(itemInfo[cpt][3]) - (win.getEditorPan().getTilesetPan().getTilesetWidth() * (Integer.parseInt(itemInfo[cpt][3]) / win.getEditorPan().getTilesetPan().getTilesetWidth())), Integer.parseInt(itemInfo[cpt][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth());
+						if(itemInfo[cpt][0].equals("goldenkey"))
+							win.getEditorPan().getTilesetPan().getTileset().getItem(coord).setType(ItemType.KEY);
+						else if(itemInfo[cpt][0].equals("lollipop"))
+							win.getEditorPan().getTilesetPan().getTileset().getItem(coord).setType(ItemType.LOLLIPOP);
+						else if(itemInfo[cpt][0].equals("door"))
+							win.getEditorPan().getTilesetPan().getTileset().getItem(coord).setType(ItemType.DOOR);
+						else
+							win.getEditorPan().getTilesetPan().getTileset().getItem(coord).setType(ItemType.NOT_AN_ITEM);
+					}
+				
+					win.getEditorPan().getCurrentlyEdited().reloadMap();
+				}
     		}
     	});
     	
@@ -337,11 +377,11 @@ public class ButtonEventsManager
 									final int indexX = mapItemsLayer.getTile(x, y) - (win.getEditorPan().getTilesetPan().getTilesetWidth() * indexY);
 									
 									if(win.getEditorPan().getTilesetPan().getTileset().getItem(new Point(indexX, indexY)).getType() == ItemType.KEY)
-										mapFileWriter.write("goldenkey " + x + " " + y + "\n");
+										mapFileWriter.write("goldenkey " + x + " " + y + " " + mapItemsLayer.getTile(x, y) + "\n");
 									else if(win.getEditorPan().getTilesetPan().getTileset().getItem(new Point(indexX, indexY)).getType() == ItemType.LOLLIPOP)
-										mapFileWriter.write("lollipop " + x + " " + y + "\n");
+										mapFileWriter.write("lollipop " + x + " " + y + " " + mapItemsLayer.getTile(x, y) + "\n");
 									else if(win.getEditorPan().getTilesetPan().getTileset().getItem(new Point(indexX, indexY)).getType() == ItemType.DOOR)
-										mapFileWriter.write("door " + x + " " + y + "\n");
+										mapFileWriter.write("door " + x + " " + y + " " + mapItemsLayer.getTile(x, y) + "\n");
 								}
 							}
 						}
@@ -405,8 +445,28 @@ public class ButtonEventsManager
     			}
     		}
     	});
+		
+		// Called when clicking on "how to use BEditor"
+		this.win.getHelpHowToMenu().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				win.setHowToWindow(new HowToWindow(win));
+			}
+		});
+		
+		// Called when clicking on "about"
+		this.win.getHelpAboutMenu().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				win.setAboutWindow(new AboutWindow(win));
+			}
+		});
 	}
 	
+	/** Adds the listeners for the TilePropertiesPan shown in the editor
+	*/
 	public void addTilePropertiesPanListeners()
 	{	
     	// Called when clicking on the "empty" radio button in the properties
@@ -446,6 +506,8 @@ public class ButtonEventsManager
     	});
 	}
 	
+	/** Adds the listeners for the ItemPropertiesPan shown in the editor
+	*/
 	public void addItemPropertiesPanListeners()
 	{	
 		// Called when clicking on the "not an item" radio button in the properties
@@ -485,6 +547,8 @@ public class ButtonEventsManager
     	});
 	}
 	
+	/** Adds the listeners for the "map" menu
+	*/
 	public void addMapMenuListeners()
 	{
 		//Called when clicking on "layer 1"
@@ -573,6 +637,8 @@ public class ButtonEventsManager
 		});
 	}
 	
+	/** Adds the listeners for the window allowing to change the map's properties
+	*/
 	public void addMapPropertiesWindowListeners()
 	{
 		// Called when clicking on the "apply" button
@@ -594,6 +660,36 @@ public class ButtonEventsManager
     		{
 	    		win.getMapPropertiesWindow().dispose();
     			win.setMapPropertiesWindow(null);
+    		}
+    	});
+	}
+	
+	/** Adds the listeners for the "about" window
+	*/
+	public void addAboutWindowListeners()
+	{    	
+    	// Called when clicking on the "close" button
+    	win.getAboutWindow().getCloseButton().addActionListener(new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent arg0)
+    		{
+	    		win.getAboutWindow().dispose();
+    			win.setAboutWindow(null);
+    		}
+    	});
+	}
+	
+	/** Adds the listeners for the "how to" window
+	*/
+	public void addHowToWindowListeners()
+	{    	
+    	// Called when clicking on the "close" button
+    	win.getHowToWindow().getCloseButton().addActionListener(new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent arg0)
+    		{
+	    		win.getHowToWindow().dispose();
+    			win.setHowToWindow(null);
     		}
     	});
 	}
