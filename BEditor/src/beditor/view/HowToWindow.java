@@ -19,7 +19,7 @@ public class HowToWindow extends JFrame
 	private JButton closeButton;
 
 	private final String WINDOW_TITLE = "How to use BEditor";
-	private final Dimension WINDOW_SIZE = new Dimension(400, 150);
+	private final Dimension WINDOW_SIZE = new Dimension(400, 500);
 	private final String CLOSE_LABEL = "Close";
 
 	
@@ -51,7 +51,7 @@ public class HowToWindow extends JFrame
 	{
 		this.getContentPane().setLayout(new BorderLayout());
 		
-		this.text = new JLabel("<html><center><b>How to use BEditor</b><br/><br/>When you open BEditor, the program shows a window which allows you to create a new map.<br/>If you want to open an existing one, you can do it at any moment in the menu File > Load an existing map.<br/>Once you are in the editor, you can choose a part of the tileset on the right with a left click on it.<br/>You can then place it on the map with a left clic on the left part.<br/>If you want to delete a tile from the map, you can right click on it.<br/>There are 4 layers on this editor :<ul><li>The layer 1 is mostly used for the background of the map</li><li>The layer 2 is for elements you want to superimpose on the layer 1</li></ul></center></html>");
+		this.text = new JLabel("<html><center><b>How to use BEditor</b><br/><br/>When you open BEditor, the program shows a window which allows you to create a new map.<br/>If you want to open an existing one, you can do it at any moment in the File > Load an existing map menu.<br/>Once you are in the editor, you can choose a part of the tileset on the right with a left click on it.<br/>You can then place it on the map with a left click on the left part.<br/>If you want to remove a tile from the map, you can right click on it.<br/>There are 4 layers on this editor :<ul><li>The layer 1 is mostly used for the background of the map</li><li>The layer 2 is for elements you want to superimpose on the layer 1</li><li>The items layer is for items the player can interact with</li><li>The last layer allows you to place the starting and finishing points. Left click is for the starting point and right click is for the finishing point</li></ul>You can switch between the diferent layers in the Map menu</center></html>");
 		
 		JPanel closePan = new JPanel();
 		this.closeButton = new JButton(CLOSE_LABEL);

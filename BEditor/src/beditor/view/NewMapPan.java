@@ -36,7 +36,7 @@ public class NewMapPan extends JPanel
 	private final String LABEL_CREATE = "Create";
 
 
-	/** Constructeur that displays the buttons
+	/** Constructor that displays the buttons
 	*/
 	public NewMapPan()
 	{		
