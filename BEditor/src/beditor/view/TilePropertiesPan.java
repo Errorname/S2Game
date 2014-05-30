@@ -7,7 +7,7 @@ import java.awt.*;
 * TilePropertiesPan : a class to display and choose the properties of a tile
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class TilePropertiesPan extends JPanel

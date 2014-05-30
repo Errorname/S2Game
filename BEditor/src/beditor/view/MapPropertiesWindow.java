@@ -9,7 +9,7 @@ import java.awt.*;
 * MapPropertiesWindow : class for the window which displays the current edited map's properties
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class MapPropertiesWindow extends JFrame

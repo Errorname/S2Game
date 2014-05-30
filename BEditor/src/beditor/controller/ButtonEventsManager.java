@@ -12,15 +12,13 @@ import java.io.*;
 * ButtonEventsManager : a class which manages the events related to buttons
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class ButtonEventsManager
 {
 	private MainWindow win;
 	
-	private final int SCROLLX = 10;
-	private final int SCROLLY = 10;
 	private final String MAP_SAVED_MSG = "The map has been successfully saved";
 	private final String MAP_SAVED_TITLE = "Map saved";
 	private final String MAP_NOT_CREATED_MSG = "No map has been created, nothing saved";
@@ -271,10 +269,6 @@ public class ButtonEventsManager
 						mapFileWriter.write((int) win.getEditorPan().getLayer1().getTilesDim().getWidth() + "\n");
 						mapFileWriter.write("#widthTile\n");
 						mapFileWriter.write((int) win.getEditorPan().getLayer1().getTilesDim().getHeight() + "\n");
-						mapFileWriter.write("#scrollX\n");
-						mapFileWriter.write(SCROLLX + "\n");
-						mapFileWriter.write("#scrollY\n");
-						mapFileWriter.write(SCROLLY + "\n");
 						mapFileWriter.write("#nbItem\n");
 						int nbItem = 0;
 						for(int y = 0 ; y < mapItemsLayer.getHeight() ; y++)

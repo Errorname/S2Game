@@ -7,7 +7,7 @@ import java.awt.Point;
 * Map : a class to define the edited map
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class Map

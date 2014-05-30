@@ -9,7 +9,7 @@ import java.awt.*;
 * HowToWindow : class for the window which explains how to use BEditor
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class HowToWindow extends JFrame

@@ -9,7 +9,7 @@ import java.awt.*;
 * Window : class for the window which displays the editor
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class MainWindow extends JFrame

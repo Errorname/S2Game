@@ -10,7 +10,7 @@ import javax.swing.*;
 * MouseEventsManager : a class which manages the events related to the mouse
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class MouseEventsManager extends MouseAdapter

@@ -9,7 +9,7 @@ import java.awt.*;
 * EditorPan : a class to dispay the editor
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class EditorPan extends JPanel

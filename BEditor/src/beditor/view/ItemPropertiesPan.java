@@ -8,7 +8,7 @@ import beditor.model.*;
 * ItemPropertiesPan : a class to display and choose the properties of a tile
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class ItemPropertiesPan extends JPanel

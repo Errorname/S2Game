@@ -7,7 +7,7 @@ import java.awt.Point;
 * Tileset : a class to define the tileset
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class Tileset

@@ -9,7 +9,7 @@ import java.awt.*;
 * MapPan : a class to dispay the map
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class MapPan extends JPanel

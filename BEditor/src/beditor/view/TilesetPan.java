@@ -11,7 +11,7 @@ import java.io.File;
 * TilesetPan : a class to display the tileset
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class TilesetPan extends JPanel

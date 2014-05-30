@@ -7,7 +7,7 @@ import java.awt.*;
 * AboutWindow : class for the window which displays information about BEditor
 *
 * @author Hugo PIGEON
-* @version 1.0
+* @version 1.1
 */
 
 public class AboutWindow extends JFrame
@@ -17,7 +17,7 @@ public class AboutWindow extends JFrame
 	private JButton closeButton;
 
 	private final String AUTHOR  = "Hugo Pigeon";
-	private final String VERSION = "1.0";	
+	private final String VERSION = "1.1";	
 	private final String YEAR = "2014";
 	private final String WINDOW_TITLE = "About BEditor";
 	private final String CLOSE_LABEL = "Close";
