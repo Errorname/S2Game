@@ -68,7 +68,7 @@ public class TilesetPan extends JPanel
 			catch(Exception e)
 			{
     			JOptionPane errorMsg = new JOptionPane();
-    			errorMsg.showMessageDialog(this.editorPan.getMainWindow(), TILESET_NOT_FOUND_MSG, TILESET_NOT_FOUND_TITLE, JOptionPane.ERROR_MESSAGE);
+    			errorMsg.showMessageDialog(win, TILESET_NOT_FOUND_MSG, TILESET_NOT_FOUND_TITLE, JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
