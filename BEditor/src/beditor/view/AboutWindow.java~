@@ -51,7 +51,7 @@ public class AboutWindow extends JFrame
 	{		
 		this.getContentPane().setLayout(new BorderLayout());
 		
-		this.text = new JLabel("<html><center><b>BEditor version " + VERSION + " (" + YEAR + ")</b><br/><br/>BEditor is an editor to create maps working with BEngine<br/><br/>This program is a part of a project for Nantes Institute of Technology<br/><br/>Responsible for the map editor<br/>Hugo PIGEON<br/>Responsible for the view<br/>Dylan GAUTIER<br/>Responsible models<br/>Thomas PICARD<br/>Responsible for the physics engine<br/>Mathieu GRONDIN<br/>Controller responsible<br/>Maël QUÉMARD<br/>Responsible for the internal and external communication<br/>Thibaud COURTOISON<br/>Teacher tutor / Project manager<br/>Adrien BOUGOUIN<br/></center></html>");
+		this.text = new JLabel("<html><center><b>BEditor version " + VERSION + " (" + YEAR + ")</b><br/><br/>BEditor is an editor to create maps working with BEngine<br/><br/>This program is a part of a project for Nantes Institute of Technology<br/><br/>Responsible for the map editor<br/>Hugo PIGEON><br/>Responsible for the view<br/>Dylan GAUTIER<br/>Responsible models<br/>Thomas PICARD<br/>Responsible for the physics engine<br/>Mathieu GRONDIN<br/>Controller responsible<br/>Maël QUÉMARD<br/>Responsible for the internal and external communication<br/>Thibaud COURTOISON<br/>Teacher tutor / Project manager<br/>Adrien BOUGOUIN<br/></center></html>");
 		
 		JPanel closePan = new JPanel();
 		this.closeButton = new JButton(CLOSE_LABEL);

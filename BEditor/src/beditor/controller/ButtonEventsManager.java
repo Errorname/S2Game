@@ -318,6 +318,7 @@ public class ButtonEventsManager
 						mapFileWriter.write("#image\n");
 						String tilesetPath = win.getEditorPan().getTilesetPan().getTilesetPath();
 						tilesetPath = tilesetPath.substring(tilesetPath.lastIndexOf("/") + 1);
+						tilesetPath = tilesetPath.substring(tilesetPath.lastIndexOf("\\") + 1);
 						mapFileWriter.write(tilesetPath + "\n");
 						mapFileWriter.write("#tileset\n");
 						for(int y = 0 ; y < win.getEditorPan().getTilesetPan().getTilesetHeight() ; y++)

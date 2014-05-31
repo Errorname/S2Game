@@ -137,9 +137,9 @@ public class ButtonEventsManager
 						{
 							props[j-24][k] = prop[k]; 
 						}
-						Point coord = new Point(Integer.parseInt(props[j-28][1]) - (win.getEditorPan().getTilesetPan().getTilesetWidth() * (Integer.parseInt(props[j-28][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth())), Integer.parseInt(props[j-28][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth());
-						win.getEditorPan().getTilesetPan().getTileset().getTile(coord).setSolid(props[j-28][2].equals("solid"));
-						win.getEditorPan().getTilesetPan().getTileset().getTile(coord).setBreakable(props[j-28][3].equals("breakable"));
+						Point coord = new Point(Integer.parseInt(props[j-24][1]) - (win.getEditorPan().getTilesetPan().getTilesetWidth() * (Integer.parseInt(props[j-24][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth())), Integer.parseInt(props[j-24][1]) / win.getEditorPan().getTilesetPan().getTilesetWidth());
+						win.getEditorPan().getTilesetPan().getTileset().getTile(coord).setSolid(props[j-24][2].equals("solid"));
+						win.getEditorPan().getTilesetPan().getTileset().getTile(coord).setBreakable(props[j-24][3].equals("breakable"));
 					}
 				
 					// loading layer 1
