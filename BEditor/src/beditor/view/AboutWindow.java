@@ -20,7 +20,7 @@ public class AboutWindow extends JFrame
 	private final String YEAR = "2014";
 	private final String WINDOW_TITLE = "About BEditor";
 	private final String CLOSE_LABEL = "Close";
-	private final Dimension WINDOW_SIZE = new Dimension(400, 400);
+	private final Dimension WINDOW_SIZE = new Dimension(400, 450);
 
 	
 	/** Constructor to make a new window

@@ -37,6 +37,7 @@ public class Map
 	/** Gives the tile at the given coordinates
 	* @param x the X coordinate of the tile
 	* @param y the Y coordinate of the tile
+	* @return the tile at the given coordinates
 	*/
 	public int getTile(int x, int y)
 	{

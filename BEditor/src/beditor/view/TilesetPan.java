@@ -114,6 +114,7 @@ public class TilesetPan extends JPanel
 	
 	/** Gives the sprite of the tile at the specified index
 	* @param index the tile's index
+	* @return the sprite of the tile at the specified index
 	*/
 	public BufferedImage getSpriteImage(int index)
 	{
