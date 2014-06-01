@@ -20,6 +20,8 @@ public class GameControleur extends JPanel implements Runnable, KeyListener, Mou
 	private Image image;
 	private GameView gv;
 	private Level level;
+	private String nameLevel = null;
+	private String nextLevel = null;
 	
 	private Stack<Menu> menuStack = new Stack<Menu>(); // Menu -> Sous-Menu, etc...
 	
@@ -28,15 +30,19 @@ public class GameControleur extends JPanel implements Runnable, KeyListener, Mou
 	
 	private boolean running = true;
 	
+	private long currentTime;
+	private double dT;	//dT utilise par gravite et deplacements
+	
 	public GameControleur(int width, int height) {
 		this.panelWidth = width;
 		this.panelHeight = height;
 		
 		gv = new GameView(width, height);
 		level = null;
-		Menu menu = new TitleMenu(width, height);
+		Menu menu = new TitleMenu(width, height, this);
 		addMenu(menu);
 		
+		this.currentTime = System.nanoTime();
 		
 		this.setFocusable(true);
 		this.addKeyListener(this);
@@ -72,25 +78,41 @@ public class GameControleur extends JPanel implements Runnable, KeyListener, Mou
 	private void gameUpdate() {
 		// Do some stuff here, like moving the player or looking at the colliding things
 		mouseButtons.setPosition(getMousePosition());
-		mouseButtons.tick();
+		dT = (System.nanoTime() - currentTime) / 1000000.0;
+		currentTime = System.nanoTime();
 		
+		//mesurer l'ecart de temps entre ici et le prochain ici
 		if (level != null) {
-			level.update();
+			level.update(dT);
+		}
+		
+		if (menuStack.isEmpty() && level !=  null) {
+			clearMenus();
 		}
 		
 		if (!menuStack.isEmpty()) {
             menuStack.peek().update(mouseButtons);
 			if (menuStack.peek().isClosed()) {
 				popMenu();
-				System.out.println("Start Game");
+				//System.out.println("Start Game");
 			}
         }
 		
 		if (level == null && menuStack.isEmpty()) {
-			level = new Level();
+			if (nameLevel == null) {
+				level = new Level("1.map",null,this);
+			} else {
+				level = new Level(nameLevel,nextLevel,this);
+			}
 			gv.setLevel(level);
 			clearMenus();
+			currentTime = System.nanoTime();
 		}
+		/*if (Button.getId() == TitleMenu.OPTION_GAME_ID){
+			OptionMenu option = new OptionMenu(0,0);
+        	addMenu(option);
+		}*/
+		mouseButtons.tick();
 	}
 	
 	private void gameRender() {
@@ -162,13 +184,16 @@ public class GameControleur extends JPanel implements Runnable, KeyListener, Mou
         mouseButtons.setNextState(e.getButton(), false);
     }
 	
-	private void addMenu(Menu menu) {
+	public void addMenu(Menu menu) {
         menuStack.add(menu);
 		gv.setMenu(menu); // Permet d'afficher le menu dans la vue
+		if (level == null) {
+			gv.setLevel(null);
+		}
         //menu.addButtonListener(this);
     }
 	
-	private void popMenu() {
+	public void popMenu() {
         if (!menuStack.isEmpty()) {
             menuStack.pop();
 			if (!menuStack.isEmpty()) {
@@ -183,4 +208,16 @@ public class GameControleur extends JPanel implements Runnable, KeyListener, Mou
         }
 		gv.setMenu(null);
     }
+	
+	public void setNameLevel(String name) {
+		nameLevel = name;
+	}
+	
+	public void setNextLevel(String name) {
+		nextLevel = name;
+	}
+	
+	public void setLevel(Level level) {
+		this.level = level;
+	}
 }

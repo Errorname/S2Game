@@ -1,0 +1,251 @@
+Tilemapping Version 1.0
+#nbTilesLengthWorld
+50
+#nbTilesWidthWorld
+32
+#nbTilesX
+12
+#nbTilesY
+13
+#lengthTile
+70
+#widthTile
+70
+#nbItem
+3
+#collisionType
+normal
+#coordinateStart
+4 6
+#coordinateFinish
+48 9
+#image
+1.png
+#tileset
+tile 0 solid notBreakable
+tile 1 solid notBreakable
+tile 2 solid notBreakable
+tile 3 solid notBreakable
+tile 4 solid notBreakable
+tile 5 solid notBreakable
+tile 6 solid notBreakable
+tile 7 solid notBreakable
+tile 8 solid notBreakable
+tile 9 solid notBreakable
+tile 10 solid notBreakable
+tile 11 solid notBreakable
+tile 12 solid notBreakable
+tile 13 solid notBreakable
+tile 14 solid notBreakable
+tile 15 solid notBreakable
+tile 16 solid notBreakable
+tile 17 solid notBreakable
+tile 18 empty notBreakable
+tile 19 solid notBreakable
+tile 20 solid notBreakable
+tile 21 empty notBreakable
+tile 22 solid notBreakable
+tile 23 solid notBreakable
+tile 24 solid notBreakable
+tile 25 solid notBreakable
+tile 26 solid notBreakable
+tile 27 solid notBreakable
+tile 28 solid notBreakable
+tile 29 solid notBreakable
+tile 30 solid notBreakable
+tile 31 solid notBreakable
+tile 32 solid notBreakable
+tile 33 empty notBreakable
+tile 34 solid notBreakable
+tile 35 solid notBreakable
+tile 36 solid notBreakable
+tile 37 solid notBreakable
+tile 38 solid notBreakable
+tile 39 solid notBreakable
+tile 40 empty notBreakable
+tile 41 solid notBreakable
+tile 42 solid notBreakable
+tile 43 solid notBreakable
+tile 44 solid notBreakable
+tile 45 solid notBreakable
+tile 46 solid notBreakable
+tile 47 solid notBreakable
+tile 48 solid notBreakable
+tile 49 solid notBreakable
+tile 50 solid notBreakable
+tile 51 solid notBreakable
+tile 52 solid notBreakable
+tile 53 solid notBreakable
+tile 54 solid notBreakable
+tile 55 solid notBreakable
+tile 56 solid notBreakable
+tile 57 solid notBreakable
+tile 58 solid notBreakable
+tile 59 solid notBreakable
+tile 60 solid notBreakable
+tile 61 solid notBreakable
+tile 62 solid notBreakable
+tile 63 solid notBreakable
+tile 64 empty notBreakable
+tile 65 solid notBreakable
+tile 66 solid notBreakable
+tile 67 solid notBreakable
+tile 68 solid notBreakable
+tile 69 solid notBreakable
+tile 70 solid notBreakable
+tile 71 solid notBreakable
+tile 72 solid notBreakable
+tile 73 solid notBreakable
+tile 74 solid notBreakable
+tile 75 solid notBreakable
+tile 76 solid notBreakable
+tile 77 solid notBreakable
+tile 78 solid breakable
+tile 79 solid notBreakable
+tile 80 solid notBreakable
+tile 81 solid notBreakable
+tile 82 solid notBreakable
+tile 83 solid notBreakable
+tile 84 solid notBreakable
+tile 85 solid notBreakable
+tile 86 solid notBreakable
+tile 87 solid notBreakable
+tile 88 solid notBreakable
+tile 89 solid notBreakable
+tile 90 solid notBreakable
+tile 91 solid notBreakable
+tile 92 solid notBreakable
+tile 93 solid notBreakable
+tile 94 solid notBreakable
+tile 95 solid notBreakable
+tile 96 solid breakable
+tile 97 solid notBreakable
+tile 98 solid notBreakable
+tile 99 solid notBreakable
+tile 100 solid notBreakable
+tile 101 solid notBreakable
+tile 102 solid notBreakable
+tile 103 solid notBreakable
+tile 104 solid notBreakable
+tile 105 solid notBreakable
+tile 106 solid notBreakable
+tile 107 solid notBreakable
+tile 108 solid notBreakable
+tile 109 solid notBreakable
+tile 110 solid notBreakable
+tile 111 solid notBreakable
+tile 112 solid notBreakable
+tile 113 solid notBreakable
+tile 114 solid notBreakable
+tile 115 solid notBreakable
+tile 116 solid notBreakable
+tile 117 solid notBreakable
+tile 118 solid notBreakable
+tile 119 solid notBreakable
+tile 120 solid notBreakable
+tile 121 solid notBreakable
+tile 122 solid notBreakable
+tile 123 solid notBreakable
+tile 124 empty notBreakable
+tile 125 solid notBreakable
+tile 126 solid notBreakable
+tile 127 solid notBreakable
+tile 128 solid notBreakable
+tile 129 solid notBreakable
+tile 130 solid notBreakable
+tile 131 solid notBreakable
+tile 132 solid notBreakable
+tile 133 solid notBreakable
+tile 134 solid notBreakable
+tile 135 solid notBreakable
+tile 136 solid notBreakable
+tile 137 solid notBreakable
+tile 138 solid notBreakable
+tile 139 solid notBreakable
+tile 140 solid notBreakable
+tile 141 solid notBreakable
+tile 142 solid notBreakable
+tile 143 solid notBreakable
+tile 144 solid notBreakable
+tile 145 solid notBreakable
+tile 146 solid notBreakable
+tile 147 solid notBreakable
+tile 148 solid notBreakable
+tile 149 empty notBreakable
+tile 150 solid notBreakable
+tile 151 solid notBreakable
+tile 152 solid notBreakable
+tile 153 solid notBreakable
+tile 154 solid notBreakable
+tile 155 solid notBreakable
+#level_layer1
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+  35                  40                              
+  55        33 21      103 100 100 100 100         74 73 73 73 50             105 95  
+  96       116 103 103 92    103 152 152 152 152 152   77                      105 83 107 95 
+128 103 103 103 103 103 103 103   152 152    103 152 152 152 152 152 152     77      40              83   107 
+ 152 152 152 152 152 152 152   152 152    152 152 152 152 152 152 152 124      100 100 73 73 73 73 73 100   109   100  100     64 55 
+ 152 152 152 152 152 152 152   152 152    152 152 152 152 152 152 152 100 100 100 100 100 100 152 152      152 100 100 100 100 100 152  152 100 100 100 100 100 100 
+ 152 152 152 152 152 152 152   152 152    152 152 152 152 152 152 152 152 152 152 152 152 152 152 152      152 152 152 152 152 152 152  152 152 152 152 152 152 152 
+ 152 152 152 152 152 152 152   152 152    152 152 152 152 152 152 152 152 152 152 152 152 152 152 152      152 152 152 152 152 152 152  152 152 152 152 152 152 152 
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+#level_layer2
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                 29             37    25                
+            18    29 17                                 
+            149   29 17                                  
+   128 103 104       149                 42      30               
+            149                42 133 102 102 102 102 102 121 30              
+            149               42 133 98 43 43 43 43 43 98 121 30             
+            149              42 133 98 98 43 43 43 43 43 98 98 121 30            
+            149                                      
+            149                                      
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+#items
+goldenkey 0 7 143
+lollipop 38 8 131
+door 46 9 54
+#end

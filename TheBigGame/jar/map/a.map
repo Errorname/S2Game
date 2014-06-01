@@ -1,0 +1,283 @@
+Tilemapping Version 1.0
+#nbTilesLengthWorld
+32
+#nbTilesWidthWorld
+32
+#nbTilesX
+19
+#nbTilesY
+10
+#lengthTile
+16
+#widthTile
+16
+#nbItem
+1
+#collisionType
+normal
+#coordinateStart
+3 9
+#coordinateFinish
+12 9
+#image
+tileset.jpg
+#tileset
+tile 0 solid notBreakable
+tile 1 solid notBreakable
+tile 2 solid notBreakable
+tile 3 solid notBreakable
+tile 4 solid notBreakable
+tile 5 solid notBreakable
+tile 6 solid notBreakable
+tile 7 solid notBreakable
+tile 8 solid notBreakable
+tile 9 solid notBreakable
+tile 10 solid notBreakable
+tile 11 solid notBreakable
+tile 12 solid notBreakable
+tile 13 solid notBreakable
+tile 14 solid notBreakable
+tile 15 solid notBreakable
+tile 16 solid notBreakable
+tile 17 solid notBreakable
+tile 18 solid notBreakable
+tile 19 solid notBreakable
+tile 20 solid notBreakable
+tile 21 solid notBreakable
+tile 22 solid notBreakable
+tile 23 solid notBreakable
+tile 24 solid notBreakable
+tile 25 solid notBreakable
+tile 26 solid notBreakable
+tile 27 solid notBreakable
+tile 28 solid notBreakable
+tile 29 solid notBreakable
+tile 30 solid notBreakable
+tile 31 solid notBreakable
+tile 32 solid notBreakable
+tile 33 solid notBreakable
+tile 34 solid notBreakable
+tile 35 solid notBreakable
+tile 36 solid notBreakable
+tile 37 solid notBreakable
+tile 38 solid notBreakable
+tile 39 solid notBreakable
+tile 40 solid notBreakable
+tile 41 solid notBreakable
+tile 42 solid notBreakable
+tile 43 solid notBreakable
+tile 44 solid notBreakable
+tile 45 solid notBreakable
+tile 46 solid notBreakable
+tile 47 solid notBreakable
+tile 48 solid notBreakable
+tile 49 solid notBreakable
+tile 50 solid notBreakable
+tile 51 solid notBreakable
+tile 52 solid notBreakable
+tile 53 solid notBreakable
+tile 54 solid notBreakable
+tile 55 solid notBreakable
+tile 56 solid notBreakable
+tile 57 solid notBreakable
+tile 58 solid notBreakable
+tile 59 solid notBreakable
+tile 60 solid notBreakable
+tile 61 solid notBreakable
+tile 62 solid notBreakable
+tile 63 solid notBreakable
+tile 64 solid notBreakable
+tile 65 solid notBreakable
+tile 66 solid notBreakable
+tile 67 solid notBreakable
+tile 68 solid notBreakable
+tile 69 solid notBreakable
+tile 70 solid notBreakable
+tile 71 solid notBreakable
+tile 72 solid notBreakable
+tile 73 solid notBreakable
+tile 74 solid notBreakable
+tile 75 solid notBreakable
+tile 76 solid notBreakable
+tile 77 solid notBreakable
+tile 78 solid notBreakable
+tile 79 solid notBreakable
+tile 80 solid notBreakable
+tile 81 solid notBreakable
+tile 82 solid notBreakable
+tile 83 solid notBreakable
+tile 84 solid notBreakable
+tile 85 solid notBreakable
+tile 86 solid notBreakable
+tile 87 solid notBreakable
+tile 88 solid notBreakable
+tile 89 solid notBreakable
+tile 90 solid notBreakable
+tile 91 solid notBreakable
+tile 92 solid notBreakable
+tile 93 solid notBreakable
+tile 94 solid notBreakable
+tile 95 solid notBreakable
+tile 96 solid notBreakable
+tile 97 solid notBreakable
+tile 98 solid notBreakable
+tile 99 solid notBreakable
+tile 100 solid notBreakable
+tile 101 solid notBreakable
+tile 102 solid notBreakable
+tile 103 solid notBreakable
+tile 104 solid notBreakable
+tile 105 solid notBreakable
+tile 106 solid notBreakable
+tile 107 solid notBreakable
+tile 108 solid notBreakable
+tile 109 solid notBreakable
+tile 110 solid notBreakable
+tile 111 solid notBreakable
+tile 112 solid notBreakable
+tile 113 solid notBreakable
+tile 114 solid notBreakable
+tile 115 solid notBreakable
+tile 116 solid notBreakable
+tile 117 solid notBreakable
+tile 118 solid notBreakable
+tile 119 solid notBreakable
+tile 120 solid notBreakable
+tile 121 solid notBreakable
+tile 122 solid notBreakable
+tile 123 solid notBreakable
+tile 124 solid notBreakable
+tile 125 solid notBreakable
+tile 126 solid notBreakable
+tile 127 solid notBreakable
+tile 128 solid notBreakable
+tile 129 solid notBreakable
+tile 130 solid notBreakable
+tile 131 solid notBreakable
+tile 132 solid notBreakable
+tile 133 solid notBreakable
+tile 134 solid notBreakable
+tile 135 solid notBreakable
+tile 136 solid notBreakable
+tile 137 solid notBreakable
+tile 138 solid notBreakable
+tile 139 solid notBreakable
+tile 140 solid notBreakable
+tile 141 solid notBreakable
+tile 142 solid notBreakable
+tile 143 solid notBreakable
+tile 144 solid notBreakable
+tile 145 solid notBreakable
+tile 146 solid notBreakable
+tile 147 solid notBreakable
+tile 148 solid notBreakable
+tile 149 solid notBreakable
+tile 150 solid notBreakable
+tile 151 solid notBreakable
+tile 152 solid notBreakable
+tile 153 solid notBreakable
+tile 154 solid notBreakable
+tile 155 solid notBreakable
+tile 156 solid notBreakable
+tile 157 solid notBreakable
+tile 158 solid notBreakable
+tile 159 solid notBreakable
+tile 160 solid notBreakable
+tile 161 solid notBreakable
+tile 162 solid notBreakable
+tile 163 solid notBreakable
+tile 164 solid notBreakable
+tile 165 solid notBreakable
+tile 166 solid notBreakable
+tile 167 solid notBreakable
+tile 168 solid notBreakable
+tile 169 solid notBreakable
+tile 170 solid notBreakable
+tile 171 solid notBreakable
+tile 172 solid notBreakable
+tile 173 solid notBreakable
+tile 174 solid notBreakable
+tile 175 solid notBreakable
+tile 176 solid notBreakable
+tile 177 solid notBreakable
+tile 178 solid notBreakable
+tile 179 solid notBreakable
+tile 180 solid notBreakable
+tile 181 solid notBreakable
+tile 182 solid notBreakable
+tile 183 solid notBreakable
+tile 184 solid notBreakable
+tile 185 solid notBreakable
+tile 186 solid notBreakable
+tile 187 solid notBreakable
+tile 188 solid notBreakable
+tile 189 solid notBreakable
+#level_layer1
+                                
+                                
+                                
+                                
+                                
+       171 171 171 171 171                     
+       171 0 0 0 171 180 180                   
+       171 171 171 171 171 180 180                   
+                                
+                                
+                                
+                                
+                                
+165 165 165 165 165 165 165 165 165 165 165 165 165 165 165 165 165                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+#level_layer2
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+#items
+lollipop 6 9 169
+#end

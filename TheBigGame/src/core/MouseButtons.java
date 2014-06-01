@@ -30,6 +30,8 @@ public class MouseButtons {
         for (int i = 0; i < currentState.length; i++) {
             currentState[i] = nextState[i];
         }
+        
+        
     }
 
     public void releaseAll() {

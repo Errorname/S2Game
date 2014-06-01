@@ -18,10 +18,12 @@ public class GameView {
 	
 	private Level level;
 	private Menu menu;
+	public static Color color;
 	
 	public GameView(int screenWidth, int screenHeight) {
 		level = null;
 		menu = null;
+		color = new Color(208,244,247);
 	}
 	
 	public void setLevel(Level level) {
@@ -45,8 +47,9 @@ public class GameView {
 	}
 	
 	public void draw(Graphics2D g, int screenWidth, int screenHeight) {
-		g.setColor(Color.WHITE);
-
+		//g.setColor(new Color(208,244,247));
+		g.setColor(color);
+		
         g.fillRect(0, 0, screenWidth, screenHeight);
         
 		// draw level
@@ -64,7 +67,11 @@ public class GameView {
 		BufferedImage img = null;
 		try {
 		    img = ImageIO.read(new File(filename));
-		} catch (IOException e) { System.out.println("THERE IS A FUCKING PROBLEME HERE"); }
+		} catch (IOException e) { System.out.println("Couldn't load file: " + filename); }
 		return img;
+	}
+	
+	public static void setColor(Color colorz) {
+		color = colorz;
 	}
 }

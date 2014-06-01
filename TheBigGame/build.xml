@@ -5,6 +5,7 @@
     <property name="jar.dir" value="jar"/>
 	<property name="doc.dir" value="doc"/>
 	<property name="images.dir" value="images"/>
+	<property name="map.dir" value="map"/>
 	<property name="main-package" value="core"/>
     <property name="main-class" value="GameApp"/>
 
@@ -18,6 +19,7 @@
         <mkdir dir="${jar.dir}"/>
         <copy todir="${jar.dir}/${images.dir}" preservelastmodified="true">
 			<fileset dir="${images.dir}"/>
+			<fileset dir="${map.dir}"/>
 		</copy>
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
